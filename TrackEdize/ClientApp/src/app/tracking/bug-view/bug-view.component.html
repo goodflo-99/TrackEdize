@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Projects</a></li>
+            <li class="breadcrumb-item"><a href="#">Project_name</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">Issue_ID</a></li>
+            <div class="ml-4">
+              <button pButton type="button" class="p-element p-ripple p-button-rounded p-button-info p-button-text p-button p-component p-button-icon-only"><i class="pi pi-copy"></i></button>
+            </div>
+        </ol>
+    </nav>
+      <div class="d-flex col-8">        
+        <div class="container">
+            <form>
+                <mdb-form-control class="mb-3">
+                    <textarea mdbInput class="form-control" id="subject" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Subject</label>
+                  </mdb-form-control>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Credentials for user</span>
+                    <mdb-form-control>
+                      <input mdbInput type="text" id="username" class="form-control">
+                      <label mdbLabel class="form-label" for="form1"><i class="pi pi-user"></i> Username</label>
+                    </mdb-form-control>
+                    <mdb-form-control>
+                      <input mdbInput type="text" id="password" class="form-control">
+                      <label mdbLabel class="form-label" for="form1"><i class="pi pi-key"></i> Password</label>
+                    </mdb-form-control>
+                  </div>
+
+                  <mdb-form-control class="mb-3">
+                    <textarea mdbInput class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Steps to reproduce</label>
+                  </mdb-form-control>
+
+                  <mdb-form-control class="mb-3">
+                    <textarea mdbInput class="form-control" id="aresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Actual result</label>
+                  </mdb-form-control>
+
+                  <mdb-form-control class="mb-3">
+                    <textarea mdbInput class="form-control" id="eresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Expected result</label>
+                  </mdb-form-control>
+
+                  <hr class="hr hr-blurry">
+        
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="environment">Environment</span>
+                    <p-dropdown [options]="environments" [(ngModel)]="selectedEnvironment" 
+                      [ngModelOptions]="{standalone: true}" placeholder="Select Environment"></p-dropdown>
+                  </div>
+
+                  <mdb-form-control class="mb-3">
+                    <textarea mdbInput class="form-control" id="version" autocomplete="off" rows="1"></textarea>
+                    <label mdbLabel class="form-label" for="textAreaExample">Version</label>
+                  </mdb-form-control>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="browser">Browser</span>
+                    <p-dropdown [options]="browsers" [(ngModel)]="selectedBrowser" 
+                      [ngModelOptions]="{standalone: true}" placeholder="Select your browser"></p-dropdown>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="device">Device</span>
+                    <p-dropdown [options]="devices" [(ngModel)]="selectedDevice" 
+                      [ngModelOptions]="{standalone: true}" placeholder="Select your device"></p-dropdown>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="opsystem">Operation system</span>
+                    <p-dropdown [options]="opsystems" [(ngModel)]="selectedOpSystem" 
+                      [ngModelOptions]="{standalone: true}" placeholder="Select your operation system"></p-dropdown>
+                  </div>
+            </form>
+
+            <hr class="hr hr-blurry">
+
+            <div>
+              <p>Comments</p>
+              
+            </div>
+        </div>
+        <div class="vr vr-blurry" style="min-height: 100%;"></div>
+      </div>
+      <div class="col-4">
+        <div class="d-flex justify-content-around">
+          <button pButton type="button" label=" Edit" class="p-button-text p-button-info"><i class="pi pi-file-edit"></i></button>
+          <button pButton type="button" label=" Delete" class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>

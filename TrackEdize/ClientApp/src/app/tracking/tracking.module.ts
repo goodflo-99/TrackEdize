@@ -18,12 +18,16 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DropdownModule} from 'primeng/dropdown';
+import {ButtonModule} from 'primeng/button';
 
-import { IssueViewComponent } from './issue-view/issue-view.component';
+import { BugViewComponent } from './bug-view/bug-view.component';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    IssueViewComponent
+    BugViewComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,10 @@ import { IssueViewComponent } from './issue-view/issue-view.component';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
+    DropdownModule,
+    ButtonModule,
+    FormsModule,
+    SharedModule,
   ]
 })
 export class TrackingModule { }

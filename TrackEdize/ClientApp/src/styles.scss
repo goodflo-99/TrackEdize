@@ -19,6 +19,10 @@ code {
  
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 
+@import '~primeng/resources/themes/lara-light-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+
 body {
   background-color: #FAFBFC;
 }
@@ -28,11 +32,52 @@ body {
   justify-content: center;
 }
 
-span {
+.input-group-text {
   background-color: #7d9098 !important;
   color: #FAFBFC !important;
+  height: 2em;
+  min-width: 10em;
 }
 
-.form-control, .form-select {
-  background-color: #FAFBFC;
+#username, #password, #version {
+  min-width: 19.6em;
+  height: 2.2em;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+  overflow: hidden;
+  max-height: 20em;
+}
+
+.p-dropdown {
+  min-width: 39.5em;
+  height: 2.2em;
+  margin: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background-color: #FAFBFC !important;
+  border-color: #BDBDBD;
+}
+
+.p-inputtext {
+  padding: 0.2em;
+}
+
+.p-dropdown-label {
+  margin-left: 0.5em;
+}
+
+.p-button-text {
+  height: 2.5em;
+  width: 7em;
+}
+
+.p-button-label {
+  padding-left: 0.5em;
+}
+
+.p-button-rounded {
+  height: 0.4em !important;
 }

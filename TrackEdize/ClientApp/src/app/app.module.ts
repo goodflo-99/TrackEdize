@@ -31,7 +31,10 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { TrackingModule } from './tracking/tracking.module';
-import { IssueViewComponent } from './tracking/issue-view/issue-view.component';
+import { BugViewComponent } from './tracking/bug-view/bug-view.component';
+import { TextareaAutoresizeDirective } from './shared/textarea-autoresize/textarea-autoresize.directive';
+import { SharedModule } from './shared/shared.module';
+
 
 
 @NgModule({
@@ -40,7 +43,7 @@ import { IssueViewComponent } from './tracking/issue-view/issue-view.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,7 +55,7 @@ import { IssueViewComponent } from './tracking/issue-view/issue-view.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'issue-view', component: IssueViewComponent}
+      { path: 'bug-view', component: BugViewComponent}
     ]),
     MdbAccordionModule,
     MdbCarouselModule,
@@ -70,6 +73,7 @@ import { IssueViewComponent } from './tracking/issue-view/issue-view.component';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
