@@ -24,10 +24,14 @@ import {ButtonModule} from 'primeng/button';
 import { BugViewComponent } from './bug-view/bug-view.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { IssueService } from './services/issue.service';
+import { IssuesComponent } from './issues/issues.component';
 
 @NgModule({
+  providers: [IssueService],
   declarations: [
-    BugViewComponent
+    BugViewComponent,
+    IssuesComponent
   ],
   imports: [
     CommonModule,

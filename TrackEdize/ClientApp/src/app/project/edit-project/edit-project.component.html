@@ -1,0 +1,31 @@
+<form>
+    <div class="d-flex col-12">
+        <div class="col-9">
+            <mdb-form-control class="mb-3">
+                <textarea [(ngModel)]="project.name" name="name" mdbInput class="form-control"
+                    autocomplete="off" rows="1" appTextareaAutoresize></textarea>
+                <label mdbLabel class="form-label" for="textAreaExample">Title</label>
+            </mdb-form-control>
+    
+            <mdb-form-control class="mb-3">
+                <input type="text" [(ngModel)]="project.abbreviation" name="abbreviation" mdbInput class="form-control"
+                    id="subject" autocomplete="off" maxlength="4" />
+                <label mdbLabel class="form-label" for="textAreaExample">Abbreviation</label>
+            </mdb-form-control>
+        </div>
+    
+        <div class="container">
+            <div class="d-flex justify-content-center ">
+                <button class="btn btn-primary" (click)="save()">Save</button>
+            </div>
+        </div>
+        
+    
+    </div>
+    
+    <mdb-form-control class="mb-3">
+        <textarea [(ngModel)]="project.description" name="description" mdbInput class="form-control" autocomplete="off"
+            rows="3" appTextareaAutoresize></textarea>
+        <label mdbLabel class="form-label" for="textAreaExample">Description</label>
+    </mdb-form-control>
+</form>

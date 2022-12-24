@@ -34,6 +34,9 @@ import { TrackingModule } from './tracking/tracking.module';
 import { BugViewComponent } from './tracking/bug-view/bug-view.component';
 import { TextareaAutoresizeDirective } from './shared/textarea-autoresize/textarea-autoresize.directive';
 import { SharedModule } from './shared/shared.module';
+import { ProjectModule } from './project/project.module';
+import { ProjectsComponent } from './project/projects/projects.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 
@@ -73,10 +76,12 @@ import { SharedModule } from './shared/shared.module';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ProjectModule,
+    DashboardModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    //{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
