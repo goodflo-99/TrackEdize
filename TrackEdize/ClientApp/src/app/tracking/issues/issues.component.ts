@@ -24,4 +24,8 @@ export class IssuesComponent implements OnInit {
   delete(id:any) {
 
   }
+
+  filterIssues(event: any) {
+    console.log("triggered from issues.component", event)
+  }
 }

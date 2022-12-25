@@ -10,7 +10,8 @@ namespace TrackEdize
     {
         public static void ConfigureDatabase(WebApplicationBuilder builder)
         {
-            builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+            //builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+            builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseServerSettings"));
             ConfigureRepositories(builder);
             ConfigureServices(builder);
         }

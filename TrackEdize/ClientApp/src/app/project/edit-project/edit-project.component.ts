@@ -27,6 +27,7 @@ export class EditProjectComponent implements OnInit, OnChanges {
       this.projectService.getById(this.id).subscribe(res => this.project = res);
     } else {
       this.project = new Project;
+      this.wasChanges = true;
     }
   }
 

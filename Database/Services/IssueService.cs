@@ -35,7 +35,7 @@ namespace Database.Services
 
         public override async Task CreateAsync(Issue newEntity)
         {
-            newEntity.Project.Id = "639e26060350994520d59428";
+            newEntity.Project.Id = "63a8d2002e1cfeff073bd484";
             newEntity.OrderNumber = await _issueRepository.GetOrderByProjectId(newEntity.Project.Id);
             var project_abbv = await _projectService.GetAbbv(newEntity.Project.Id);
             newEntity.Key = $"{project_abbv}-{newEntity.OrderNumber}";
