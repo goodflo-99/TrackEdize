@@ -36,7 +36,7 @@ export class FilterComponent implements OnInit {
       clearTimeout(this.timeout);
     }
 
-    this.timeout = setTimeout(() => this.projectChange.emit(e.value), 2000);
+    this.timeout = setTimeout(() => this.projectChange.emit(e.value), 500);
   }
 
   emmitProjects(values: string[]) {

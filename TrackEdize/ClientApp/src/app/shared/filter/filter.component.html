@@ -1,4 +1,4 @@
 <div>
-    <!-- <p-multiSelect [options]="projects" [(ngModel)]="selectedProjects" optionLabel="name" optionValue="id" display="chip" (onChange)="projectFilterChange($event)"></p-multiSelect> -->
-    <p-dropdown [options]="projects" [(ngModel)]="selectedProject"  optionLabel="name" optionValue="id" placeholder="Select a Project" (onChange)="projectFilterChange($event)"></p-dropdown>
+    <!-- <p-multiSelect [options]="projects" [(ngModel)]="selectedProjects" optionLabel="name" optionValue="id" display="chip" (onChange)="projectsFilterChange($event)"></p-multiSelect> -->
+    <p-dropdown [options]="projects" [(ngModel)]="selectedProject" [showClear]="true" optionLabel="name" optionValue="id" placeholder="Select a Project" (onChange)="projectFilterChange($event)"></p-dropdown>
 </div>

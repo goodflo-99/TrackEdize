@@ -25,7 +25,14 @@ export class IssuesComponent implements OnInit {
 
   }
 
+  getAll() {
+    this.service.getAll().subscribe(x=> this.issues = x);
+  }
+
   filterIssues(id: any) {
+    if(!id) {
+      return this.getAll();
+    }
     console.log("triggered from issues.component", id)
     this.service.getByProjectId(id).subscribe(x=>this.issues = x);
   }

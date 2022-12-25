@@ -66,7 +66,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller}/{action?}/{id?}");
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html"); ;

@@ -16,7 +16,7 @@ export class IssueService extends BaseService<Issue> {
 
   getByProjectId(id: string) {
     var params = new HttpParams().set("id", id);
-    var res = this.http.get<Issue[]>(this.api+'/GetByProject'+id, { params: params});
+    var res = this.http.get<Issue[]>(this.api+'/GetByProject', { params: params});
     console.log(res);
     return res;
   }

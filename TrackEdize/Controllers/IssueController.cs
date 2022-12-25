@@ -7,6 +7,7 @@ using TrackEdize.Controllers.CRUDController;
 namespace TrackEdize.Controllers
 {
     [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class IssueController : CRUDController<IssueService, Issue>
     {
         public IssueController(IssueService service) : base(service)
@@ -14,7 +15,7 @@ namespace TrackEdize.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("GetByProject")]
         [ActionName("GetByProject")]
         public async Task<IActionResult> GetByProject(string id)
         {
