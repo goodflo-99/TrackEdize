@@ -47,6 +47,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +59,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'bug-view', component: BugViewComponent}
+      //{ path: 'bug-view', component: BugViewComponent}
     ]),
     MdbAccordionModule,
     MdbCarouselModule,
