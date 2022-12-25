@@ -1,7 +1,9 @@
 export namespace Statuses {
     export enum Status {
         Open = "Open",
-        InProgres = 'In Progres',
+        InProgress = 'In Progress',
+        ReadyForTesting = 'Ready for testing',
+        Testing = 'Testing',
         Done = 'Done'
     }
     

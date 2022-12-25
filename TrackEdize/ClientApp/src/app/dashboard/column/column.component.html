@@ -1,8 +1,14 @@
-<div class="p-2">
+<!-- <div class="p-2">
     <p-card class="" header="{{header}}" styleClass="col-12">
         <div class="">
             <issue-card *ngFor="let i of issues" [issue]="i">
             </issue-card>
         </div>
     </p-card>
+</div> -->
+
+<div class="p-2 flex-fill bd-highlight">{{header}}</div>
+<div>
+    <issue-card *ngFor="let i of issues" [issue]="i">
+    </issue-card>
 </div>

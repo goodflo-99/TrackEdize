@@ -12,7 +12,9 @@ export class DashboardComponent implements OnInit {
 
   issues: Issue[] = [];
   openIssues: Issue[] = [];
-  progresIssues: Issue[] = [];
+  progressIssues: Issue[] = [];
+  readyTestingIssues: Issue[] = [];
+  TestingIssues: Issue[] = [];
   doneIssues: Issue[] = [];
 
   constructor(private issueService: IssueService) { }
@@ -22,7 +24,9 @@ export class DashboardComponent implements OnInit {
       this.issues = x;
 
       this.openIssues = this.issues.filter(x=> x.status == Statuses.Status.Open);
-      this.progresIssues = this.issues.filter(x=> x.status == Statuses.Status.InProgres);
+      this.progressIssues = this.issues.filter(x=> x.status == Statuses.Status.InProgress);
+      this.readyTestingIssues = this.issues.filter(x=> x.status == Statuses.Status.ReadyForTesting);
+      this.TestingIssues = this.issues.filter(x=> x.status == Statuses.Status.Testing);
       this.doneIssues = this.issues.filter(x=> x.status == Statuses.Status.Done);
 
     });

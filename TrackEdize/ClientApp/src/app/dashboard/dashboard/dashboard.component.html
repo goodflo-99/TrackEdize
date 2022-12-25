@@ -1,12 +1,18 @@
 <div>
-    Filters here
+    <mdb-form-control class="mb-3">
+        <textarea name="Search" mdbInput class="form-control"
+            autocomplete="off" rows="1" appTextareaAutoresize></textarea>
+        <label mdbLabel class="form-label" for="textAreaExample">Search</label>
+    </mdb-form-control>
 </div>
 
 <div class="container">
     <!-- <div class="d-flex justify-content-md-around"> -->
     <div class="d-flex justify-content-around align-self-stretch">
         <app-column [header]="'Open'" [issues]="openIssues"></app-column>
-        <app-column [header]="'In Progres'" [issues]="progresIssues"></app-column>
+        <app-column [header]="'In Progress'" [issues]="progressIssues"></app-column>
+        <app-column [header]="'Ready for testing'" [issues]="readyTestingIssues"></app-column>
+        <app-column [header]="'Testing'" [issues]="TestingIssues"></app-column>
         <app-column [header]="'Done'" [issues]="doneIssues"></app-column>
     </div>
 </div>
