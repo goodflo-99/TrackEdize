@@ -11,6 +11,14 @@ namespace TrackEdize.Controllers
     {
         public IssueController(IssueService service) : base(service)
         {
+
+        }
+
+        [HttpGet]
+        [ActionName("GetByProject")]
+        public async Task<IActionResult> GetByProject(string id)
+        {
+            return Ok(await _service.GetByProject(id));
         }
     }
 }

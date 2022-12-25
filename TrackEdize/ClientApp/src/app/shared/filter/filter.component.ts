@@ -11,7 +11,7 @@ export class FilterComponent implements OnInit {
 
   projects: Project[] = [];
   selectedProjects: string[] = [];
-
+  selectedProject: string | undefined;
   timeout: any;
 
   @Output()
@@ -23,12 +23,20 @@ export class FilterComponent implements OnInit {
     this.projectSvc.getAll().subscribe(x => this.projects = x);
   }
 
-  projectFilterChange(e: any) {
+  projectsFilterChange(e: any) {
     if(this.timeout) {
       clearTimeout(this.timeout);
     }
 
     this.timeout = setTimeout(() => this.emmitProjects(e.value), 2000);
+  }
+
+  projectFilterChange(e: any) {
+    if(this.timeout) {
+      clearTimeout(this.timeout);
+    }
+
+    this.timeout = setTimeout(() => this.projectChange.emit(e.value), 2000);
   }
 
   emmitProjects(values: string[]) {

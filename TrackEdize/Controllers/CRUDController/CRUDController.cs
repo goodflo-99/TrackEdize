@@ -12,7 +12,7 @@ namespace TrackEdize.Controllers.CRUDController
     [AllowAnonymous]
     public class CRUDController<T,U> : ControllerBase where T : BaseCRUDService<U> where U : BaseEntity
     {
-        T _service;
+        protected T _service;
         public CRUDController(T service) : base()
         {
             _service = service;

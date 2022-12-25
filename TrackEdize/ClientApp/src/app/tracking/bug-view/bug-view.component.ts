@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
 import { Statuses } from 'src/app/shared/constants/statuses';
+import { ProjectService } from 'src/app/project/services/project.service';
+import { Project } from 'src/app/project/models/project';
 
 @Component({
   selector: 'app-bug-view',
@@ -35,7 +37,9 @@ export class BugViewComponent implements OnInit {
 
   newIssue: Issue = new Issue();
 
-  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute) { }
+  projects: Project[] = [];
+
+  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute, private projSvc: ProjectService) { }
 
   ngOnInit(): void {
     if(!this.id) {
@@ -55,6 +59,8 @@ export class BugViewComponent implements OnInit {
     
     this.statuses = Statuses.getValues();
     console.log(this.statuses);
+
+    this.projSvc.getAll().subscribe(x=> this.projects = x);
   }
 
   click() {

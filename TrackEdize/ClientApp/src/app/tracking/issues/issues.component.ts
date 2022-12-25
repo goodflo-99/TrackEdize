@@ -25,7 +25,8 @@ export class IssuesComponent implements OnInit {
 
   }
 
-  filterIssues(event: any) {
-    console.log("triggered from issues.component", event)
+  filterIssues(id: any) {
+    console.log("triggered from issues.component", id)
+    this.service.getByProjectId(id).subscribe(x=>this.issues = x);
   }
 }
