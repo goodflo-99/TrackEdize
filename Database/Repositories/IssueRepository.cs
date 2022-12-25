@@ -19,14 +19,14 @@ namespace Database.Repositories
 
         public async Task<IEnumerable<Issue>> GetByProjectId(string id)
         {
-            var res = await _collection.FindAsync(x => x.ProjectId == id);
+            var res = await _collection.FindAsync(x => x.Project.Id == id);
             return await res.ToListAsync();
         }
 
 
         public async Task<int> GetOrderByProjectId(string id)
         {
-            var res = await _collection.Aggregate().Match(x => x.ProjectId == id).Group(i => i.ProjectId, g => new { Max = g.Max(e => e.OrderNumber) }).FirstOrDefaultAsync();
+            var res = await _collection.Aggregate().Match(x => x.Project.Id == id).Group(i => i.Project.Id, g => new { Max = g.Max(e => e.OrderNumber) }).FirstOrDefaultAsync();
             return res?.Max + 1 ?? 1;
         }
     }

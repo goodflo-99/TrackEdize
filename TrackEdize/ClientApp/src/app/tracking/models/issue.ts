@@ -1,3 +1,5 @@
+import { Dropdown } from "src/app/shared/model/dropdown";
+
 export class Issue {
     id: string | null = null;
     subject: string | null = null;
@@ -11,9 +13,9 @@ export class Issue {
     browser: string | null = null;
     device: string | null = null;
     system: string | null = null;
-    projectId: string | null = null;
+    project: Dropdown | undefined = new Dropdown();
     key: string | undefined;
-
+    status: string | undefined;
     constructor() {
         
     }

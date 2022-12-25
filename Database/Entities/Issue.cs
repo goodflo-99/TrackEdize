@@ -21,7 +21,8 @@ namespace Database.Entities
         public string? Version { get; set; }
         public string? Browser { get; set; }
         public string? Device { get; set; }
-        public string? ProjectId { get; set; }
+        public Dropdown? Project { get; set; }
         public string? Key { get; set; }
+        public string? Status { get; set; }
     }
 }

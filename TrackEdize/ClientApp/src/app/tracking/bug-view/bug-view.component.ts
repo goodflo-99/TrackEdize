@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
+import { Statuses } from 'src/app/shared/constants/statuses';
 
 @Component({
   selector: 'app-bug-view',
@@ -21,6 +23,8 @@ export class BugViewComponent implements OnInit {
   opsystems = ['Windows', 'Linux', 'Android', 'MacOS', 'iOS', 'iPadOS'];
   selectedOpSystem?: string;
 
+  statuses: any[] = [];
+
   @Input()
   issue: Issue | undefined;
 
@@ -31,9 +35,12 @@ export class BugViewComponent implements OnInit {
 
   newIssue: Issue = new Issue();
 
-  constructor(private issueService: IssueService) { }
+  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(!this.id) {
+      this.route.params.subscribe(x=> this.id = x['id'])
+    }
     if(this.id) {
       this.isNewIssue = false;
       this.issueService.getById(this.id).subscribe(response=> {
@@ -44,6 +51,10 @@ export class BugViewComponent implements OnInit {
       this.isNewIssue = false;
       this.newIssue = this.issue;
     }
+
+    
+    this.statuses = Statuses.getValues();
+    console.log(this.statuses);
   }
 
   click() {

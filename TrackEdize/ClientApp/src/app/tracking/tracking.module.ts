@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { IssueService } from './services/issue.service';
 import { IssuesComponent } from './issues/issues.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   providers: [IssueService],
@@ -55,6 +56,13 @@ import { IssuesComponent } from './issues/issues.component';
     ButtonModule,
     FormsModule,
     SharedModule,
+    RouterModule.forRoot([
+      { path: 'issues', component: IssuesComponent, pathMatch: 'full', children: [
+        
+      ] },
+      { path: 'issues/bug-view', component: BugViewComponent},
+      { path: 'issues/bug-view/:id', component: BugViewComponent}
+    ]),
   ]
 })
 export class TrackingModule { }

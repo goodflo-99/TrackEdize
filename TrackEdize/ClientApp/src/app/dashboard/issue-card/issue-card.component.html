@@ -1,0 +1,10 @@
+<div class="p-2" style="min-width:20em;">
+    <p-card subheader="{{issue.key}}" (click)="goToIssue()">
+        {{issue.subject}}
+        <ng-template pTemplate="footer">
+            <div class="mb-2 d-flex justify-content-end">
+                {{issue.status}}
+            </div>
+        </ng-template>
+    </p-card>
+</div>

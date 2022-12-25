@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<div>
+    Filters here
+</div>
+
+<div class="container">
+    <!-- <div class="d-flex justify-content-md-around"> -->
+    <div class="d-flex justify-content-around align-self-stretch">
+        <app-column [header]="'Open'" [issues]="openIssues"></app-column>
+        <app-column [header]="'In Progres'" [issues]="progresIssues"></app-column>
+        <app-column [header]="'Done'" [issues]="doneIssues"></app-column>
+    </div>
+</div>

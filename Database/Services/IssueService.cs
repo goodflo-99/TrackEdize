@@ -27,17 +27,22 @@ namespace Database.Services
 
             var issue = await base.GetAsync(id);
             ArgumentNullException.ThrowIfNull(issue, $"Issue with id {id} was not found");
-            var project_abbv = await _projectService.GetAbbv(issue.ProjectId);
+            var project = _projectService.GetAsync(issue.Project.Id);
+            var project_abbv = await _projectService.GetAbbv(issue.Project.Id);
             issue.Key = $"{project_abbv}-{issue.OrderNumber}";
             return issue;
         }
 
         public override async Task CreateAsync(Issue newEntity)
         {
-            newEntity.ProjectId = "639e26060350994520d59428";
-            newEntity.OrderNumber = await _issueRepository.GetOrderByProjectId(newEntity.ProjectId);
-            var project_abbv = await _projectService.GetAbbv(newEntity.ProjectId);
+            newEntity.Project.Id = "639e26060350994520d59428";
+            newEntity.OrderNumber = await _issueRepository.GetOrderByProjectId(newEntity.Project.Id);
+            var project_abbv = await _projectService.GetAbbv(newEntity.Project.Id);
             newEntity.Key = $"{project_abbv}-{newEntity.OrderNumber}";
+            newEntity.Status = "Open";
+
+            var project = await _projectService.GetAsync(newEntity.Project.Id);
+            newEntity.Project.Name = project.Name;
 
             await base.CreateAsync(newEntity);
         }

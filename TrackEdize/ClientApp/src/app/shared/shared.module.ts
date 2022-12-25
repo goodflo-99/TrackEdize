@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextareaAutoresizeDirective } from './textarea-autoresize/textarea-autoresize.directive';
+import { FilterComponent } from './filter/filter.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [TextareaAutoresizeDirective],
+  declarations: [TextareaAutoresizeDirective, FilterComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    DropdownModule,
+    MultiSelectModule,
+    FormsModule
   ],
   exports: [
-    TextareaAutoresizeDirective
+    TextareaAutoresizeDirective,
+    FilterComponent
   ]
 })
 export class SharedModule { }

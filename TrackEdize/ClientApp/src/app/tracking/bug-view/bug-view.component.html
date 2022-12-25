@@ -3,7 +3,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
-            <li class="breadcrumb-item"><a href="#">Project_name</a></li>
+            <li class="breadcrumb-item"><a href="#">{{newIssue.project?.name || "Project Name"}}</a></li>
             <li class="breadcrumb-item active" aria-current="page"><a href="#">{{newIssue.key || ""}}</a></li>
             <div class="ml-4">
               <button pButton type="button" class="p-element p-ripple p-button-rounded p-button-info p-button-text p-button p-component p-button-icon-only"><i class="pi pi-copy"></i></button>
@@ -90,6 +90,13 @@
         <div class="d-flex justify-content-around">
           <button (click)="click()" pButton type="button" [label]="isNewIssue ? 'Add' : 'Edit'" class="p-button-text p-button-info"><i class="pi pi-file-edit"></i></button>
           <button (click)="reset()" *ngIf="isNewIssue" type="button" label=" Delete" class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
+        </div>
+        <div class="d-flex justify-content-around" *ngIf="!isNewIssue">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="status">Status</span>
+            <p-dropdown [options]="statuses" [(ngModel)]="newIssue.status" name="status"
+              [ngModelOptions]="{standalone: true}" placeholder="Status"></p-dropdown>
+          </div>
         </div>
       </div>
     </div>
