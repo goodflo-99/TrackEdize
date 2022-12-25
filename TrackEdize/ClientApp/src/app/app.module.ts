@@ -37,6 +37,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProjectModule } from './project/project.module';
 import { ProjectsComponent } from './project/projects/projects.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 
 
@@ -56,7 +57,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ApiAuthorizationModule,
     TrackingModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: DashboardComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       //{ path: 'bug-view', component: BugViewComponent}
