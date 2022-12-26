@@ -16,6 +16,7 @@ export class Issue {
     project: Dropdown | undefined = new Dropdown();
     key: string | undefined;
     status: string | undefined;
+    type: string | undefined;
     constructor() {
         
     }

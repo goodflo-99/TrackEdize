@@ -7,7 +7,7 @@
     </p-card>
 </div> -->
 
-<div class="p-2 flex-fill bd-highlight">{{header}}</div>
+<div class="p-2 mt-3 d-flex justify-content-around" style="width: 20em;"><h2 [ngClass]="getHeaderColor(header)">{{header}}</h2></div>
 <div>
     <issue-card *ngFor="let i of issues" [issue]="i">
     </issue-card>

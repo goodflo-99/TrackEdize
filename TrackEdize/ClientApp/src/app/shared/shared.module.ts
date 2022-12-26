@@ -6,8 +6,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-
-
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [TextareaAutoresizeDirective, FilterComponent],
@@ -16,7 +15,8 @@ import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/form
     DropdownModule,
     MultiSelectModule,
     FormsModule,
-    MdbFormsModule
+    MdbFormsModule,
+    InputTextModule,
   ],
   exports: [
     TextareaAutoresizeDirective,

@@ -1,5 +1,5 @@
 a {
-  color: #0366d6;
+  color: #33525e;
 }
 
 code {
@@ -8,8 +8,13 @@ code {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #7d9098 !important;
+  border-color: #7d9098;
+}
+
+.btn-outline-primary {
+  color: #7d9098 !important;
+  border-color: #7d9098 !important;
 }
 
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
@@ -51,10 +56,6 @@ textarea {
   max-height: 20em;
 }
 
-.right-side-menu {
-  width: 3em !important;
-}
-
 .p-dropdown {
   min-width: 39.5em;
   height: 2.2em;
@@ -84,4 +85,28 @@ textarea {
 
 .p-button-rounded {
   height: 0.4em !important;
+}
+
+.bug-border-card-color {
+  border-color: grey;
+}
+
+.task-border-card-color {
+  border-color: blue;
+}
+
+.story-border-card-color {
+  border-color: lightgreen;
+}
+
+.bug-card-color {
+  background-color: grey;
+}
+
+.task-card-color {
+  background-color: blue;
+}
+
+.story-card-color {
+  background-color: lightgreen;
 }

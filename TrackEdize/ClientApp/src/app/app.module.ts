@@ -24,9 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { Page404Component } from './page404/page404.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
@@ -38,17 +36,17 @@ import { ProjectModule } from './project/project.module';
 import { ProjectsComponent } from './project/projects/projects.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-
+import { SignInComponent } from './sign-in/sign-in.component';
+import { AccountPageComponent } from './account-page/account-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    
+    Page404Component,
+    SignInComponent,
+    AccountPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,8 +56,11 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     TrackingModule,
     RouterModule.forRoot([
       { path: '', component: DashboardComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'sign-in', component: SignInComponent },
+      { path: 'account-page', component: AccountPageComponent },
+      { path: '**', component: Page404Component },
+      // { path: 'counter', component: CounterComponent },
+      // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       //{ path: 'bug-view', component: BugViewComponent}
     ]),
     MdbAccordionModule,

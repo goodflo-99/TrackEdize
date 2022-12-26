@@ -138,5 +138,8 @@
 			}
 		}
 	},
-	"defaultProject": "TrackEdize"
+  "defaultProject": "TrackEdize",
+  "cli": {
+    "analytics": false
+  }
 }

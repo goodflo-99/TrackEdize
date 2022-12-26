@@ -64,6 +64,7 @@ export class FilterComponent implements OnInit {
   }
 
   clearSearch() {
+    console.log("clear")
     this.search = "";
     this.searchFilterChange();
   }

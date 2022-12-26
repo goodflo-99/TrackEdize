@@ -1,24 +1,12 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 nav-bgc"
-  >
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 nav-bgc">
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">TrackEdize</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <!-- <li
             class="nav-item"
@@ -28,24 +16,22 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li> -->
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/dashboard']"
-              >Dashboard</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/projects']"
-              >Projects</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['/projects']">Projects</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['issues']"
-              >Issues</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['issues']">Issues</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['issues/bug-view']"
-              >Bug view</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['issues/bug-view']">Bug view</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['sign-in']">Sign in</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['account-page']"><i class="pi pi-user"></i></a>
           </li>
         </ul>
         <!-- <app-login-menu></app-login-menu> -->

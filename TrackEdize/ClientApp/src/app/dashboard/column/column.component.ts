@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Statuses } from 'src/app/shared/constants/statuses';
 import { Issue } from 'src/app/tracking/models/issue';
 
 @Component({
@@ -18,6 +19,18 @@ export class ColumnComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getHeaderColor(type: any) {
+    switch(type) {
+      case Statuses.Status.Open: return "open-header-color";
+      case Statuses.Status.InProgress: return "in-progress-header-color";
+      case Statuses.Status.ReadyForTesting: return "ready-for-testing-header-color";
+      case Statuses.Status.Testing: return "testing-header-color";
+      case Statuses.Status.Done: return "done-header-color";
+      default: break;
+    }
+    return "";
   }
 
 }

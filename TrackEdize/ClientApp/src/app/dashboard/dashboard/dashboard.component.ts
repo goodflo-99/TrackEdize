@@ -32,4 +32,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  filterIssues(e: any) {
+
+  }
+  
+  search(e: any) {
+
+  }
+
 }
