@@ -36,4 +36,16 @@ export class IssuesComponent implements OnInit {
     console.log("triggered from issues.component", id)
     this.service.getByProjectId(id).subscribe(x=>this.issues = x);
   }
+
+  search(str: string) {
+    console.log("searched ", str)
+    if(str.length == 0) {
+      this.getAll();
+    } else if(this.issues.length == 0) {
+      this.service.getAll().subscribe(x=> this.issues = x.filter(y=>y.subject?.includes(str)));
+    } else {
+      this.issues = this.issues.filter(x=> x.subject?.includes(str));
+    }
+
+  }
 }

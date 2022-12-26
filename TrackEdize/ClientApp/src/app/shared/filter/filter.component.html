@@ -1,4 +1,15 @@
-<div>
+<div class="d-flex align-items-center justify-content-between">
     <!-- <p-multiSelect [options]="projects" [(ngModel)]="selectedProjects" optionLabel="name" optionValue="id" display="chip" (onChange)="projectsFilterChange($event)"></p-multiSelect> -->
     <p-dropdown [options]="projects" [(ngModel)]="selectedProject" [showClear]="true" optionLabel="name" optionValue="id" placeholder="Select a Project" (onChange)="projectFilterChange($event)"></p-dropdown>
+
+    <button type="button" class="btn btn-primary">Add new issue</button>
+</div>
+
+<div class="mt-2">
+    <mdb-form-control class="mb-3">
+        <input type="text" [(ngModel)]="search" (change)="searchFilterChange()" name="Search" mdbInput class="form-control"
+            autocomplete="off"/>
+        <label mdbLabel class="form-label" for="textAreaExample">Search</label>
+    </mdb-form-control>
+    <button (click)="clearSearch()" class="btn btn-warn">Clear</button>
 </div>

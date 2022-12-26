@@ -12,10 +12,17 @@ export class FilterComponent implements OnInit {
   projects: Project[] = [];
   selectedProjects: string[] = [];
   selectedProject: string | undefined;
-  timeout: any;
+
+  projectTimeout: any;
+  searchTimeout: any;
+
+  search: string = "";
 
   @Output()
   projectChange = new EventEmitter<string[]>();
+
+  @Output()
+  searchChange = new EventEmitter<string>();
 
   constructor(private projectSvc: ProjectService) { }
 
@@ -24,24 +31,41 @@ export class FilterComponent implements OnInit {
   }
 
   projectsFilterChange(e: any) {
-    if(this.timeout) {
-      clearTimeout(this.timeout);
+    if(this.projectTimeout) {
+      clearTimeout(this.projectTimeout);
     }
 
-    this.timeout = setTimeout(() => this.emmitProjects(e.value), 2000);
+    this.projectTimeout = setTimeout(() => this.emmitProjects(e.value), 2000);
   }
 
   projectFilterChange(e: any) {
-    if(this.timeout) {
-      clearTimeout(this.timeout);
+    if(this.projectTimeout) {
+      clearTimeout(this.projectTimeout);
     }
 
-    this.timeout = setTimeout(() => this.projectChange.emit(e.value), 500);
+    this.projectTimeout = setTimeout(() => this.projectChange.emit(e.value), 500);
   }
 
   emmitProjects(values: string[]) {
     console.log("emmited: ", values)
     this.projectChange.emit(values);
+  }
+
+  searchFilterChange() {
+    if(this.search.length < 3 && this.search.length > 0) return;
+
+    if(this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+
+    console.log("emmited: ", this.search)
+
+    this.searchTimeout = setTimeout(() => this.searchChange.emit(this.search), 500);
+  }
+
+  clearSearch() {
+    this.search = "";
+    this.searchFilterChange();
   }
 
 }
