@@ -13,6 +13,9 @@ import { Project } from 'src/app/project/models/project';
 })
 export class BugViewComponent implements OnInit {
 
+  iTypes = ['Bug', 'Task', 'Story'];
+  selectedType?: string;
+
   environments = ['Development', 'Staging', 'Production'];
   selectedEnvironment?: string;
 
