@@ -26,5 +26,6 @@ namespace Database.Entities
         public string? Key { get; set; }
         public string? Status { get; set; }
         public string? Type { get; set; }
+        public List<Comment>? Comments { get; set; }
     }
 }

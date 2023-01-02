@@ -2,6 +2,7 @@
 using Database.Interfaces;
 using Database.Repositories;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,28 @@ namespace Database.Services
         public async Task<IEnumerable<Issue>> GetByProject(string projectId)
         {
             return await _issueRepository.GetByProjectId(projectId);
+        }
+
+        public async Task<List<Comment>> AddCommentAsync(Comment comment, string id)
+        {
+            var issue = await GetAsync(id);
+            if(issue.Comments == null)
+            {
+                issue.Comments = new List<Comment>();
+            }
+            if(comment.Id == null)
+            {
+                comment.Id = ObjectId.GenerateNewId().ToString();
+            }
+            issue.Comments.Add(comment);
+            await UpdateAsync(id, issue);
+            return await GetCommentsAsync(id);
+        }
+
+        public async Task<List<Comment>> GetCommentsAsync(string id)
+        {
+            var issue = await GetAsync(id);
+            return issue?.Comments ?? new List<Comment>();
         }
     }
 }

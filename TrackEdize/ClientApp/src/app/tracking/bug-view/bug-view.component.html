@@ -12,91 +12,92 @@
       </nav>
       <div class="d-flex col-8">        
         <div class="container">
-            <form>
+            <form [formGroup]="issueForm">
               <div class="d-flex justify-content-around" >
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="project">Project</span>
-                  <p-dropdown [disabled]="!isNewIssue" [options]="projects" [(ngModel)]="newIssue.project!.id" name="project"
-                    [ngModelOptions]="{standalone: true}" placeholder="Project" optionLabel="name" optionValue="id"></p-dropdown>
+                  <p-dropdown [disabled]="!isNewIssue" [options]="projects" [(ngModel)]="newIssue.project!.id"
+                    formControlName="projectId" placeholder="Project" optionLabel="name" optionValue="id"></p-dropdown>
                 </div>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="type">Issue type</span>
-                <p-dropdown [options]="iTypes" [(ngModel)]="newIssue.type" name="iType"
-                  [ngModelOptions]="{standalone: true}" placeholder="Issue type"></p-dropdown>
+                <p-dropdown [options]="iTypes" [(ngModel)]="newIssue.type" formControlName="type" placeholder="Issue type"></p-dropdown>
               </div>
 
               <hr class="hr hr-blurry">
 
                 <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.subject" name="subject" mdbInput class="form-control" id="subject" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <textarea [(ngModel)]="newIssue.subject" mdbInput
+                      formControlName="subject" class="form-control" id="subject" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
                     <label mdbLabel class="form-label" for="textAreaExample">Subject</label>
                   </mdb-form-control>
 
                   <div class="input-group mb-3">
                     <span class="input-group-text">Credentials for user</span>
                     <mdb-form-control>
-                      <input [(ngModel)]="newIssue.userName" name="username" mdbInput type="text" id="username" class="form-control">
+                      <input [(ngModel)]="newIssue.userName" formControlName="username" mdbInput type="text" id="username" class="form-control">
                       <label mdbLabel class="form-label" for="form1"><i class="pi pi-user"></i> Username</label>
                     </mdb-form-control>
                     <mdb-form-control>
-                      <input [(ngModel)]="newIssue.password" name="password" mdbInput type="text" id="password" class="form-control">
+                      <input [(ngModel)]="newIssue.password" formControlName="password" mdbInput type="text" id="password" class="form-control">
                       <label mdbLabel class="form-label" for="form1"><i class="pi pi-key"></i> Password</label>
                     </mdb-form-control>
                   </div>
 
                   <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.steps" name="steps" mdbInput class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
+                    <textarea [(ngModel)]="newIssue.steps" formControlName="steps" mdbInput class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
                     <label mdbLabel class="form-label" for="textAreaExample">Steps to reproduce</label>
                   </mdb-form-control>
 
                   <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.actualResult" name="actualResult" mdbInput class="form-control" id="aresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <textarea [(ngModel)]="newIssue.actualResult" formControlName="actualResult" mdbInput class="form-control" id="aresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
                     <label mdbLabel class="form-label" for="textAreaExample">Actual result</label>
                   </mdb-form-control>
 
                   <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.expectedResult" name="expectedResult" mdbInput class="form-control" id="eresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+                    <textarea [(ngModel)]="newIssue.expectedResult" formControlName="expectedResult" mdbInput class="form-control" id="eresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
                     <label mdbLabel class="form-label" for="textAreaExample">Expected result</label>
                   </mdb-form-control>
 
-                  <hr class="hr hr-blurry">
+                  <div *ngIf="newIssue.type=='Bug'">
+                    <hr class="hr hr-blurry">
         
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="environment">Environment</span>
-                    <p-dropdown [options]="environments" [(ngModel)]="newIssue.environment" name="environment"
-                      [ngModelOptions]="{standalone: true}" placeholder="Select Environment"></p-dropdown>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="environment">Environment</span>
+                      <p-dropdown [options]="environments" [(ngModel)]="newIssue.environment" formControlName="environment" placeholder="Select Environment"></p-dropdown>
+                    </div>
+  
+                    <mdb-form-control class="mb-3">
+                      <textarea mdbInput class="form-control" id="version" autocomplete="off" rows="1" [(ngModel)]="newIssue.version" formControlName="version"></textarea>
+                      <label mdbLabel class="form-label" for="textAreaExample">Version</label>
+                    </mdb-form-control>
+  
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="browser">Browser</span>
+                      <p-dropdown [options]="browsers" [(ngModel)]="newIssue.browser" formControlName="browser" placeholder="Select your browser"></p-dropdown>
+                    </div>
+  
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="device">Device</span>
+                      <p-dropdown [options]="devices" [(ngModel)]="newIssue.device" formControlName="device" placeholder="Select your device"></p-dropdown>
+                    </div>
+  
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="opsystem">Operation system</span>
+                      <p-dropdown [options]="opsystems" [(ngModel)]="newIssue.system" formControlName="system" placeholder="Select your operation system"></p-dropdown>
+                    </div>
                   </div>
-
-                  <mdb-form-control class="mb-3">
-                    <textarea mdbInput class="form-control" id="version" autocomplete="off" rows="1" [(ngModel)]="newIssue.version" name="version"></textarea>
-                    <label mdbLabel class="form-label" for="textAreaExample">Version</label>
-                  </mdb-form-control>
-
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="browser">Browser</span>
-                    <p-dropdown [options]="browsers" [(ngModel)]="newIssue.browser" name="browser"
-                      [ngModelOptions]="{standalone: true}" placeholder="Select your browser"></p-dropdown>
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="device">Device</span>
-                    <p-dropdown [options]="devices" [(ngModel)]="newIssue.device" name="device"
-                      [ngModelOptions]="{standalone: true}" placeholder="Select your device"></p-dropdown>
-                  </div>
-
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="opsystem">Operation system</span>
-                    <p-dropdown [options]="opsystems" [(ngModel)]="newIssue.system" name="system"
-                      [ngModelOptions]="{standalone: true}" placeholder="Select your operation system"></p-dropdown>
-                  </div>
+                  
             </form>
 
             <hr class="hr hr-blurry">
 
-            <div>
+            <div *ngIf="!isNewIssue">
               <p>Comments</p>
-              
+              <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)">
+
+              </app-comment-section>
             </div>
         </div>
         <div class="vr vr-blurry" style="min-height: 100%;"></div>
@@ -109,7 +110,7 @@
         <div class="d-flex mt-4" *ngIf="!isNewIssue">
           <div class="input-group">
             <span class="input-group-text" id="status">Status</span>
-            <p-dropdown [className]="'right-side-menu'" [options]="statuses" [(ngModel)]="newIssue.status" name="status"
+            <p-dropdown [className]="['right-side-menu']" [options]="statuses" [(ngModel)]="newIssue.status" name="status"
               [ngModelOptions]="{standalone: true}" placeholder="Status"></p-dropdown>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectService } from './services/project.service';
 import { RouterModule } from '@angular/router';
 import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +23,8 @@ import { FormsModule } from '@angular/forms';
       { path: 'projects/edit-project/:id', component: EditProjectComponent, }
     ]),
     MdbFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProjectModule { }

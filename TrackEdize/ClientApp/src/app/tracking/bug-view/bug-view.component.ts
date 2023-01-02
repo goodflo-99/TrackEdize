@@ -3,8 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
 import { Statuses } from 'src/app/shared/constants/statuses';
+import { Constants } from 'src/app/shared/constants/constants';
 import { ProjectService } from 'src/app/project/services/project.service';
 import { Project } from 'src/app/project/models/project';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Comment } from '../models/comment';
 
 @Component({
   selector: 'app-bug-view',
@@ -13,21 +16,11 @@ import { Project } from 'src/app/project/models/project';
 })
 export class BugViewComponent implements OnInit {
 
-  iTypes = ['Bug', 'Task', 'Story'];
-  selectedType?: string;
-
-  environments = ['Development', 'Staging', 'Production'];
-  selectedEnvironment?: string;
-
-  browsers = ['Chrome', 'Safari', 'Opera', 'Firefox', 'Edge'];
-  selectedBrowser?: string;
-
-  devices = ['PC/Laptop', 'MacBook', 'Android phone', 'iPhone', 'Android tablet', 'iPad', 'Windows phone'];
-  selectedDevice?: string;
-
-  opsystems = ['Windows', 'Linux', 'Android', 'MacOS', 'iOS', 'iPadOS'];
-  selectedOpSystem?: string;
-
+  iTypes = Constants.iTypes;
+  environments = Constants.environments;
+  browsers = Constants.browsers;
+  devices = Constants.devices;
+  opsystems = Constants.opsystems;
   statuses: any[] = [];
 
   @Input()
@@ -37,14 +30,15 @@ export class BugViewComponent implements OnInit {
   id: string | undefined;
 
   isNewIssue: boolean = true;
-
   newIssue: Issue = new Issue();
-
   projects: Project[] = [];
 
-  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute, private projSvc: ProjectService) { }
+  issueForm: FormGroup = new FormGroup({});
+
+  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute, private projSvc: ProjectService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initForm();
     if(!this.id) {
       this.route.params.subscribe(x=> this.id = x['id'])
     }
@@ -66,6 +60,24 @@ export class BugViewComponent implements OnInit {
     this.projSvc.getAll().subscribe(x=> this.projects = x);
   }
 
+  initForm() {
+    this.issueForm = this.fb.group({
+      projectId: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      subject: [null, [Validators.required]],
+      username: null,
+      password: null,
+      steps: null,
+      actualResult: null,
+      expectedResult: null,
+      environment: null,
+      version: null,
+      browser: null,
+      device: null,
+      system: null
+    });
+  }
+
   click() {
     if(this.id || this.newIssue.id) {
       this.issueService.update(this.newIssue).subscribe(x=> {
@@ -81,6 +93,14 @@ export class BugViewComponent implements OnInit {
 
   reset() {
     this.newIssue = new Issue();
+  }
+
+  addComment(comment: Comment) {
+    if(this.newIssue.id && this.newIssue.id != null) {
+      this.issueService.addComment(comment, this.newIssue.id).subscribe(x=> {
+        this.newIssue.comments = x;
+      });
+    }    
   }
 
 }

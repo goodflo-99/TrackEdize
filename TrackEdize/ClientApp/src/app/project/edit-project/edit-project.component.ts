@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/project';
 import { ProjectService } from '../services/project.service';
@@ -13,11 +14,14 @@ export class EditProjectComponent implements OnInit, OnChanges {
   @Input()
   id: string | undefined;
 
-  project!: Project;
+  project: Project = new Project();
 
   wasChanges: boolean = false;
 
-  constructor(private projectService:ProjectService, private router:Router, private route: ActivatedRoute) { }
+  projectForm: FormGroup = new FormGroup({});
+
+  constructor(private projectService:ProjectService, private router:Router, private route: ActivatedRoute, private fb:FormBuilder) {
+   }
 
   ngOnInit(): void {
     if(!this.id) {
@@ -29,6 +33,8 @@ export class EditProjectComponent implements OnInit, OnChanges {
       this.project = new Project;
       this.wasChanges = true;
     }
+
+    this.initForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -49,6 +55,31 @@ export class EditProjectComponent implements OnInit, OnChanges {
 
   close() {
     this.router.navigate(['/projects'])
+  }
+
+  generateAbbv() {
+    if(!this.project.name) return;
+    let abbv = "";
+    const reg: RegExp = /[ -]/;
+    const str = this.project.name.split(reg);
+    if(str.length == 1) {
+      abbv = str[0].slice(0,3);
+    } else {
+      str.forEach(x=> {
+        if(abbv.length >= 4) return;
+        abbv += x[0];
+      })
+    }
+
+    this.project.abbreviation = abbv.toUpperCase();
+  }
+
+  initForm() {
+    this.projectForm = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(3)]],
+      abbv: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
+      description: null
+    })
   }
 
 }

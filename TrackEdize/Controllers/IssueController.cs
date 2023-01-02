@@ -21,5 +21,17 @@ namespace TrackEdize.Controllers
         {
             return Ok(await _service.GetByProject(id));
         }
+
+        [HttpPost("AddComment")]
+        public async Task<IActionResult> AddComment([FromBody]Comment comment, string id)
+        {
+            return Ok(await _service.AddCommentAsync(comment, id));
+        }
+
+        [HttpGet("GetComments")]
+        public async Task<IActionResult> GetComments(string id)
+        {
+            return Ok(await _service.GetCommentsAsync(id));
+        }
     }
 }

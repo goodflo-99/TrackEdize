@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from 'src/app/common/base-service';
+import { Comment } from '../models/comment';
 import { Issue } from '../models/issue';
 
 @Injectable({
@@ -21,4 +22,11 @@ export class IssueService extends BaseService<Issue> {
     return res;
   }
 
+  addComment(comment: Comment, id: string) {
+    var params = new HttpParams().set("id", id);
+
+    return this.http.post<Comment[]>(this.api+'/AddComment', comment, {
+      params: params
+    });
+  }
 }

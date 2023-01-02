@@ -17,4 +17,8 @@ export class NavigationHelper {
     public navigateToIssue(id: string) {
         this.router.navigate([`/issues/bug-view/${id}`]);        
     }
+
+    public toNewIssue() {
+        this.router.navigate([`/issues/bug-view`]);        
+    }
 }

@@ -12,8 +12,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let pr of projects">
-            <th>{{pr.name}}</th>
             <th>{{pr.abbreviation}}</th>
+            <th>{{pr.name}}</th>
             <th>{{pr.description}}</th>
             <th>
                 <a (click)="editProject(pr.id)">Edit</a>

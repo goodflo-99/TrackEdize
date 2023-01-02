@@ -22,17 +22,19 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 
 import { BugViewComponent } from './bug-view/bug-view.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { IssueService } from './services/issue.service';
 import { IssuesComponent } from './issues/issues.component';
 import { RouterModule } from '@angular/router';
+import { CommentSectionComponent } from './comment-section/comment-section.component';
 
 @NgModule({
   providers: [IssueService],
   declarations: [
     BugViewComponent,
-    IssuesComponent
+    IssuesComponent,
+    CommentSectionComponent
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,8 @@ import { RouterModule } from '@angular/router';
     ButtonModule,
     FormsModule,
     SharedModule,
+    ReactiveFormsModule,
+    DropdownModule,
     RouterModule.forRoot([
       { path: 'issues', component: IssuesComponent, pathMatch: 'full', children: [
         

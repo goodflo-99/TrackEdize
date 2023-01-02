@@ -17,8 +17,8 @@ export class IssuesComponent implements OnInit {
     this.service.getAll().subscribe(x=> this.issues = x);
   }
 
-  edit(id:Issue){
-    this.router.navigate(['/issues/bug-view', id.id]);
+  edit(issue:Issue){
+    this.router.navigate(['/issues/bug-view', issue.id]);
   }
 
   delete(id:any) {
@@ -42,10 +42,9 @@ export class IssuesComponent implements OnInit {
     if(str.length == 0) {
       this.getAll();
     } else if(this.issues.length == 0) {
-      this.service.getAll().subscribe(x=> this.issues = x.filter(y=>y.subject?.includes(str)));
+      this.service.getAll().subscribe(x=> this.issues = x.filter(y=>y.subject?.toUpperCase().includes(str.toUpperCase())));
     } else {
-      this.issues = this.issues.filter(x=> x.subject?.includes(str));
+      this.issues = this.issues.filter(x=> x.subject?.toUpperCase().includes(str.toUpperCase()));
     }
-
   }
 }

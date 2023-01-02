@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Project } from 'src/app/project/models/project';
 import { ProjectService } from 'src/app/project/services/project.service';
+import { NavigationHelper } from '../helpers/navigation.helper';
 
 @Component({
   selector: 'filter',
@@ -24,7 +25,7 @@ export class FilterComponent implements OnInit {
   @Output()
   searchChange = new EventEmitter<string>();
 
-  constructor(private projectSvc: ProjectService) { }
+  constructor(private projectSvc: ProjectService, private nav: NavigationHelper) { }
 
   ngOnInit(): void {
     this.projectSvc.getAll().subscribe(x => this.projects = x);
@@ -67,6 +68,10 @@ export class FilterComponent implements OnInit {
     console.log("clear")
     this.search = "";
     this.searchFilterChange();
+  }
+
+  addNewIssue() {
+    this.nav.toNewIssue();
   }
 
 }

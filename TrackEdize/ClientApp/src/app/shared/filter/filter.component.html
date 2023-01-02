@@ -4,7 +4,7 @@
         <span class="input-group-text" id="browser">Filter by project</span>
         <p-dropdown [options]="projects" [(ngModel)]="selectedProject" [showClear]="true" optionLabel="name" optionValue="id" placeholder="Select a Project" (onChange)="projectFilterChange($event)"></p-dropdown>
     </div>
-    <button type="button" class="btn btn-primary">Add new issue</button>
+    <button type="button" (click)="addNewIssue()" class="btn btn-primary">Add new issue</button>
 </div>
 
 <div class="mt-2">
