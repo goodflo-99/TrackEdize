@@ -1,119 +1,169 @@
 <div class="container">
-    <div class="row">
-      <nav aria-label="breadcrumb" *ngIf="!isNewIssue">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
-            <li class="breadcrumb-item"><a href="#">{{newIssue.project?.name || "Project Name"}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{newIssue.key || ""}}</a></li>
-            <div class="ml-4">
-              <button pButton type="button" class="p-element p-ripple p-button-rounded p-button-info p-button-text p-button p-component p-button-icon-only"><i class="pi pi-copy"></i></button>
+  <div class="row">
+    <nav aria-label="breadcrumb" *ngIf="!isNewIssue">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
+        <li class="breadcrumb-item"><a href="#">{{newIssue.project?.name || "Project Name"}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="#">{{newIssue.key || ""}}</a></li>
+        <div class="ml-4">
+          <button pButton type="button"
+            class="p-element p-ripple p-button-rounded p-button-info p-button-text p-button p-component p-button-icon-only"><i
+              class="pi pi-copy"></i></button>
+        </div>
+      </ol>
+    </nav>
+    <div class="d-flex col-8">
+      <div class="container">
+        <form [formGroup]="issueForm">
+          <div class="d-flex justify-content-around">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="project">Project</span>
+              <p-dropdown [disabled]="!isNewIssue" [options]="projects" [(ngModel)]="newIssue.project!.id"
+                formControlName="projectId" placeholder="Project" optionLabel="name" optionValue="id"></p-dropdown>
             </div>
-        </ol>
-      </nav>
-      <div class="d-flex col-8">        
-        <div class="container">
-            <form [formGroup]="issueForm">
-              <div class="d-flex justify-content-around" >
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="project">Project</span>
-                  <p-dropdown [disabled]="!isNewIssue" [options]="projects" [(ngModel)]="newIssue.project!.id"
-                    formControlName="projectId" placeholder="Project" optionLabel="name" optionValue="id"></p-dropdown>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="type">Issue type</span>
-                <p-dropdown [options]="iTypes" [(ngModel)]="newIssue.type" formControlName="type" placeholder="Issue type"></p-dropdown>
-              </div>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="type">Issue type</span>
+            <p-dropdown [options]="iTypes" [(ngModel)]="newIssue.type" formControlName="type"
+              placeholder="Issue type"></p-dropdown>
+          </div>
 
-              <hr class="hr hr-blurry">
+          <hr class="hr hr-blurry">
 
-                <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.subject" mdbInput
-                      formControlName="subject" class="form-control" id="subject" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
-                    <label mdbLabel class="form-label" for="textAreaExample">Subject</label>
-                  </mdb-form-control>
+          <mdb-form-control class="mb-3">
+            <textarea [(ngModel)]="newIssue.subject" mdbInput formControlName="subject" class="form-control"
+              id="subject" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample">Subject</label>
+          </mdb-form-control>
 
-                  <div class="input-group mb-3">
-                    <span class="input-group-text">Credentials for user</span>
-                    <mdb-form-control>
-                      <input [(ngModel)]="newIssue.userName" formControlName="username" mdbInput type="text" id="username" class="form-control">
-                      <label mdbLabel class="form-label" for="form1"><i class="pi pi-user"></i> Username</label>
-                    </mdb-form-control>
-                    <mdb-form-control>
-                      <input [(ngModel)]="newIssue.password" formControlName="password" mdbInput type="text" id="password" class="form-control">
-                      <label mdbLabel class="form-label" for="form1"><i class="pi pi-key"></i> Password</label>
-                    </mdb-form-control>
-                  </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Credentials for user</span>
+            <mdb-form-control>
+              <input [(ngModel)]="newIssue.userName" formControlName="username" mdbInput type="text" id="username"
+                class="form-control">
+              <label mdbLabel class="form-label" for="form1"><i class="pi pi-user"></i> Username</label>
+            </mdb-form-control>
+            <mdb-form-control>
+              <input [(ngModel)]="newIssue.password" formControlName="password" mdbInput type="text" id="password"
+                class="form-control">
+              <label mdbLabel class="form-label" for="form1"><i class="pi pi-key"></i> Password</label>
+            </mdb-form-control>
+          </div>
 
-                  <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.steps" formControlName="steps" mdbInput class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
-                    <label mdbLabel class="form-label" for="textAreaExample">Steps to reproduce</label>
-                  </mdb-form-control>
+          <mdb-form-control class="mb-3">
+            <textarea [(ngModel)]="newIssue.steps" formControlName="steps" mdbInput class="form-control" id="steps"
+              autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample">Steps to reproduce</label>
+          </mdb-form-control>
 
-                  <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.actualResult" formControlName="actualResult" mdbInput class="form-control" id="aresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
-                    <label mdbLabel class="form-label" for="textAreaExample">Actual result</label>
-                  </mdb-form-control>
+          <mdb-form-control class="mb-3">
+            <textarea [(ngModel)]="newIssue.actualResult" formControlName="actualResult" mdbInput class="form-control"
+              id="aresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample">Actual result</label>
+          </mdb-form-control>
 
-                  <mdb-form-control class="mb-3">
-                    <textarea [(ngModel)]="newIssue.expectedResult" formControlName="expectedResult" mdbInput class="form-control" id="eresult" autocomplete="off" rows="1" appTextareaAutoresize [minHeight]="38"></textarea>
-                    <label mdbLabel class="form-label" for="textAreaExample">Expected result</label>
-                  </mdb-form-control>
+          <mdb-form-control class="mb-3">
+            <textarea [(ngModel)]="newIssue.expectedResult" formControlName="expectedResult" mdbInput
+              class="form-control" id="eresult" autocomplete="off" rows="1" appTextareaAutoresize
+              [minHeight]="38"></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample">Expected result</label>
+          </mdb-form-control>
 
-                  <div *ngIf="newIssue.type=='Bug'">
-                    <hr class="hr hr-blurry">
-        
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="environment">Environment</span>
-                      <p-dropdown [options]="environments" [(ngModel)]="newIssue.environment" formControlName="environment" placeholder="Select Environment"></p-dropdown>
-                    </div>
-  
-                    <mdb-form-control class="mb-3">
-                      <textarea mdbInput class="form-control" id="version" autocomplete="off" rows="1" [(ngModel)]="newIssue.version" formControlName="version"></textarea>
-                      <label mdbLabel class="form-label" for="textAreaExample">Version</label>
-                    </mdb-form-control>
-  
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="browser">Browser</span>
-                      <p-dropdown [options]="browsers" [(ngModel)]="newIssue.browser" formControlName="browser" placeholder="Select your browser"></p-dropdown>
-                    </div>
-  
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="device">Device</span>
-                      <p-dropdown [options]="devices" [(ngModel)]="newIssue.device" formControlName="device" placeholder="Select your device"></p-dropdown>
-                    </div>
-  
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="opsystem">Operation system</span>
-                      <p-dropdown [options]="opsystems" [(ngModel)]="newIssue.system" formControlName="system" placeholder="Select your operation system"></p-dropdown>
-                    </div>
-                  </div>
-                  
-            </form>
-
+          <div *ngIf="newIssue.type=='Bug'">
             <hr class="hr hr-blurry">
 
-            <div *ngIf="!isNewIssue">
-              <p>Comments</p>
-              <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)">
-
-              </app-comment-section>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="environment">Environment</span>
+              <p-dropdown [options]="environments" [(ngModel)]="newIssue.environment" formControlName="environment"
+                placeholder="Select Environment"></p-dropdown>
             </div>
-        </div>
-        <div class="vr vr-blurry" style="min-height: 100%;"></div>
-      </div>
-      <div class="col-4">
-        <div class="d-flex justify-content-around">
-          <button (click)="click()" pButton type="button" [label]="isNewIssue ? 'Create' : 'Edit'" class="p-button-text p-button-info"><i class="pi pi-file-edit"></i></button>
-          <button (click)="reset()" pButton *ngIf="isNewIssue" type="button" label=" Clear" class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
-        </div>
-        <div class="d-flex mt-4" *ngIf="!isNewIssue">
-          <div class="input-group">
-            <span class="input-group-text" id="status">Status</span>
-            <p-dropdown [className]="['right-side-menu']" [options]="statuses" [(ngModel)]="newIssue.status" name="status"
-              [ngModelOptions]="{standalone: true}" placeholder="Status"></p-dropdown>
+
+            <mdb-form-control class="mb-3">
+              <textarea mdbInput class="form-control" id="version" autocomplete="off" rows="1"
+                [(ngModel)]="newIssue.version" formControlName="version"></textarea>
+              <label mdbLabel class="form-label" for="textAreaExample">Version</label>
+            </mdb-form-control>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="browser">Browser</span>
+              <p-dropdown [options]="browsers" [(ngModel)]="newIssue.browser" formControlName="browser"
+                placeholder="Select your browser"></p-dropdown>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="device">Device</span>
+              <p-dropdown [options]="devices" [(ngModel)]="newIssue.device" formControlName="device"
+                placeholder="Select your device"></p-dropdown>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="opsystem">Operation system</span>
+              <p-dropdown [options]="opsystems" [(ngModel)]="newIssue.system" formControlName="system"
+                placeholder="Select your operation system"></p-dropdown>
+            </div>
           </div>
+
+        </form>
+
+        <hr class="hr hr-blurry">
+
+        <div *ngIf="!isNewIssue">
+          <p>Comments</p>
+          <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)">
+
+          </app-comment-section>
+        </div>
+      </div>
+      <div class="vr vr-blurry" style="min-height: 100%;"></div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-around">
+        <button (click)="click()" pButton type="button" [label]="isNewIssue ? 'Create' : 'Edit'"
+          class="p-button-text p-button-info"><i class="pi pi-file-edit"></i></button>
+        <button (click)="reset()" pButton *ngIf="isNewIssue" type="button" label=" Clear"
+          class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="status">Status</span>
+          <p-dropdown [className]="['right-side-menu']" [options]="statuses" [(ngModel)]="newIssue.status" name="status"
+            [ngModelOptions]="{standalone: true}" placeholder="Status"></p-dropdown>
+        </div>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="users">Assignee</span>
+          <p-dropdown [className]="['right-side-menu']" [options]="users" [(ngModel)]="newIssue.status" name="user"
+            [ngModelOptions]="{standalone: true}" placeholder="Assignee"></p-dropdown>
+        </div>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="reporter">Reporter</span>
+          <mdb-form-control>
+            <input mdbInput class="form-control" id="reporters" type="text" [readonly]="true"/>
+            <label mdbLabel class="form-label" for="reporters">Reporter</label>
+          </mdb-form-control>
+        </div>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="created">Created at</span>
+          <mdb-form-control>
+            <input mdbInput class="form-control" id="created" type="text" [readonly]="true"/>
+            <label mdbLabel class="form-label" for="created">Created at</label>
+          </mdb-form-control>
+        </div>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="updated">Updated at</span>
+          <mdb-form-control>
+            <input mdbInput class="form-control" id="updated" type="text" [readonly]="true"/>
+            <label mdbLabel class="form-label" for="updated">Updated at</label>
+          </mdb-form-control>
         </div>
       </div>
     </div>
   </div>
+</div>

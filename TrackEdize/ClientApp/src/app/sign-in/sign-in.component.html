@@ -1,8 +1,28 @@
-<div class="form-box">
-    <div class="header-text">
-        Sign In Form
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
     </div>
-    <input placeholder="Your Email Address" type="text">
-    <input placeholder="Your Password" type="password">
-    <button>Sign in</button>
-</div>
+    <form>
+        <h3>Login Here</h3>
+        <div>
+            <div class="pt-5">
+                <mdb-form-control class="form-white">
+                    <input mdbInput type="email" id="username" class="form-control" />
+                    <label mdbLabel class="form-label" for="username">Username</label>
+                </mdb-form-control>
+            </div>
+            <div class="pt-4">
+                <mdb-form-control class="form-white">
+                    <input mdbInput type="password" id="password" class="form-control" />
+                    <label mdbLabel class="form-label" for="password">Password</label>
+                </mdb-form-control>
+            </div>
+        </div>
+        <button class="btn btn-primary">Log In</button>
+    </form>
+</body>
