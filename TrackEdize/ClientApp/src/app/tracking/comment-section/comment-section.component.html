@@ -10,5 +10,5 @@
 </div>
 
 <div>
-    
+    <comment-card *ngFor="let i of comments" [comment]="i" (editComment)="editComment($event)"></comment-card>
 </div>

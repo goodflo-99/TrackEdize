@@ -35,29 +35,29 @@ export class BugViewComponent implements OnInit {
 
   issueForm: FormGroup = new FormGroup({});
 
-  constructor(private issueService: IssueService, private router:Router, private route: ActivatedRoute, private projSvc: ProjectService, private fb: FormBuilder) { }
+  constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, private projSvc: ProjectService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
-    if(!this.id) {
-      this.route.params.subscribe(x=> this.id = x['id'])
+    if (!this.id) {
+      this.route.params.subscribe(x => this.id = x['id'])
     }
-    if(this.id) {
+    if (this.id) {
       this.isNewIssue = false;
-      this.issueService.getById(this.id).subscribe(response=> {
+      this.issueService.getById(this.id).subscribe(response => {
         this.newIssue = response;
       });
     }
-    if(this.issue) {
+    if (this.issue) {
       this.isNewIssue = false;
       this.newIssue = this.issue;
     }
 
-    
+
     this.statuses = Statuses.getValues();
     console.log(this.statuses);
 
-    this.projSvc.getAll().subscribe(x=> this.projects = x);
+    this.projSvc.getAll().subscribe(x => this.projects = x);
   }
 
   initForm() {
@@ -79,12 +79,12 @@ export class BugViewComponent implements OnInit {
   }
 
   click() {
-    if(this.id || this.newIssue.id) {
-      this.issueService.update(this.newIssue).subscribe(x=> {
-          this.newIssue = x
+    if (this.id || this.newIssue.id) {
+      this.issueService.update(this.newIssue).subscribe(x => {
+        this.newIssue = x
       });
     } else {
-      this.issueService.add(this.newIssue).subscribe(x=> {
+      this.issueService.add(this.newIssue).subscribe(x => {
         this.isNewIssue = false;
         this.newIssue = x;
       });
@@ -95,12 +95,18 @@ export class BugViewComponent implements OnInit {
     this.newIssue = new Issue();
   }
 
+  updateComments(commets: Comment[]) {
+    this.newIssue.comments = commets;
+  }
+
   addComment(comment: Comment) {
-    if(this.newIssue.id && this.newIssue.id != null) {
-      this.issueService.addComment(comment, this.newIssue.id).subscribe(x=> {
-        this.newIssue.comments = x;
-      });
-    }    
+    if (this.newIssue.id && this.newIssue.id != null) {
+      if (comment.id) {
+        this.issueService.updateComment(comment, this.newIssue.id).subscribe(x => this.updateComments(x));
+      } else {
+        this.issueService.addComment(comment, this.newIssue.id).subscribe(x => this.updateComments(x));
+      }
+    }
   }
 
 }

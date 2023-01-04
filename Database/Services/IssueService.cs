@@ -63,6 +63,8 @@ namespace Database.Services
             if(comment.Id == null)
             {
                 comment.Id = ObjectId.GenerateNewId().ToString();
+                comment.CreatedDate = DateTime.UtcNow;
+                comment.UpdatedDate = DateTime.UtcNow;
             }
             issue.Comments.Add(comment);
             await UpdateAsync(id, issue);
@@ -73,6 +75,17 @@ namespace Database.Services
         {
             var issue = await GetAsync(id);
             return issue?.Comments ?? new List<Comment>();
+        }
+
+        public async Task<List<Comment>> UpdateCommentAsync(Comment comment, string id)
+        {
+            var issue = await GetAsync(id);
+            
+            var dbComment = issue.Comments.FirstOrDefault(x=>x.Id == comment.Id);
+            dbComment.Text = comment.Text;
+            dbComment.UpdatedDate = DateTime.UtcNow;
+            await UpdateAsync(id, issue);
+            return await GetCommentsAsync(id);
         }
     }
 }

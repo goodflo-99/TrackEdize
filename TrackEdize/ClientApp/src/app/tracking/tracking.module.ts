@@ -28,13 +28,16 @@ import { IssueService } from './services/issue.service';
 import { IssuesComponent } from './issues/issues.component';
 import { RouterModule } from '@angular/router';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
+import { CommentCardComponent } from './comment-section/comment-card/comment-card.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   providers: [IssueService],
   declarations: [
     BugViewComponent,
     IssuesComponent,
-    CommentSectionComponent
+    CommentSectionComponent,
+    CommentCardComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +63,7 @@ import { CommentSectionComponent } from './comment-section/comment-section.compo
     SharedModule,
     ReactiveFormsModule,
     DropdownModule,
+    CardModule,
     RouterModule.forRoot([
       { path: 'issues', component: IssuesComponent, pathMatch: 'full', children: [
         

@@ -29,4 +29,12 @@ export class IssueService extends BaseService<Issue> {
       params: params
     });
   }
+
+  updateComment(comment: Comment, id: string) {
+    var params = new HttpParams().set("id", id);
+
+    return this.http.put<Comment[]>(this.api+'/Comment', comment, {
+      params: params
+    });
+  }
 }
