@@ -22,6 +22,9 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//PrimeNG
+import {RadioButtonModule} from 'primeng/radiobutton';
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { Page404Component } from './page404/page404.component';
@@ -81,7 +84,8 @@ import { AccountPageComponent } from './account-page/account-page.component';
     BrowserAnimationsModule,
     SharedModule,
     ProjectModule,
-    DashboardModule
+    DashboardModule,
+    RadioButtonModule
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

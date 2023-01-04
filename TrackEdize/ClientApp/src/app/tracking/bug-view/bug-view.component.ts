@@ -22,6 +22,7 @@ export class BugViewComponent implements OnInit {
   devices = Constants.devices;
   opsystems = Constants.opsystems;
   statuses: any[] = [];
+  users: any[] = [];
 
   @Input()
   issue: Issue | undefined;

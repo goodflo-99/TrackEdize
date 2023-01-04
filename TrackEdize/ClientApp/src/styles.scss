@@ -12,6 +12,10 @@ code {
   border-color: #7d9098;
 }
 
+.bg-primary {
+  background-color: #7d9098 !important;
+}
+
 .btn-outline-primary {
   color: #7d9098 !important;
   border-color: #7d9098 !important;
@@ -111,10 +115,35 @@ textarea {
   background-color: lightgreen;
 }
 
-
 .right-side-menu {
   .p-dropdown {
-    max-width: 20em;
-    min-width: 10em;
+    max-width: 15em;
+    min-width: 15em;
   }
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+.p-dropdown {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: #7d909848;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #33525e98;
+}
+
+a {
+  cursor: pointer;
+}
+
+th:first-child {
+  cursor: pointer;
 }
