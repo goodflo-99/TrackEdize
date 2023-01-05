@@ -25,6 +25,9 @@
             <a class="nav-link text-dark" [routerLink]="['issues']">Issues</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
+            <a class="nav-link text-dark" [routerLink]="['sign-up']">Sign Up</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
             <a class="nav-link text-dark" [routerLink]="['sign-in']">Sign in</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">

@@ -43,6 +43,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -54,7 +55,8 @@ export function tokenGetter() {
     NavMenuComponent,
     Page404Component,
     SignInComponent,
-    AccountPageComponent
+    AccountPageComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,6 +68,7 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: '', component: DashboardComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'sign-in', component: SignInComponent },
+      { path: 'sign-up', component: SignUpComponent },
       { path: 'account-page', component: AccountPageComponent, canActivate: [AuthGuard] },
       { path: '**', component: Page404Component },
     ]),
