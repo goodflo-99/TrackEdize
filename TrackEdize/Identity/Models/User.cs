@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TrackEdize.Identity.Models
+namespace Database.Entities.Identity
 {
     public class User
     {

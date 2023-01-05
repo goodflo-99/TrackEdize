@@ -13,5 +13,7 @@ namespace Database
         public string DatabaseName { get; set; } = null!;
 
         public string BaseCollectionName { get; set; } = null!;
+
+        public string UserCollectionName { get; set;} = null!;
     }
 }

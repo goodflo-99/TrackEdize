@@ -1,14 +1,18 @@
+using System.Text;
 using Database;
 using Database.Entities;
 using Database.Interfaces;
 using Database.Repositories;
 using Database.Services;
+using Identity.Security;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TrackEdize;
-using TrackEdize.Identity.Models;
+using Database.Entities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +27,35 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var dbSettings = builder.Configuration.GetSection("DatabaseServerSettings").Get<DatabaseSettings>();
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddMongoDbStores<ApplicationUser, ApplicationRole, string>(
         dbSettings.ConnectionString, dbSettings.DatabaseName
     );
 
-//builder.Services.AddIdentityServer()
+builder.Services.AddIdentityServer();
 //    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o => {
+        o.RequireHttpsMetadata = false;
+        o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
+            ValidateIssuer = true,
+                            // строка, представляющая издателя
+                            ValidIssuer = AuthOptions.ISSUER,
+ 
+                            // будет ли валидироваться потребитель токена
+                            ValidateAudience = true,
+                            // установка потребителя токена
+                            ValidAudience = AuthOptions.AUDIENCE,
+                            // будет ли валидироваться время существования
+                            ValidateLifetime = true,
+ 
+                            // установка ключа безопасности
+                            IssuerSigningKey = AuthOptions.SymmetricSecurityKey,
+                            // валидация ключа безопасности
+                            ValidateIssuerSigningKey = true
+        };
+    });
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();

@@ -3,6 +3,7 @@ using Database.Interfaces;
 using Database.Repositories;
 using Database.Services;
 using Database;
+using Identity.Security;
 
 namespace TrackEdize
 {
@@ -21,6 +22,7 @@ namespace TrackEdize
             builder.Services.AddScoped<IBaseRepository<Issue>, BaseRepository<Issue>>();
 
             builder.Services.AddScoped<IssueRepository>();
+            builder.Services.AddTransient<AccountRepository>();
 
         }
 
@@ -28,6 +30,7 @@ namespace TrackEdize
         {
             builder.Services.AddScoped<ProjectService>();
             builder.Services.AddScoped<IssueService>();
+            builder.Services.AddScoped<JwtTokenService>();
         }
     }
 }

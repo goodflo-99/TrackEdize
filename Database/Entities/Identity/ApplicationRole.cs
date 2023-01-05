@@ -1,7 +1,7 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Models;
 using MongoDbGenericRepository.Attributes;
 
-namespace TrackEdize.Identity.Models
+namespace Database.Entities.Identity
 {
     [CollectionName("Roles")]
     public class ApplicationRole : MongoIdentityRole<string>
