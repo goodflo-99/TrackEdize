@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TrackEdize.Identity.Models;
 
 namespace TrackEdize.Controllers
 {
@@ -25,7 +26,7 @@ namespace TrackEdize.Controllers
         public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService,
              ILogger<AccountController> logger, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
-            _userManager = _userManager;
+            _userManager = userManager;
             _logger = logger;
             _roleManager = roleManager;
             _signInManager = signInManager;
@@ -62,16 +63,16 @@ namespace TrackEdize.Controllers
 
         [HttpPost("Token")]
         [AllowAnonymous]
-        public async Task<IActionResult> Token([Required] string userName, string password)
+        public async Task<IActionResult> Token([Required, FromBody] LoginRequest request)
         {
             
-            var token = await _tokenService.GetTokenAsync(userName, password);
+            var token = await _tokenService.GetTokenAsync(request);
             if(token == null) {
                 return Unauthorized();
             }
             
             return Ok(new {
-                user = userName,
+                user = request.UserName,
                 token = token
             });
         }

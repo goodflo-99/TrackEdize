@@ -15,4 +15,6 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  authorized = () => !!localStorage.getItem("jwt");
 }

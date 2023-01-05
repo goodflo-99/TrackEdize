@@ -6,6 +6,8 @@ import { ProjectService } from './services/project.service';
 import { RouterModule } from '@angular/router';
 import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -18,13 +20,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: 'projects', component: ProjectsComponent },
-      { path: 'projects/edit-project', component: EditProjectComponent},
-      { path: 'projects/edit-project/:id', component: EditProjectComponent, }
+      { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
+      { path: 'projects/edit-project', component: EditProjectComponent, canActivate: [AuthGuard]},
+      { path: 'projects/edit-project/:id', component: EditProjectComponent, canActivate: [AuthGuard] }
     ]),
     MdbFormsModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    ConfirmDialogModule
+  ],
 })
 export class ProjectModule { }

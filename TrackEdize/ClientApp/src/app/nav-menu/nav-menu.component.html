@@ -24,10 +24,10 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['issues']">Issues</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
             <a class="nav-link text-dark" [routerLink]="['sign-in']">Sign in</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
             <a class="nav-link text-dark" [routerLink]="['account-page']"><i class="pi pi-user"></i></a>
           </li>
         </ul>

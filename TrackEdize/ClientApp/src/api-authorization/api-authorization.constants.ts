@@ -14,7 +14,8 @@ export const LogoutActions = {
 };
 
 export const LoginActions = {
-  Login: 'login',
+  // Login: 'login',
+  Login: 'sign-in',
   LoginCallback: 'login-callback',
   LoginFailed: 'login-failed',
   Profile: 'profile',
@@ -24,6 +25,7 @@ export const LoginActions = {
 let applicationPaths: ApplicationPathsType = {
   DefaultLoginRedirectPath: '/',
   ApiAuthorizationClientConfigurationUrl: `_configuration/${ApplicationName}`,
+  //Login: `authentication/${LoginActions.Login}`,
   Login: `authentication/${LoginActions.Login}`,
   LoginFailed: `authentication/${LoginActions.LoginFailed}`,
   LoginCallback: `authentication/${LoginActions.LoginCallback}`,

@@ -9,14 +9,12 @@ import { ProjectService } from '../services/project.service';
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.scss']
 })
-export class EditProjectComponent implements OnInit, OnChanges {
+export class EditProjectComponent implements OnInit {
 
   @Input()
   id: string | undefined;
 
   project: Project = new Project();
-
-  wasChanges: boolean = false;
 
   projectForm: FormGroup = new FormGroup({});
 
@@ -31,18 +29,13 @@ export class EditProjectComponent implements OnInit, OnChanges {
       this.projectService.getById(this.id).subscribe(res => this.project = res);
     } else {
       this.project = new Project;
-      this.wasChanges = true;
     }
 
     this.initForm();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.wasChanges = true;
-  }
-
   save() {
-    if(!this.wasChanges) {
+    if(this.projectForm.pristine) {
       return this.close();
     }
 

@@ -21,4 +21,8 @@ export class NavigationHelper {
     public toNewIssue() {
         this.router.navigate([`/issues/bug-view`]);        
     }
+
+    public toDashboard() {
+        this.router.navigate([`/dashboard`]);
+    }
 }

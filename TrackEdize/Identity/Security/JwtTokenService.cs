@@ -1,22 +1,29 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Database.Entities.Identity;
 using Database.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using TrackEdize.Identity.Models;
 
 namespace Identity.Security;
 
 public class JwtTokenService
 {
-    private AccountRepository _repository;
+    private readonly AccountRepository _repository;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public JwtTokenService(AccountRepository accountRepository) 
+    public JwtTokenService(AccountRepository accountRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) 
     {
         _repository = accountRepository;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
-    internal async Task<string> GetTokenAsync(string username, string password)
+    internal async Task<string> GetTokenAsync(LoginRequest request)
     {
-        var identity = await GetIdentityAsync(username, password);
+        var identity = await GetIdentityAsync(request.UserName, request.Password);
         if(identity == null) {
             return null;
         }
@@ -43,8 +50,16 @@ public class JwtTokenService
             return null;
         }
 
+        var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+
+        if(!result.Succeeded)
+        {
+            return null;
+        }
+
         var claims = new[] {
-            new Claim(ClaimTypes.Name, username)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Email, user.Email)
         };
         
         ClaimsIdentity ci = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,

@@ -13,52 +13,68 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TrackEdize;
 using Database.Entities.Identity;
+using AspNetCore.Identity.MongoDbCore.Extensions;
+using AspNetCore.Identity.MongoDbCore.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var dbSettings = builder.Configuration.GetSection("DatabaseServerSettings").Get<DatabaseSettings>();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>()
-    .AddMongoDbStores<ApplicationUser, ApplicationRole, string>(
-        dbSettings.ConnectionString, dbSettings.DatabaseName
-    );
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(op =>
+{
+    op.User.RequireUniqueEmail = true;
+    op.Password.RequiredUniqueChars = 0;
+    op.Password.RequireNonAlphanumeric = false;
+    op.Password.RequiredLength = 3;
+    op.Password.RequireUppercase = false;
+    op.Password.RequireDigit = false;
 
-builder.Services.AddIdentityServer();
-//    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+}).AddMongoDbStores<ApplicationUser, ApplicationRole, string>(dbSettings.ConnectionString, dbSettings.DatabaseName)
+  .AddUserManager<UserManager<ApplicationUser>>()
+  .AddSignInManager<SignInManager<ApplicationUser>>()
+  .AddRoleManager<RoleManager<ApplicationRole>>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(o => {
+
+//MongoDbIdentityConfiguration config = new MongoDbIdentityConfiguration()
+//{
+//    MongoDbSettings = new MongoDbSettings()
+//    {
+//        ConnectionString = dbSettings.ConnectionString,
+//        DatabaseName = dbSettings.DatabaseName
+//    },
+//    IdentityOptionsAction = op =>
+//    {
+//        op.User.RequireUniqueEmail = true;
+//    }
+//};
+
+//builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, string>(config)
+//    .AddUserManager<UserManager<ApplicationUser>>()
+//    .AddSignInManager<SignInManager<ApplicationUser>>()
+//    .AddRoleManager<RoleManager<ApplicationRole>>();
+
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+    {
         o.RequireHttpsMetadata = false;
-        o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
             ValidateIssuer = true,
-                            // строка, представляющая издателя
-                            ValidIssuer = AuthOptions.ISSUER,
- 
-                            // будет ли валидироваться потребитель токена
-                            ValidateAudience = true,
-                            // установка потребителя токена
-                            ValidAudience = AuthOptions.AUDIENCE,
-                            // будет ли валидироваться время существования
-                            ValidateLifetime = true,
- 
-                            // установка ключа безопасности
-                            IssuerSigningKey = AuthOptions.SymmetricSecurityKey,
-                            // валидация ключа безопасности
-                            ValidateIssuerSigningKey = true
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidateAudience = true,
+            ValidAudience = AuthOptions.AUDIENCE,
+            ValidateLifetime = true,
+            IssuerSigningKey = AuthOptions.SymmetricSecurityKey,
+            ValidateIssuerSigningKey = true
         };
     });
-
-builder.Services.AddAuthentication()
-    .AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
@@ -72,7 +88,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors(c=>
+    app.UseCors(c =>
     {
         c.AllowAnyHeader();
         c.AllowAnyMethod();
@@ -93,14 +109,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action?}/{id?}");
+    pattern: "{controller}/{action?}/{id?}").RequireAuthorization();
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html");
 
 app.Run();

@@ -8,10 +8,10 @@ namespace TrackEdize.Controllers
         private readonly ILogger<OidcConfigurationController> _logger;
 
         public OidcConfigurationController(
-            IClientRequestParametersProvider clientRequestParametersProvider,
+            //IClientRequestParametersProvider clientRequestParametersProvider,
             ILogger<OidcConfigurationController> logger)
         {
-            ClientRequestParametersProvider = clientRequestParametersProvider;
+            //ClientRequestParametersProvider = clientRequestParametersProvider;
             _logger = logger;
         }
 
@@ -20,7 +20,8 @@ namespace TrackEdize.Controllers
         [HttpGet("_configuration/{clientId}")]
         public IActionResult GetClientRequestParameters([FromRoute] string clientId)
         {
-            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+            var parameters = new Dictionary<string, string>();
+            //ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
             return Ok(parameters);
         }
     }

@@ -18,8 +18,10 @@
             <th>
                 <a (click)="editProject(pr.id)">Edit</a>
                 <span> | </span>
-                <a (click)="deleteProject(pr.id)">Delete</a>
+                <a (click)="callDeletePopUp(pr.id)">Delete</a>
             </th>
         </tr>
     </tbody>
 </table>
+
+<p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptButtonStyleClass="p-button-danger"></p-confirmDialog>

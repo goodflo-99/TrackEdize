@@ -51,7 +51,7 @@ export class AuthorizeService {
   public getUser(): Observable<IUser | null> {
     return concat(
       this.userSubject.pipe(take(1), filter(u => !!u)),
-      //this.getUserFromStorage().pipe(filter(u => !!u), tap(u => this.userSubject.next(u))),
+      this.getUserFromStorage().pipe(filter(u => !!u), tap(u => this.userSubject.next(u))),
       this.userSubject.asObservable());
   }
 
@@ -170,24 +170,24 @@ export class AuthorizeService {
   }
 
   private async ensureUserManagerInitialized(): Promise<void> {
-    // if (this.userManager !== undefined) {
-    //   return;
-    // }
+    if (this.userManager !== undefined) {
+      return;
+    }
 
-    // const response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
-    // if (!response.ok) {
-    //   throw new Error(`Could not load settings for '${ApplicationName}'`);
-    // }
+    const response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
+    if (!response.ok) {
+      throw new Error(`Could not load settings for '${ApplicationName}'`);
+    }
 
-    // const settings: any = await response.json();
-    // settings.automaticSilentRenew = true;
-    // settings.includeIdTokenInSilentRenew = true;
-    // this.userManager = new UserManager(settings);
+    const settings: any = await response.json();
+    settings.automaticSilentRenew = true;
+    settings.includeIdTokenInSilentRenew = true;
+    this.userManager = new UserManager(settings);
 
-    // this.userManager.events.addUserSignedOut(async () => {
-    //   await this.userManager!.removeUser();
-    //   this.userSubject.next(null);
-    // });
+    this.userManager.events.addUserSignedOut(async () => {
+      await this.userManager!.removeUser();
+      this.userSubject.next(null);
+    });
   }
 
   private getUserFromStorage(): Observable<IUser | null> {

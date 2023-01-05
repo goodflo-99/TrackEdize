@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -30,7 +30,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { Page404Component } from './page404/page404.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { AuthorizeInterceptor } from 'src/app/interceptors/authorize.interceptor';
 import { TrackingModule } from './tracking/tracking.module';
 import { BugViewComponent } from './tracking/bug-view/bug-view.component';
 import { TextareaAutoresizeDirective } from './shared/textarea-autoresize/textarea-autoresize.directive';
@@ -41,7 +41,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AccountPageComponent } from './account-page/account-page.component';
+import { AuthGuard } from './guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [
@@ -55,16 +60,14 @@ import { AccountPageComponent } from './account-page/account-page.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ApiAuthorizationModule,
     TrackingModule,
     RouterModule.forRoot([
-      { path: '', component: DashboardComponent, pathMatch: 'full' },
+      { path: '', component: DashboardComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'sign-in', component: SignInComponent },
-      { path: 'account-page', component: AccountPageComponent },
+      { path: 'account-page', component: AccountPageComponent, canActivate: [AuthGuard] },
       { path: '**', component: Page404Component },
-      // { path: 'counter', component: CounterComponent },
-      // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      //{ path: 'bug-view', component: BugViewComponent}
     ]),
     MdbAccordionModule,
     MdbCarouselModule,
@@ -85,10 +88,17 @@ import { AccountPageComponent } from './account-page/account-page.component';
     SharedModule,
     ProjectModule,
     DashboardModule,
-    RadioButtonModule
+    RadioButtonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,        
+        allowedDomains: ["localhost:7294"],
+        headerName: "Authrorization"
+      }
+    })
   ],
   providers: [
-    //{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

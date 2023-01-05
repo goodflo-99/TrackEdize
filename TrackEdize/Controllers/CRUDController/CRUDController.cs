@@ -9,7 +9,7 @@ namespace TrackEdize.Controllers.CRUDController
 {
     //[Route("api/[controller]")]
     [ApiController]
-    // [AllowAnonymous]
+    [Authorize]
     public class CRUDController<T,U> : ControllerBase where T : BaseCRUDService<U> where U : BaseEntity
     {
         protected T _service;

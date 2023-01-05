@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
 import { CommentCardComponent } from './comment-section/comment-card/comment-card.component';
 import { CardModule } from 'primeng/card';
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   providers: [IssueService],
@@ -65,9 +66,9 @@ import { CardModule } from 'primeng/card';
     DropdownModule,
     CardModule,
     RouterModule.forRoot([
-      { path: 'issues', component: IssuesComponent, pathMatch: 'full', children: [
+      { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard],  pathMatch: 'full', children: [
         
-      ] },
+      ]},
       { path: 'issues/bug-view', component: BugViewComponent},
       { path: 'issues/bug-view/:id', component: BugViewComponent}
     ]),

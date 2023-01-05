@@ -7,22 +7,22 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form [formGroup]="formCtr">
         <h3>Login Here</h3>
         <div>
             <div class="pt-5">
                 <mdb-form-control class="form-white">
-                    <input mdbInput type="email" id="username" class="form-control" />
+                    <input mdbInput formControlName="userName" type="email" id="username" class="form-control" />
                     <label mdbLabel class="form-label" for="username">Username</label>
                 </mdb-form-control>
             </div>
             <div class="pt-4">
                 <mdb-form-control class="form-white">
-                    <input mdbInput type="password" id="password" class="form-control" />
+                    <input mdbInput formControlName="password" type="password" id="password" class="form-control" />
                     <label mdbLabel class="form-label" for="password">Password</label>
                 </mdb-form-control>
             </div>
         </div>
-        <button class="btn btn-primary">Log In</button>
+        <button type="submit" class="btn btn-primary" (click)="login()">Log In</button>
     </form>
 </body>

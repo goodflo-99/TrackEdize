@@ -25,7 +25,7 @@ public class AccountRepository
     }
 
     public async Task<ApplicationUser> GetUserAsync(string userName) {
-        var res = await _users.FindAsync(x=> x.UserName == userName);
+        var res = await _users.FindAsync(x=> x.UserName.ToUpperInvariant() == userName.ToUpperInvariant());
         return res.FirstOrDefault();
     }
 }
