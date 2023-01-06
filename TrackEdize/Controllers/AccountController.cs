@@ -43,7 +43,9 @@ namespace TrackEdize.Controllers
             ApplicationUser appUser = new ApplicationUser()
             {
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
 
             var res = await _userManager.CreateAsync(appUser, user.Password);

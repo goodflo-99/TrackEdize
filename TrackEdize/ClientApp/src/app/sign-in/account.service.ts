@@ -16,4 +16,9 @@ export class AccountService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })      
     });
   }
+  register(newUser: any) {
+    return this.http.post(this.api+'/user', newUser, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })      
+    });
+  }
 }

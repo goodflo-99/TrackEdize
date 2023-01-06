@@ -2,7 +2,6 @@
     <div *ngIf="!editMode">
         {{comment.text}}
     </div>
-
     <div *ngIf="editMode">
         <form [formGroup]="comForm">
             <mdb-form-control class="mb-3">
@@ -12,11 +11,8 @@
         </form>
         
     </div>
-
-    <ng-template pTemplate="footer">
-        <div>
-            <button class="btn btn-primary mx-1" (click)="toggleMode()">{{editMode ? 'Save' : 'Edit'}}</button>
-            <button class="btn btn-danger mx-1">Delete</button>
-        </div>
-    </ng-template>
+    <div>
+        <button class="btn btn-primary mx-1" (click)="toggleMode()"><i [ngClass]="editMode ? ['pi','pi-check-circle'] : ['pi','pi-file-edit']"></i></button>
+        <button class="btn btn-danger mx-1"><i class="pi pi-times"></i></button>
+    </div>
 </p-card>

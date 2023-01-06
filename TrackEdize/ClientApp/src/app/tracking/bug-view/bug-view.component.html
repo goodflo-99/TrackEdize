@@ -108,7 +108,7 @@
         <hr class="hr hr-blurry">
 
         <div *ngIf="!isNewIssue">
-          <p>Comments</p>
+          <h5>Comments</h5>
           <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)">
 
           </app-comment-section>
@@ -142,7 +142,7 @@
           <span class="input-group-text" id="reporter">Reporter</span>
           <mdb-form-control>
             <input mdbInput class="form-control" id="reporters" type="text" [readonly]="true"/>
-            <label mdbLabel class="form-label" for="reporters">Reporter</label>
+            <!-- <label mdbLabel class="form-label" for="reporters">Reporter</label> -->
           </mdb-form-control>
         </div>
       </div>
@@ -151,7 +151,7 @@
           <span class="input-group-text" id="created">Created at</span>
           <mdb-form-control>
             <input mdbInput class="form-control" id="created" type="text" [readonly]="true"/>
-            <label mdbLabel class="form-label" for="created">Created at</label>
+            <!-- <label mdbLabel class="form-label" for="created">Created at</label> -->
           </mdb-form-control>
         </div>
       </div>
@@ -160,7 +160,7 @@
           <span class="input-group-text" id="updated">Updated at</span>
           <mdb-form-control>
             <input mdbInput class="form-control" id="updated" type="text" [readonly]="true"/>
-            <label mdbLabel class="form-label" for="updated">Updated at</label>
+            <!-- <label mdbLabel class="form-label" for="updated">Updated at</label> -->
           </mdb-form-control>
         </div>
       </div>

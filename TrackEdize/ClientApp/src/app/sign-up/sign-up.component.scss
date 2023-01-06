@@ -24,8 +24,24 @@
         #1845ada0,
         #23a2f6a7
     );
-    left: -80px;
-    top: -50px;
+    left: -255px;
+    top: -60px;
+}
+.shape:nth-child(2){
+    background: linear-gradient(
+        #ad181da0,
+        #f62323a7
+    );
+    right: -10px;
+    top: -30px;
+}
+.shape:nth-child(3){
+    background: linear-gradient(
+        #5dad18a0,
+        #74f623a7
+    );
+    left: -180px;
+    top: 215px;
 }
 .shape:last-child{
     background: linear-gradient(
@@ -33,12 +49,12 @@
         #ff522f9b,
         #f096199d
     );
-    right: -30px;
-    bottom: -0px;
+    right: -240px;
+    bottom: -40px;
 }
 form{
-    height: 420px;
-    width: 400px;
+    height: 480px;
+    width: 730px;
     background-color: #7d90988a;
     position: absolute;
     transform: translate(-50%,-50%);

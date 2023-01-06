@@ -1,28 +1,56 @@
-<head>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
     <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
     <form [formGroup]="formCtr">
-        <h3>Login Here</h3>
-        <div>
-            <div class="pt-5">
-                <mdb-form-control class="form-white">
-                    <input mdbInput formControlName="userName" type="email" id="username" class="form-control" />
-                    <label mdbLabel class="form-label" for="username">Username</label>
-                </mdb-form-control>
+        <h3>Register Here</h3>
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="pt-5">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="firstName" type="email" id="firstname" class="form-control" />
+                        <label mdbLabel class="form-label" for="firstname">First Name</label>
+                    </mdb-form-control>
+                </div>
+                <div class="pt-4">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="userName" type="text" id="username" class="form-control" />
+                        <label mdbLabel class="form-label" for="username">Username</label>
+                    </mdb-form-control>
+                </div>
+                <div class="pt-4">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="password" type="password" id="password" class="form-control" />
+                        <label mdbLabel class="form-label" for="password">Password</label>
+                    </mdb-form-control>
+                </div>
+              </div>
+                <div class="vr vr-blurry mx-2" style="min-height: 100%;"></div>
+              <div class="col">
+                <div class="pt-5">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="lastName" type="email" id="lastname" class="form-control" />
+                        <label mdbLabel class="form-label" for="lastname">Last Name</label>
+                    </mdb-form-control>
+                </div>
+                <div class="pt-4">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="email" type="email" id="email" class="form-control" />
+                        <label mdbLabel class="form-label" for="email">Email</label>
+                    </mdb-form-control>
+                </div>
+                <div class="pt-4">
+                    <mdb-form-control class="form-white">
+                        <input mdbInput formControlName="repeatPassword" type="password" id="rpassword"
+                            class="form-control" />
+                        <label mdbLabel class="form-label" for="rpassword">Repeat Password</label>
+                    </mdb-form-control>
+                </div>
+              </div>
             </div>
-            <div class="pt-4">
-                <mdb-form-control class="form-white">
-                    <input mdbInput formControlName="password" type="password" id="password" class="form-control" />
-                    <label mdbLabel class="form-label" for="password">Password</label>
-                </mdb-form-control>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="login()">Log In</button>
+          </div>
+        <button type="submit" class="btn btn-primary" (click)="register()">Sign Up</button>
     </form>
-</body>
