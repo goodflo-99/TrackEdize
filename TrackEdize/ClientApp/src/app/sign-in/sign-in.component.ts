@@ -1,19 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationHelper } from '../shared/helpers/navigation.helper';
-import { SignInService } from './sign-in.service';
+import { AccountService } from './account.service';
 
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  providers: [SignInService]
+  providers: [AccountService]
 })
 export class SignInComponent implements OnInit {
 
   formCtr!: FormGroup;
 
-  constructor(private fb: FormBuilder, private signinSvc: SignInService, private nav: NavigationHelper) {
+  constructor(private fb: FormBuilder, private signinSvc: AccountService, private nav: NavigationHelper) {
 
   }
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from 'src/app/common/base-service';
+import { environment } from 'src/environments/environment';
 import { Comment } from '../models/comment';
 import { Issue } from '../models/issue';
 
@@ -11,7 +12,7 @@ export class IssueService extends BaseService<Issue> {
 
   constructor(public http: HttpClient) {
     super(http);
-    this.api = 'http://localhost:5294/api/issue';
+    this.api = environment.apiUrl+'/issue';
   }
 
 

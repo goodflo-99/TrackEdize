@@ -15,6 +15,7 @@ using TrackEdize;
 using Database.Entities.Identity;
 using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
+using TrackEdize.SignalR.HubConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,6 +80,27 @@ builder.Services.AddAuthentication(opt =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(x =>
+{
+    //x.AddPolicy("CorsPolicy", b =>
+    //{
+    //    b.AllowAnyMethod();
+    //    b.AllowAnyHeader();
+    //    b.WithOrigins("https://localhost:44497", "http://localhost:44497");
+    //    b.AllowCredentials();        
+    //});
+
+    x.AddDefaultPolicy(b=>
+    {
+        b.AllowAnyMethod();
+        b.AllowAnyHeader();
+        b.WithOrigins("https://localhost:44497", "http://localhost:44497");
+        //b.AllowAnyOrigin();
+        b.AllowCredentials();
+    });
+});
 
 
 ConfigureHelper.ConfigureDatabase(builder);
@@ -88,12 +110,16 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors(c =>
-    {
-        c.AllowAnyHeader();
-        c.AllowAnyMethod();
-        c.AllowAnyOrigin();
-    });
+    //app.UseCors(c =>
+    //{
+    //    c.AllowAnyHeader();
+    //    c.AllowAnyMethod();
+    //    //c.AllowAnyOrigin();
+    //    c.WithOrigins("https://localhost:44497");
+    //    //c.DisallowCredentials();
+    //});
+
+
     app.UseMigrationsEndPoint();
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -104,9 +130,12 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+//app.UseCors("CorsPolicy");
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -114,6 +143,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action?}/{id?}").RequireAuthorization();
+
+app.MapHub<ChatHub>("/chat");
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");

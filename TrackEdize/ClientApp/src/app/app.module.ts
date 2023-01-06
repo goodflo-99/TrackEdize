@@ -44,6 +44,7 @@ import { AccountPageComponent } from './account-page/account-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ChatModule } from './chat/chat.module';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -98,7 +99,8 @@ export function tokenGetter() {
         allowedDomains: ["localhost:7294"],
         headerName: "Authrorization"
       }
-    })
+    }),
+    ChatModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

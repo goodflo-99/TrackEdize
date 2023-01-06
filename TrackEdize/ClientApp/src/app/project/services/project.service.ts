@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from 'src/app/common/base-service';
+import { environment } from 'src/environments/environment';
 import { Project } from '../models/project';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class ProjectService extends BaseService<Project> {
 
   constructor(public http: HttpClient) {
     super(http);
-    this.api = 'http://localhost:5294/api/project';
+    this.api = environment.apiUrl+'/project';
   }
 
   // getAll() {
