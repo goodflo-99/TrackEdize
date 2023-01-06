@@ -1,18 +1,25 @@
 <p-card [classList]="'p-1'">
-    <div *ngIf="!editMode">
-        {{comment.text}}
-    </div>
-    <div *ngIf="editMode">
-        <form [formGroup]="comForm">
-            <mdb-form-control class="mb-3">
-                <textarea mdbInput formControlName="text" class="form-control" autocomplete="off" rows="3" [(ngModel)]="comment.text"></textarea>
-                <label mdbLabel class="form-label">Edit comment</label>
-            </mdb-form-control>
-        </form>
-        
-    </div>
-    <div>
-        <button class="btn btn-primary mx-1" (click)="toggleMode()"><i [ngClass]="editMode ? ['pi','pi-check-circle'] : ['pi','pi-file-edit']"></i></button>
-        <button class="btn btn-danger mx-1"><i class="pi pi-times"></i></button>
-    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col-9 align-self-center">
+                <div *ngIf="!editMode">
+                    {{comment.text}}
+                </div>
+                <div *ngIf="editMode">
+                    <form [formGroup]="comForm">
+                        <mdb-form-control class="mb-3">
+                            <textarea mdbInput formControlName="text" class="form-control" autocomplete="off" rows="3" [(ngModel)]="comment.text"></textarea>
+                            <label mdbLabel class="form-label">Edit comment</label>
+                        </mdb-form-control>
+                    </form>
+                </div>
+            </div>
+          <div class="col-3 align-self-center">
+            <div>
+                <button class="btn btn-outline-primary mx-1" (click)="toggleMode()"><i [ngClass]="editMode ? ['pi','pi-check-circle'] : ['pi','pi-file-edit']"></i></button>
+                <button class="btn btn-outline-danger mx-1"><i class="pi pi-times"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
 </p-card>
