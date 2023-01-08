@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Common.Entities.SignalR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using TrackEdize.SignalR;
@@ -22,6 +23,7 @@ namespace TrackEdize.Controllers.SignalR
         {
             
             _hub.Clients.All.SendAsync("Send", msg.User, msg.MsgText);
+
             return Ok();
         }
 

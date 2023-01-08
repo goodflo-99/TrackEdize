@@ -14,9 +14,6 @@ export class AuthorizeInterceptor implements HttpInterceptor {
     return this.processRequestWithToken(token, req, next);
   }
 
-  // Checks if there is an access_token available in the authorize service
-  // and adds it to the request in case it's targeted at the same origin as the
-  // single page application.
   private processRequestWithToken(token: string | null, req: HttpRequest<any>, next: HttpHandler) {
     if (!!token && !this.jwtSvc.isTokenExpired(token)) {
       req = req.clone({

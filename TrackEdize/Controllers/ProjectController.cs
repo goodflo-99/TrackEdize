@@ -1,5 +1,5 @@
-﻿using Database.Entities;
-using Database.Services;
+﻿using BusunessLogic.Services;
+using Database.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrackEdize.Controllers.CRUDController;

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationHelper } from '../shared/helpers/navigation.helper';
-import { AccountService } from '../sign-in/account.service';
+import { NavigationHelperService } from '../../shared/helpers/navigation-helper.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,7 @@ import { AccountService } from '../sign-in/account.service';
 export class SignUpComponent implements OnInit {
   formCtr!: FormGroup;
 
-  constructor(private fb: FormBuilder, private signinSvc: AccountService, private nav: NavigationHelper) {
+  constructor(private fb: FormBuilder, private signinSvc: AccountService, private nav: NavigationHelperService) {
 
   }
 

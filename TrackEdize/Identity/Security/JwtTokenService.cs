@@ -4,7 +4,7 @@ using Database.Entities.Identity;
 using Database.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using TrackEdize.Identity.Models;
+using Common.Entities.Identity;
 
 namespace Identity.Security;
 
@@ -59,7 +59,8 @@ public class JwtTokenService
 
         var claims = new[] {
             new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
         
         ClaimsIdentity ci = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,

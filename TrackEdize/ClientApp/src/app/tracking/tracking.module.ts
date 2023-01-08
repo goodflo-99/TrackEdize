@@ -30,7 +30,7 @@ import { RouterModule } from '@angular/router';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
 import { CommentCardComponent } from './comment-section/comment-card/comment-card.component';
 import { CardModule } from 'primeng/card';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../common/guards/auth.guard';
 
 @NgModule({
   providers: [IssueService],

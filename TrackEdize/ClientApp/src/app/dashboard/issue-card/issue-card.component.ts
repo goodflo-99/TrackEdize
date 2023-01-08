@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Statuses } from 'src/app/shared/constants/statuses';
-import { NavigationHelper } from 'src/app/shared/helpers/navigation.helper';
+import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
 import { Issue } from 'src/app/tracking/models/issue';
 
 @Component({
@@ -13,7 +13,7 @@ export class IssueCardComponent implements OnInit {
   @Input()
   issue!: Issue;
 
-  constructor(private nav: NavigationHelper) { }
+  constructor(private nav: NavigationHelperService) { }
 
   ngOnInit(): void {
   }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TrackEdize.Identity.Models
+namespace Common.Entities.Identity
 {
     public class LoginRequest
     {

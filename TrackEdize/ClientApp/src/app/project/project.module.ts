@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../common/guards/auth.guard';
 
 
 

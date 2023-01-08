@@ -1,5 +1,5 @@
-﻿using Database.Entities.Base;
-using Database.Services;
+﻿using BusunessLogic.Services.Base;
+using Database.Entities.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

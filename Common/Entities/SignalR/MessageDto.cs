@@ -1,4 +1,4 @@
-﻿namespace TrackEdize.SignalR
+﻿namespace Common.Entities.SignalR
 {
     public class MessageDto
     {

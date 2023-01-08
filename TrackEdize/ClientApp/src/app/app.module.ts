@@ -26,11 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RadioButtonModule} from 'primeng/radiobutton';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { Page404Component } from './page404/page404.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { Page404Component } from './components/page404/page404.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/app/interceptors/authorize.interceptor';
+import { AuthorizeInterceptor } from 'src/app/common/interceptors/authorize.interceptor';
 import { TrackingModule } from './tracking/tracking.module';
 import { BugViewComponent } from './tracking/bug-view/bug-view.component';
 import { TextareaAutoresizeDirective } from './shared/textarea-autoresize/textarea-autoresize.directive';
@@ -39,11 +39,11 @@ import { ProjectModule } from './project/project.module';
 import { ProjectsComponent } from './project/projects/projects.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { AccountPageComponent } from './account-page/account-page.component';
-import { AuthGuard } from './guards/auth.guard';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AccountPageComponent } from './components/account-page/account-page.component';
+import { AuthGuard } from './common/guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ChatModule } from './chat/chat.module';
 
 export function tokenGetter() {
@@ -103,6 +103,7 @@ export function tokenGetter() {
     ChatModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

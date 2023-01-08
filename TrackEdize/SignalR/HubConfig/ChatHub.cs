@@ -6,6 +6,7 @@ namespace TrackEdize.SignalR.HubConfig
     {
         public async Task SendToAll(string message)
         {
+
             await Clients.All.SendAsync("Send", message);
         }
     }

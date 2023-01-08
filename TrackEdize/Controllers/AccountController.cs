@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
+using Common.Entities.Identity;
 using Database.Entities.Identity;
 using Humanizer;
 using Identity.Security;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TrackEdize.Identity.Models;
 
 namespace TrackEdize.Controllers
 {
@@ -18,18 +18,13 @@ namespace TrackEdize.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
-        private RoleManager<ApplicationRole> _roleManager;
-        private SignInManager<ApplicationUser> _signInManager;
 
         private JwtTokenService _tokenService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService,
-             ILogger<AccountController> logger, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _logger = logger;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
@@ -67,7 +62,6 @@ namespace TrackEdize.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Token([Required, FromBody] LoginRequest request)
         {
-            
             var token = await _tokenService.GetTokenAsync(request);
             if(token == null) {
                 return Unauthorized();
@@ -77,6 +71,17 @@ namespace TrackEdize.Controllers
                 user = request.UserName,
                 token = token
             });
+        }
+
+
+        [HttpGet("AccountInfo")]
+        [Authorize]
+        public async Task<IActionResult> GetAccountInfo()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+
+            return Ok(user);
         }
 
 

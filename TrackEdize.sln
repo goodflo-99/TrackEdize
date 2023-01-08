@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackEdize", "TrackEdize\TrackEdize.csproj", "{A5E48394-792B-4C7A-80CB-29BE759834C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DF461062-06A1-4A6F-8047-A96F7A9D947F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{DF461062-06A1-4A6F-8047-A96F7A9D947F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{0AE447FE-67B7-4DD7-98B9-88DFB529BFB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{0AE447FE-67B7-4DD7-98B9-88DFB529BFB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{A760C98C-DADC-4573-BDD9-388E26327D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0AE447FE-67B7-4DD7-98B9-88DFB529BFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE447FE-67B7-4DD7-98B9-88DFB529BFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AE447FE-67B7-4DD7-98B9-88DFB529BFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A760C98C-DADC-4573-BDD9-388E26327D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A760C98C-DADC-4573-BDD9-388E26327D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A760C98C-DADC-4573-BDD9-388E26327D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A760C98C-DADC-4573-BDD9-388E26327D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

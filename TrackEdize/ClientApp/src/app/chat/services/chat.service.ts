@@ -19,7 +19,7 @@ export class ChatService {
    }
 
   public startConnection = () => {
-    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl.replace('api','chat')).build();
+    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl.replace('api','chat')).configureLogging(signalR.LogLevel.Trace).build();
     this.hubConnection
         .start()
         .then(() => console.log('Connection started'))

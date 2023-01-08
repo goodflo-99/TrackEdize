@@ -13,12 +13,17 @@ export class AccountService {
 
   login(credentials: any) {
     return this.http.post(this.api+'/token', credentials, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })      
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
+
   register(newUser: any) {
     return this.http.post(this.api+'/user', newUser, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })      
     });
+  }
+
+  async getUserInfo() {
+    this.http.get(this.api+'/accountinfo').subscribe(x=> sessionStorage.setItem("AccountInfo", JSON.stringify(x)));
   }
 }

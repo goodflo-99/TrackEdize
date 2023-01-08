@@ -1,9 +1,9 @@
 ﻿using Database.Entities;
 using Database.Interfaces;
 using Database.Repositories;
-using Database.Services;
 using Database;
 using Identity.Security;
+using BusunessLogic.Services;
 
 namespace TrackEdize
 {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Services
+namespace BusunessLogic.Services.Base
 {
     public class BaseCRUDService<T> where T : BaseEntity
     {
