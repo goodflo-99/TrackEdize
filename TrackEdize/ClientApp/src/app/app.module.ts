@@ -47,7 +47,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ChatModule } from './chat/chat.module';
 import { LogoComponent } from './nav-menu/logo/logo.component';
-import { MessageFloatComponent } from './message-float/message-float.component';
+import { MessageFloatComponent } from './components/message-float/message-float.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");

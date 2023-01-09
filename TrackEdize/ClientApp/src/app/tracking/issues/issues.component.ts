@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ColorHelperService } from 'src/app/common/color-helper.service';
+import { ColorHelperService } from 'src/app/shared/helpers/color-helper.service';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
 
