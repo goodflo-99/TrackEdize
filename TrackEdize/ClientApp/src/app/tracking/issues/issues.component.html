@@ -3,19 +3,21 @@
 
     <!-- <button type="button" class="btn btn-primary">Add new issue</button> -->
 <!-- </div> -->
-<table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-        <tr>
-            <th class="col-3">Key</th>
-            <th>Subject</th>
-            <th>Status</th>
+<table class="table align-middle mb-0 table-hover table-striped">
+    <thead class="table-light">
+        <tr class="table-primary">
+            <th class="col-1">Key</th>
+            <th class="col-1">Type</th>
+            <th class="col-8">Subject</th>
+            <th class="col-2">Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let is of issues">
-            <th class="col-3" (click)="edit(is)">{{is.key}}</th>
+        <tr *ngFor="let is of issues" (click)="edit(is)">
+            <th>{{is.key}}</th>
+            <th><span [ngClass]="colorHelper.getIssueCardColor(is.type)" class="p-1">{{is.type}}</span></th>
             <th>{{is.subject}}</th>
-            <th class="col-3">{{is.status}}</th>
+            <th>{{is.status}}</th>
         </tr>
     </tbody>
 </table>

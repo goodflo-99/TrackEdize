@@ -53,6 +53,8 @@ export class BugViewComponent implements OnInit {
     if (this.issue) {
       this.isNewIssue = false;
       this.newIssue = this.issue;
+    } else {
+      this.setDefaultIssueType();
     }
 
 
@@ -76,7 +78,8 @@ export class BugViewComponent implements OnInit {
       version: null,
       browser: null,
       device: null,
-      system: null
+      system: null,
+      acceptance: null
     });
   }
 
@@ -95,6 +98,7 @@ export class BugViewComponent implements OnInit {
 
   reset() {
     this.newIssue = new Issue();
+    this.setDefaultIssueType();
   }
 
   updateComments(commets: Comment[]) {
@@ -109,6 +113,18 @@ export class BugViewComponent implements OnInit {
         this.issueService.addComment(comment, this.newIssue.id).subscribe(x => this.updateComments(x));
       }
     }
+  }
+
+  isBug(issue: Issue) : boolean {
+    return issue.type=='Bug'
+  }
+
+  isStory(issue: Issue) : boolean {
+    return issue.type=='Story'
+  }
+
+  private setDefaultIssueType() {
+    this.newIssue.type = 'Bug';
   }
 
 }

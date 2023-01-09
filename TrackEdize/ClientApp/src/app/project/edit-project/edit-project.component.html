@@ -15,8 +15,10 @@
         </div>
     
         <div class="container">
-            <div class="d-flex justify-content-center ">
+            <div class="d-flex justify-content-around">
                 <button class="btn btn-primary" [disabled]="projectForm.invalid" (click)="save()">Save</button>
+                <button class="btn btn-primary" [disabled]="projectForm.invalid" type="reset">Clear</button>
+                <button class="btn btn-primary" [routerLink]="['/projects']">Cancel</button>
             </div>
         </div>
         

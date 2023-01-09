@@ -92,27 +92,37 @@ textarea {
 }
 
 .bug-border-card-color {
-  border-color: grey;
+  border-color: #FFCD2A;
 }
 
 .task-border-card-color {
-  border-color: blue;
+  border-color: #13AD5C;
 }
 
 .story-border-card-color {
-  border-color: lightgreen;
+  border-color: #9746FF;
+}
+
+.bug-border-card-color, .task-border-card-color, .story-border-card-color {
+  border-radius: 10px;
+  border-style: solid;
 }
 
 .bug-card-color {
-  background-color: grey;
+  background-color: #FFCD2A;
 }
 
 .task-card-color {
-  background-color: blue;
+  background-color: #13AD5C;
 }
 
 .story-card-color {
-  background-color: lightgreen;
+  background-color: #9746FF;
+}
+
+.bug-card-color, .task-card-color, .story-card-color {
+  color: white;
+  font-weight: bold;
 }
 
 .right-side-menu {
@@ -140,7 +150,7 @@ textarea {
   background: #33525e98;
 }
 
-a, th:first-child{
+a {
   cursor: pointer;
 }
 
