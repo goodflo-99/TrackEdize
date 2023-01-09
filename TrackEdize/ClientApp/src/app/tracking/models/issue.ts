@@ -18,6 +18,7 @@ export class Issue {
     key: string | undefined;
     status: string | undefined;
     type: string | undefined;
+    acceptance?: string;
 
     comments: Comment[] = [];
 

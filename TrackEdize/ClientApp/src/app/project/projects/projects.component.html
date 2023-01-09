@@ -4,10 +4,10 @@
 <table class="table align-middle mb-0 table-hover table-striped">
     <thead class="table-light">
         <tr class="table-primary">
-            <th>Abbreviation</th>
-            <th>Title</th>
+            <th class="col-1">Abbreviation</th>
+            <th class="col-2">Title</th>
             <th>Description</th>
-            <th>Action</th>
+            <th class="col-1">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -16,9 +16,9 @@
             <th>{{pr.name}}</th>
             <th>{{pr.description}}</th>
             <th>
-                <a (click)="editProject(pr.id)">Edit</a>
-                <span> | </span>
-                <a (click)="callDeletePopUp(pr.id)">Delete</a>
+                <a (click)="editProject(pr.id)" style="color: darkgreen;"><i class="pi pi-pencil"></i></a>
+                <span style="font-size: large;">   |   </span>
+                <a (click)="callDeletePopUp(pr.id)" style="color: red;"><i class="pi pi-times"></i></a>
             </th>
         </tr>
     </tbody>

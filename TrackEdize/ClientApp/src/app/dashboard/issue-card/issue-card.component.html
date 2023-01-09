@@ -1,9 +1,9 @@
 <div class="p-2" style="width:20em;">
-    <p-card subheader="{{issue.key}}" (click)="goToIssue()" styleClass="{{getBorderCardColor(issue.type)}}">
+    <p-card subheader="{{issue.key}}" (click)="goToIssue()" styleClass="{{colorHelper.getBorderCardColor(issue.type)}}">
         {{issue.subject}}
         <ng-template pTemplate="footer">
             <div class="d-flex justify-content-end">
-                <span [ngClass]="getIssueCardColor(issue.type)" class="px-2 rounded">
+                <span [ngClass]="colorHelper.getIssueCardColor(issue.type)" class="px-2 rounded">
                     {{issue.type}}
                 </span>
             </div>

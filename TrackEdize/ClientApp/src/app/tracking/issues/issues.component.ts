@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ColorHelperService } from 'src/app/common/color-helper.service';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
 
@@ -11,7 +12,7 @@ import { IssueService } from '../services/issue.service';
 export class IssuesComponent implements OnInit {
 
   issues: Issue[] = [];
-  constructor(private service: IssueService, private router: Router) { }
+  constructor(private service: IssueService, private router: Router, public colorHelper: ColorHelperService) { }
 
   ngOnInit(): void {
     this.service.getAll().subscribe(x=> this.issues = x);

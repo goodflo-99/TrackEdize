@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //PrimeNG
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { ButtonModule } from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -45,6 +46,8 @@ import { AuthGuard } from './common/guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ChatModule } from './chat/chat.module';
+import { LogoComponent } from './nav-menu/logo/logo.component';
+import { MessageFloatComponent } from './message-float/message-float.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -57,7 +60,9 @@ export function tokenGetter() {
     Page404Component,
     SignInComponent,
     AccountPageComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogoComponent,
+    MessageFloatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -93,6 +98,7 @@ export function tokenGetter() {
     ProjectModule,
     DashboardModule,
     RadioButtonModule,
+    ButtonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,        
