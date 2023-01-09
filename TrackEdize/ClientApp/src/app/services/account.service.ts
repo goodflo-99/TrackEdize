@@ -23,6 +23,10 @@ export class AccountService {
     });
   }
 
+  logout() {
+    localStorage.removeItem("jwt");
+  }
+
   async getUserInfo() {
     this.http.get(this.api+'/accountinfo').subscribe(x=> sessionStorage.setItem("AccountInfo", JSON.stringify(x)));
   }

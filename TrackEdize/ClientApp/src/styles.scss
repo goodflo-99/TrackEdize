@@ -25,7 +25,7 @@ code {
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
- 
+
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 
 @import '~primeng/resources/themes/lara-light-blue/theme.css';
@@ -48,7 +48,9 @@ body {
   min-width: 10em;
 }
 
-#username, #password, #version {
+#username,
+#password,
+#version {
   min-width: 19.6em;
   height: 2.2em;
   margin: 0;
@@ -103,7 +105,9 @@ textarea {
   border-color: #9746FF;
 }
 
-.bug-border-card-color, .task-border-card-color, .story-border-card-color {
+.bug-border-card-color,
+.task-border-card-color,
+.story-border-card-color {
   border-radius: 10px;
   border-style: solid;
 }
@@ -120,7 +124,9 @@ textarea {
   background-color: #9746FF;
 }
 
-.bug-card-color, .task-card-color, .story-card-color {
+.bug-card-color,
+.task-card-color,
+.story-card-color {
   color: white;
   font-weight: bold;
 }
@@ -158,6 +164,7 @@ comment-card {
   .p-card {
     background-color: #7d90981f;
   }
+
   .p-card-body {
     padding: 0 !important;
   }
@@ -166,4 +173,16 @@ comment-card {
 .p-badge {
   background-color: #33525e !important;
   color: white !important;
+}
+
+account-page {
+  .p-highlight {
+    background: #7d9098 !important;
+    border-color: #7d9098 !important;
+    color: #ffffff;
+  }
+
+  .p-ripple {
+    height: 2em;
+  }
 }

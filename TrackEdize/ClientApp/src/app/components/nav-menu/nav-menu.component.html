@@ -16,25 +16,30 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li> -->
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
-            <a class="nav-link text-dark" [routerLink]="['/dashboard']">Dashboard</a>
+            <a class="nav-link text-white" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
-            <a class="nav-link text-dark" [routerLink]="['/projects']">Projects</a>
+            <a class="nav-link text-white" [routerLink]="['/projects']">Projects</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
-            <a class="nav-link text-dark" [routerLink]="['issues']">Issues</a>
+            <a class="nav-link text-white" [routerLink]="['issues']">Issues</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
-            <a class="nav-link text-dark" [routerLink]="['sign-up']">Sign Up</a>
+            <a class="nav-link text-white" [routerLink]="['sign-up']">Sign Up</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
-            <a class="nav-link text-dark" [routerLink]="['sign-in']">Sign in</a>
+            <a class="nav-link text-white" [routerLink]="['sign-in']">Sign in</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
-            <a class="nav-link text-dark" [routerLink]="['account-page']"><i class="pi pi-user"></i></a>
+            <a class="nav-link text-white" [routerLink]="['account-page']"><i class="pi pi-user"></i></a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
+            <a class="nav-link text-white" [routerLink]="['sign-in']">Sign Out</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
+
+<app-message-float *ngIf="authorized()"></app-message-float>

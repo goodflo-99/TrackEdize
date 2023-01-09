@@ -8,8 +8,11 @@ import { MdbFormControlComponent, MdbFormsModule } from 'mdb-angular-ui-kit/form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AuthGuard } from '../common/guards/auth.guard';
-
-
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   providers: [ProjectService],
@@ -19,6 +22,11 @@ import { AuthGuard } from '../common/guards/auth.guard';
   ],
   imports: [
     CommonModule,
+    ButtonModule,
+    ToastModule,
+    RippleModule,
+    MessagesModule,
+    MessageModule,
     RouterModule.forChild([
       { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
       { path: 'projects/edit-project', component: EditProjectComponent, canActivate: [AuthGuard]},

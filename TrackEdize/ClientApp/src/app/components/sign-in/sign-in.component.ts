@@ -18,6 +18,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.signinSvc.logout();
     this.initForm();
   }
 

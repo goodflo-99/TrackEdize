@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/project';
 import { ProjectService } from '../services/project.service';
+import {Message} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-project',
   templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.scss']
+  styleUrls: ['./edit-project.component.scss'],
+  providers: [MessageService]
 })
 export class EditProjectComponent implements OnInit {
 
@@ -15,10 +18,11 @@ export class EditProjectComponent implements OnInit {
   id: string | undefined;
 
   project: Project = new Project();
+  saved: Message[] = [];
 
   projectForm: FormGroup = new FormGroup({});
 
-  constructor(private projectService:ProjectService, private router:Router, private route: ActivatedRoute, private fb:FormBuilder) {
+  constructor(private projectService:ProjectService, private router:Router, private route: ActivatedRoute, private fb:FormBuilder, private messageService: MessageService) {
    }
 
   ngOnInit(): void {
@@ -40,10 +44,10 @@ export class EditProjectComponent implements OnInit {
     }
 
     let req = this.id ? this.projectService.update(this.project) : this.projectService.add(this.project);
-
     req.subscribe(() => {
       this.close();
-    });    
+    });
+    this.messageService.add({key: 'saved', severity:'success', summary:'Success', detail:'Project created', sticky: true});
   }
 
   close() {
