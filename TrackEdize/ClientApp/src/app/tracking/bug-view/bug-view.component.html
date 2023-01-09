@@ -132,9 +132,16 @@
       </div>
       <div class="d-flex mt-4" *ngIf="!isNewIssue">
         <div class="input-group">
-          <span class="input-group-text" id="users">Assignee</span>
-          <p-dropdown [className]="['right-side-menu']" [options]="users" [(ngModel)]="newIssue.status" name="user"
-            [ngModelOptions]="{standalone: true}" placeholder="Assignee"></p-dropdown>
+          <span class="input-group-text" id="aDev">Assignee (Dev)</span>
+          <p-dropdown [className]="['right-side-menu']" [options]="aDev" [(ngModel)]="newIssue.status" name="aDev"
+            [ngModelOptions]="{standalone: true}" placeholder="Assignee (Dev)"></p-dropdown>
+        </div>
+      </div>
+      <div class="d-flex mt-4" *ngIf="!isNewIssue">
+        <div class="input-group">
+          <span class="input-group-text" id="users">Assignee (QA)</span>
+          <p-dropdown [className]="['right-side-menu']" [options]="aQA" [(ngModel)]="newIssue.status" name="aQA"
+            [ngModelOptions]="{standalone: true}" placeholder="Assignee (QA)"></p-dropdown>
         </div>
       </div>
       <div class="d-flex mt-4" *ngIf="!isNewIssue">

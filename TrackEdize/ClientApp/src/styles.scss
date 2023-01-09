@@ -140,18 +140,20 @@ textarea {
   background: #33525e98;
 }
 
-a {
+a, th:first-child{
   cursor: pointer;
 }
 
-th:first-child {
-  cursor: pointer;
+comment-card {
+  .p-card {
+    background-color: #7d90981f;
+  }
+  .p-card-body {
+    padding: 0 !important;
+  }
 }
 
-.p-card {
-  background-color: #7d90981f;
-}
-
-.p-card-body {
-  padding: 0 !important;
+.p-badge {
+  background-color: #33525e !important;
+  color: white !important;
 }
