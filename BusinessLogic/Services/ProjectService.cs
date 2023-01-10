@@ -1,4 +1,4 @@
-﻿using BusunessLogic.Services.Base;
+﻿using BusinessLogic.Services.Base;
 using Database.Entities;
 using Database.Interfaces;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusunessLogic.Services
+namespace BusinessLogic.Services
 {
     public class ProjectService : BaseCRUDService<Project>
     {

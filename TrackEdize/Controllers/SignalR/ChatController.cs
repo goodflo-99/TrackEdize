@@ -30,7 +30,7 @@ namespace TrackEdize.Controllers.SignalR
             _chatService = chatService;
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> BroadcastMessage([FromBody] MessageDto msg)
         {
             var chat = await _chatService.GetAllChat();

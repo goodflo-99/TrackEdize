@@ -3,7 +3,7 @@ using Database.Interfaces;
 using Database.Repositories;
 using Database;
 using Identity.Security;
-using BusunessLogic.Services;
+using BusinessLogic.Services;
 
 namespace TrackEdize
 {
@@ -31,6 +31,7 @@ namespace TrackEdize
         {
             builder.Services.AddScoped<ProjectService>();
             builder.Services.AddScoped<IssueService>();
+            builder.Services.AddScoped<ChatService>();
             builder.Services.AddScoped<JwtTokenService>();
         }
     }

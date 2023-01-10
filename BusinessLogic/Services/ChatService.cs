@@ -1,4 +1,4 @@
-﻿using BusunessLogic.Services.Base;
+﻿using BusinessLogic.Services.Base;
 using Database.Entities;
 using Database.Interfaces;
 using Database.Repositories;

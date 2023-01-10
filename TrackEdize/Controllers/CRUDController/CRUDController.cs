@@ -1,4 +1,4 @@
-﻿using BusunessLogic.Services.Base;
+﻿using BusinessLogic.Services.Base;
 using Database.Entities.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

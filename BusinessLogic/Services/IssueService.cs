@@ -1,7 +1,7 @@
 ﻿using Database.Entities;
 using Database.Interfaces;
 using Database.Repositories;
-using BusunessLogic.Services.Base;
+using BusinessLogic.Services.Base;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusunessLogic.Services
+namespace BusinessLogic.Services
 {
     public class IssueService : BaseCRUDService<Issue>
     {
