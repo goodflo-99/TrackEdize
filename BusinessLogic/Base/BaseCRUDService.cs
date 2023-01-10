@@ -34,6 +34,11 @@ namespace BusunessLogic.Services.Base
             await _repository.CreateAsync(newEntity);
         }
 
+        public async Task UpdateAsync(T updatedEntity)
+        {
+            await UpdateAsync(updatedEntity.Id, updatedEntity);
+        }
+
         public async Task UpdateAsync(string id, T updatedEntity)
         {
             ArgumentNullException.ThrowIfNull(id);

@@ -1,30 +1,57 @@
-﻿using Common.Entities.SignalR;
+﻿using BusinessLogic.Services;
+using Common.Entities.SignalR;
+using Database.Entities.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using TrackEdize.SignalR;
 using TrackEdize.SignalR.HubConfig;
+using TrackEdize.SignalR.Interfaces;
 
 namespace TrackEdize.Controllers.SignalR
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ChatController : ControllerBase
     {
-        private readonly IHubContext<ChatHub> _hub;
+        private readonly IHubContext<ChatHub, IChatClient> _hub;
 
-        public ChatController(IHubContext<ChatHub> hub)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly ChatService _chatService;
+
+        public ChatController(IHubContext<ChatHub, IChatClient> hub, UserManager<ApplicationUser> userManager, ChatService chatService)
         {
             _hub = hub;
+            _userManager = userManager;
+            _chatService = chatService;
         }
 
         [HttpPost]
         public async Task<IActionResult> BroadcastMessage([FromBody] MessageDto msg)
         {
+            var chat = await _chatService.GetAllChat();
+            var user = await _userManager.GetUserAsync(User);
             
-            _hub.Clients.All.SendAsync("Send", msg.User, msg.MsgText);
+            msg.User = user.FullName;
+            chat.Messages.Add(msg);
+            await _chatService.UpdateAsync(chat);
+            _hub.Clients.All.Send(user.FullName, msg.MsgText);
+            return Ok(msg);
+        }
 
-            return Ok();
+        [HttpPost]
+        public async Task<IActionResult> BroadcastMessage([FromBody] string text)
+        {
+            MessageDto msg = new MessageDto()
+            {
+                MsgText = text
+            };
+
+            return await BroadcastMessage(msg);
         }
 
 

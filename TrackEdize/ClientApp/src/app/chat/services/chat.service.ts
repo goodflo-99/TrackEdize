@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import * as signalR from "@microsoft/signalr"
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -14,16 +15,18 @@ export class ChatService {
   private api: string = environment.apiUrl + '/chat';
   private sharedObj = new Subject<MessageDto>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private jwtHelper : JwtHelperService) {
     this.startConnection();
    }
 
   public startConnection = () => {
-    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl.replace('api','chat')).configureLogging(signalR.LogLevel.Trace).build();
+    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl.replace('api','chat'), {
+      accessTokenFactory: this.jwtHelper.tokenGetter
+    }).configureLogging(signalR.LogLevel.Warning).build();
     this.hubConnection
         .start()
         .then(() => console.log('Connection started'))
-        .catch(err => console.log('Error while starting connection: ' + err));
+        .catch(err => {console.log('Error while starting connection: ' + err); this.reconect(); });
 
     this.mapSendMessage();
   }
@@ -46,4 +49,7 @@ export class ChatService {
     return this.sharedObj.asObservable();
   }
 
+  private reconect() {
+    setTimeout(this.startConnection, 1500);
+  }
 }
