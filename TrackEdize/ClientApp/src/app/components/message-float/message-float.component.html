@@ -1,4 +1,8 @@
+<p-sidebar [(visible)]="chatSide" position="right" styleClass="p-sidebar-md">
+  <general-chat></general-chat>
+</p-sidebar>
+
 <div class="floating-container">
-  <p-button icon="pi pi-comments" styleClass="p-button-outlined p-button-secondary" [routerLink]="['chat']"></p-button>
+  <p-button icon="pi pi-comments" (click)="chatSide = true" styleClass="p-button-outlined p-button-secondary"></p-button>
   <!-- <p-button icon="pi pi-comments" styleClass="p-button-outlined p-button-secondary" badge="8" badgeClass="p-badge" [routerLink]="['chat']"></p-button> -->
 </div>

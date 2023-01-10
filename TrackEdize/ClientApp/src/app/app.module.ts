@@ -27,6 +27,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {SidebarModule} from 'primeng/sidebar';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -103,6 +104,8 @@ export function tokenGetter() {
     ButtonModule,
     DropdownModule,
     SelectButtonModule,
+    SidebarModule,
+    ChatModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,        
@@ -110,7 +113,6 @@ export function tokenGetter() {
         headerName: "Authrorization"
       }
     }),
-    ChatModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

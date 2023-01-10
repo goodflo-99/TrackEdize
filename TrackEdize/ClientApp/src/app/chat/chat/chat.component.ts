@@ -3,7 +3,7 @@ import { MessageDto } from '../models/message-dto';
 import { ChatService } from '../services/chat.service';
 
 @Component({
-  selector: 'chat',
+  selector: 'general-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
