@@ -1,14 +1,59 @@
 <div class="ud-header">
-    <h2 class="text-center">Public Chat</h2>
+    <h2 class="text-center">General Chat</h2>
   </div>
-  <div class="ud-body">
+  <hr class="hr hr-blurry">
+  <!-- <div class="ud-body">
     <div class="msg-box">
       <ul>
-        <li *ngFor="let mObj of msgInboxArray">{{mObj.user}} :<br /><span class="msg-italic-style">{{mObj.msgText}}</span></li>
+        <li *ngFor="let mObj of msgInboxArray">
+          <p-chip label="{{mObj.user}}" icon="pi pi-check"></p-chip>
+          <br>
+          <span class="msg-italic-style">{{mObj.msgText}}</span>
+        </li>
       </ul>
     </div>
     <div class="ud-flex-row">
       <input type="text" placeholder="Type message here" class="msg-input" [(ngModel)]="msgDto.msgText"/>
       <button class="send-btn" (click)= "send()"><i class="fa fa-paper-plane"></i></button>
     </div>
+    <input type="text" placeholder="Your name" class="name-box" [(ngModel)]="msgDto.user"/>
+  </div> -->
+
+  <div *ngFor="let mObj of msgInboxArray">
+    <div class="div-left">
+      <p-chip label="{{mObj.user}}" icon="pi pi-check"></p-chip>
+<br>
+{{mObj.msgText}}
+    </div> 
+   
+    <div class="div-right">
+      <p-chip label="{{mObj.user}}" icon="pi pi-check"></p-chip>
+<br>
+{{mObj.msgText}}
+    </div> 
+   </div> 
+<div class="ud-flex-row">
+  <div class="d-flex mt-4">
+    <div class="input-group">
+      <mdb-form-control>
+        <input mdbInput class="form-control" id="nickname" type="text" [(ngModel)]="msgDto.user">
+        <label mdbLabel class="form-label" for="nickname">Nickname</label>
+      </mdb-form-control>
+    </div>
   </div>
+  <div class="d-flex mt-4">
+    <div class="input-group">
+      <mdb-form-control>
+        <input mdbInput class="form-control" id="message" type="text" [(ngModel)]="msgDto.msgText">
+        <label mdbLabel class="form-label" for="message">Message</label>
+      </mdb-form-control>
+       <!-- <mdb-form-control class="mb-3">
+    <textarea [(ngModel)]="msgDto.msgText" formControlName="message" mdbInput class="form-control" id="message"
+      autocomplete="off" appTextareaAutoresize></textarea>
+    <label mdbLabel class="form-label" for="message">Message</label>
+  </mdb-form-control> -->
+    </div>
+  </div>
+ 
+  <button class="btn btn-outline-primary send-btn" (click)="send()"><i class="fa fa-paper-plane"></i></button>
+</div>

@@ -5,8 +5,7 @@ import { ChatService } from '../services/chat.service';
 @Component({
   selector: 'general-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
-  providers: [ChatService]
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
 
@@ -21,8 +20,8 @@ export class ChatComponent implements OnInit {
 
   send(): void {
     if(this.msgDto) {
-      if(this.msgDto.msgText.length == 0){
-        window.alert("Text is required.");
+      if(this.msgDto.user.length == 0 || this.msgDto.user.length == 0){
+        window.alert("Both fields are required.");
         return;
       } else {
         this.chatSvc.broadcastMessage(this.msgDto);

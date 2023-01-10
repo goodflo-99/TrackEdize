@@ -15,7 +15,6 @@ using Database.Entities.Identity;
 using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using TrackEdize.SignalR.HubConfig;
-using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,26 +73,6 @@ builder.Services.AddAuthentication(opt =>
             ValidateLifetime = true,
             IssuerSigningKey = AuthOptions.SymmetricSecurityKey,
             ValidateIssuerSigningKey = true
-        };
-
-        o.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
-                if (context.Request.Path.Value.StartsWith("/chat") &&
-                    context.Request.Query.TryGetValue("access_token", out StringValues token)
-                )
-                {
-                    context.Token = token;
-                }
-
-                return Task.CompletedTask;
-            },
-            OnAuthenticationFailed = context =>
-            {
-                var te = context.Exception;
-                return Task.CompletedTask;
-            }
         };
     });
 

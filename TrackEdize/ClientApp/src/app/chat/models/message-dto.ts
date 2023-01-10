@@ -1,4 +1,4 @@
 export class MessageDto {
-    public user?: string;
+    public user: string = '';
     public msgText: string = '';
 }
