@@ -30,7 +30,7 @@ namespace TrackEdize.Controllers.SignalR
             _chatService = chatService;
         }
 
-        [HttpPut]
+        [HttpPost, HttpPut]
         public async Task<IActionResult> BroadcastMessage([FromBody] MessageDto msg)
         {
             var chat = await _chatService.GetAllChat();
@@ -43,16 +43,16 @@ namespace TrackEdize.Controllers.SignalR
             return Ok(msg);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> BroadcastMessage([FromBody] string text)
-        {
-            MessageDto msg = new MessageDto()
-            {
-                MsgText = text
-            };
+        //[HttpPost]
+        //public async Task<IActionResult> BroadcastMessage([FromBody] string msgText)
+        //{
+        //    MessageDto msg = new MessageDto()
+        //    {
+        //        MsgText = msgText
+        //    };
 
-            return await BroadcastMessage(msg);
-        }
+        //    return await BroadcastMessage(msg);
+        //}
 
 
 

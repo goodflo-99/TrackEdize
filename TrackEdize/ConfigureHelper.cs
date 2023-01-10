@@ -23,6 +23,7 @@ namespace TrackEdize
             builder.Services.AddScoped<IBaseRepository<Chat>, BaseRepository<Chat>>();
 
             builder.Services.AddScoped<IssueRepository>();
+            builder.Services.AddScoped<ChatRepository>();
             builder.Services.AddTransient<AccountRepository>();
 
         }

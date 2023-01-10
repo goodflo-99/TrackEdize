@@ -13,7 +13,7 @@ namespace BusinessLogic.Services
     public class ChatService : BaseCRUDService<Chat>
     {
         private ChatRepository _chatRepository;
-        public ChatService(ChatRepository repository, string collectionName) : base(repository, collectionName)
+        public ChatService(ChatRepository repository) : base(repository, nameof(Chat))
         {
             _chatRepository = repository;
         }
