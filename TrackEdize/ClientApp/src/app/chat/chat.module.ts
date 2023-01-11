@@ -5,6 +5,8 @@ import { ChatComponent } from './chat/chat.component';
 import { RouterModule } from '@angular/router';
 import { ChipModule } from 'primeng/chip';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import {ToastModule} from 'primeng/toast';
+import { ScrollerModule } from 'primeng/scroller';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     ReactiveFormsModule,
     ChipModule,
     MdbFormsModule,
+    ToastModule,
+    ScrollerModule,
     RouterModule.forChild([
       { path:'chat', component: ChatComponent}
     ])

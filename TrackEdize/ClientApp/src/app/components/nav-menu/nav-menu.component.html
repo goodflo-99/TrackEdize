@@ -1,6 +1,6 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 nav-bgc">
-    <div class="container">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm fixed-top border-bottom box-shadow mb-3 nav-bgc">
+    <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['/']"><app-logo></app-logo></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
@@ -28,13 +28,13 @@
             <a class="nav-link text-white" [routerLink]="['sign-up']">Sign Up</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!authorized()">
-            <a class="nav-link text-white" [routerLink]="['sign-in']">Sign in</a>
+            <a class="nav-link text-white" [routerLink]="['sign-in']"><b>Sign in</b></a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
             <a class="nav-link text-white" [routerLink]="['account-page']"><i class="pi pi-user"></i></a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
-            <a class="nav-link text-white" [routerLink]="['sign-in']">Sign Out</a>
+            <a class="nav-link text-white" [routerLink]="['sign-in']"><i class="pi pi-sign-out"></i></a>
           </li>
         </ul>
       </div>
