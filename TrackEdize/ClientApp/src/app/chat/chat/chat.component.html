@@ -4,18 +4,18 @@
 <hr class="hr hr-blurry">
 
 <div>
-  <div class="message-container" #scrollContainer>
+  <div class="message-container" #scrollContainer [scrollTop]="scrollContainer.scrollHeight">
     <div *ngFor="let mObj of msgInboxArray" >
       <div class="d-flex justify-content-start">
         <div class="div-left msg">
-          <p-chip label="{{mObj.user}}" icon="pi pi-check"></p-chip>
+          <p-chip label="{{mObj.user}}" icon="pi pi-check" class="chip-left"></p-chip>
           <br>
           {{mObj.msgText}}
         </div>
       </div>
       <div class="d-flex justify-content-end">
         <div class="div-right msg">
-          <p-chip label="{{mObj.user}}" icon="pi pi-check"></p-chip>
+          <p-chip label="{{mObj.user}}" icon="pi pi-check" class="chip-right"></p-chip>
           <br>
           {{mObj.msgText}}
         </div>
@@ -23,17 +23,22 @@
     </div>
   </div>
   
-  <div class="ud-flex-row">
-    <div class="d-flex mt-4">
-      <div class="input-group">
-        <mdb-form-control class="mb-3">
-          <textarea [(ngModel)]="msgDto.msgText" mdbInput class="form-control" id="message" autocomplete="off"
-            appTextareaAutoresize (keydown.enter)="send();false"></textarea>
-          <label mdbLabel class="form-label" for="message">Message</label>
-        </mdb-form-control>
+  <div class="container">
+    <div class="row">
+      <div class="col-11">
+        <div class="input-group">
+          <mdb-form-control>
+            <textarea [(ngModel)]="msgDto.msgText" mdbInput class="form-control" id="message" autocomplete="off"
+              appTextareaAutoresize (keydown.enter)="send();false"></textarea>
+            <label mdbLabel class="form-label" for="message">Message</label>
+          </mdb-form-control>
+        </div>
+      </div>
+      <div class="d-flex col-1 align-items-center justify-content-center">
+      <button class="btn btn-outline-primary send-btn" (click)="send()"><i class="fa fa-paper-plane"></i></button>
       </div>
     </div>
-    <button class="btn btn-outline-primary send-btn" (click)="send()"><i class="fa fa-paper-plane"></i></button>
+    
   </div>
 </div>
 

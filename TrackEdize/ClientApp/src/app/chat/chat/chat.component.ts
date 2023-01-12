@@ -40,13 +40,6 @@ export class ChatComponent implements OnInit {
     newObj.user = obj.user;
     newObj.msgText = obj.msgText;
     this.msgInboxArray.push(newObj);
-    // document.getElementsByClassName("msg:last-child").scroll();
-    this.scrollContainer?.nativeElement.scroll({
-      //top: this.scrollContainer.nativeElement.scrollHeight,
-      left: 0,
-      bottom: 0,
-      behavior: 'smooth'
-    })
   }
 
   upd() {

@@ -1,12 +1,20 @@
 .div-right,
 .div-left {
     position: relative;
-    background: #87CEFA;
-    min-width: 49%;
+    min-width: 55%;
     max-width: 90%;
     padding: 10px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.div-left {
+    background: #58717b94;
+}
+
+.div-right {
+    background: #58717bd9;
+    color: whitesmoke;
 }
 
 .div-left:before,
@@ -19,20 +27,24 @@
 }
 
 .div-right:before {
-    border-color: transparent transparent transparent #87CEFA;
+    border-color: transparent transparent transparent #58717bd9;
     right: -20px;
     top: 10px;
 }
 
 .div-left:before {
-    border-color: transparent #87CEFA transparent transparent;
+    border-color: transparent #58717b94 transparent transparent;
     left: -20px;
     top: 10px;
 }
 
 .message-container {
-    height: 35em;
+    height: 39em;
     overflow-y: auto;
     max-width: 100%;
     overflow-x: hidden;
+}
+
+.message-container {
+    scroll-behavior: smooth !important;
 }
