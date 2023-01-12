@@ -87,5 +87,17 @@ namespace BusinessLogic.Services
             await UpdateAsync(id, issue);
             return await GetCommentsAsync(id);
         }
+
+        public async Task<List<Comment>> DeleteCommentAsync(string issueId, string commentId)
+        {
+            var issue = await GetAsync(issueId);
+
+            var comment = issue.Comments.FirstOrDefault(x => x.Id == commentId);
+            issue.Comments.Remove(comment);
+
+            await UpdateAsync(issueId, issue);
+
+            return await GetCommentsAsync(issueId);
+        }
     }
 }

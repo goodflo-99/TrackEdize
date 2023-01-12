@@ -13,6 +13,7 @@ import {ToastModule} from 'primeng/toast';
 import {RippleModule} from 'primeng/ripple';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   providers: [ProjectService],
@@ -35,7 +36,8 @@ import {MessageModule} from 'primeng/message';
     MdbFormsModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SharedModule
   ],
 })
 export class ProjectModule { }

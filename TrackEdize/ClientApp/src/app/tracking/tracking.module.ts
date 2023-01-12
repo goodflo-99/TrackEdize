@@ -31,9 +31,10 @@ import { CommentSectionComponent } from './comment-section/comment-section.compo
 import { CommentCardComponent } from './comment-section/comment-card/comment-card.component';
 import { CardModule } from 'primeng/card';
 import { AuthGuard } from '../common/guards/auth.guard';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
-  providers: [IssueService],
+  providers: [IssueService, MessageService],
   declarations: [
     BugViewComponent,
     IssuesComponent,

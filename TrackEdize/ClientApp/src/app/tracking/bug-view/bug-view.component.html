@@ -3,10 +3,10 @@
     <nav aria-label="breadcrumb" *ngIf="!isNewIssue">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
-        <li class="breadcrumb-item"><a href="#">{{newIssue.project?.name || "Project Name"}}</a></li>
+        <li class="breadcrumb-item"><a href="#">{{newIssue.project.name || "Project Name"}}</a></li>
         <li class="breadcrumb-item active" aria-current="page"><a href="#">{{newIssue.key || ""}}</a></li>
         <div class="ml-4">
-          <button pButton type="button"
+          <button pButton type="button" (click)="copyLink()"
             class="p-element p-ripple p-button-rounded p-button-info p-button-text p-button p-component p-button-icon-only"><i
               class="pi pi-copy"></i></button>
         </div>
@@ -116,8 +116,7 @@
         <hr class="hr hr-blurry">
 
           <h5>Comments</h5>
-          <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)">
-
+          <app-comment-section [comments]="newIssue.comments" (commentAdded)="addComment($event)" (commentDeleted)="deleteComment($event)">
           </app-comment-section>
         </div>
       </div>
@@ -128,6 +127,8 @@
         <button (click)="click()" pButton type="button" [label]="isNewIssue ? 'Create' : 'Edit'"
           class="p-button-text p-button-info"><i class="pi pi-file-edit"></i></button>
         <button (click)="reset()" pButton *ngIf="isNewIssue" type="button" label=" Clear"
+          class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
+        <button (click)="showDeleteIssueDialog()" pButton *ngIf="!isNewIssue" type="button" label="Delete"
           class="p-button-text p-button-danger"><i class="pi pi-times"></i></button>
       </div>
       <div class="d-flex mt-4" *ngIf="!isNewIssue">
@@ -155,7 +156,7 @@
         <div class="input-group">
           <span class="input-group-text" id="reporter">Reporter</span>
           <mdb-form-control>
-            <input mdbInput class="form-control" id="reporters" type="text" [readonly]="true"/>
+            <input mdbInput class="form-control" [ngModel]="newIssue.createdBy" id="reporters" type="text" [readonly]="true"/>
             <!-- <label mdbLabel class="form-label" for="reporters">Reporter</label> -->
           </mdb-form-control>
         </div>
@@ -164,7 +165,7 @@
         <div class="input-group">
           <span class="input-group-text" id="created">Created at</span>
           <mdb-form-control>
-            <input mdbInput class="form-control" id="created" type="text" [readonly]="true"/>
+            <input mdbInput class="form-control" [ngModel]="newIssue.createdDate | date:'LL/dd/yyyy'" id="created" type="text" [readonly]="true"/>
             <!-- <label mdbLabel class="form-label" for="created">Created at</label> -->
           </mdb-form-control>
         </div>
@@ -173,7 +174,7 @@
         <div class="input-group">
           <span class="input-group-text" id="updated">Updated at</span>
           <mdb-form-control>
-            <input mdbInput class="form-control" id="updated" type="text" [readonly]="true"/>
+            <input mdbInput class="form-control" [ngModel]="newIssue.updatedDate | date:'LL/dd/yyyy'" id="updated" type="text" [readonly]="true">
             <!-- <label mdbLabel class="form-label" for="updated">Updated at</label> -->
           </mdb-form-control>
         </div>
@@ -181,3 +182,5 @@
     </div>
   </div>
 </div>
+
+<delete-confirm-dialog [okMessage]="'Issue deleted'" [rejectMessage]="'Rejected'" (confirmation)="delete($event)" [key]="'issue'"></delete-confirm-dialog>

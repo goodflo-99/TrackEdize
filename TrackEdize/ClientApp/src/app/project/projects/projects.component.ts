@@ -11,16 +11,14 @@ import { PrimeNGConfig } from 'primeng/api';
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  providers: [MessageService]
 
 })
 export class ProjectsComponent implements OnInit {
 
   projects: Project[] = [];
-  msgs: Message[] = [];
 
-  constructor(private projectService: ProjectService, private router: Router, private confirmationService: ConfirmationService, private messageService: MessageService,
-    private primengConfig: PrimeNGConfig) { }
+  constructor(private projectService: ProjectService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getProjects();
@@ -40,7 +38,7 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate(['/projects/edit-project', id]);
   }
 
-  private deleteProject(id: string | undefined) {
+  deleteProject(id: string | undefined) {
     if(id) {
       this.projectService.delete(id).subscribe(() => {
         this.getProjects();
@@ -51,7 +49,7 @@ export class ProjectsComponent implements OnInit {
   showConfirm(id: string | undefined) {
     this.messageService.clear();
     this.messageService.add({
-      key: 'c',
+      key: 'project',
       sticky: true,
       severity: 'warn',
       summary: 'Confirmation',
@@ -59,17 +57,6 @@ export class ProjectsComponent implements OnInit {
       closable: false,
       data: id,
     });
-  }
-
-  onConfirm(id: string | undefined) {
-    this.messageService.clear('c');
-    this.deleteProject(id);
-    this.messageService.add({key: 'msgs', severity:'success', summary:'Confirmed', detail:'Project deleted'});
-  }
-
-  onReject() {
-    this.messageService.clear('c');
-    this.messageService.add({key: 'msgs', severity:'info', summary:'Rejected', detail:'You have rejected'});
   }
 
 }

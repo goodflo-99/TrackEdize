@@ -18,8 +18,8 @@ export class NavigationHelperService {
         this.router.navigate([`/issues/bug-view/${id}`]);        
     }
 
-    public toNewIssue() {
-        this.router.navigate([`/issues/bug-view`]);        
+    public toNewIssue(projectId?: string) {
+        this.router.navigate([`/issues/bug-view`], {queryParams: {projectId: projectId}});        
     }
 
     public toDashboard() {

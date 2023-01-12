@@ -14,11 +14,14 @@ export class Issue {
     browser: string | null = null;
     device: string | null = null;
     system: string | null = null;
-    project: Dropdown | undefined = new Dropdown();
+    project: Dropdown = new Dropdown();
     key: string | undefined;
     status: string | undefined;
     type: string | undefined;
     acceptance?: string;
+    createdDate?: Date;
+    updatedDate?: Date;
+    createdBy?: string
 
     comments: Comment[] = [];
 

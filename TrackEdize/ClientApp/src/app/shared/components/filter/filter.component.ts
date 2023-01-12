@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Project } from 'src/app/project/models/project';
 import { ProjectService } from 'src/app/project/services/project.service';
-import { NavigationHelperService } from '../helpers/navigation-helper.service';
+import { NavigationHelperService } from '../../helpers/navigation-helper.service';
 
 @Component({
   selector: 'filter',
@@ -71,7 +71,7 @@ export class FilterComponent implements OnInit {
   }
 
   addNewIssue() {
-    this.nav.toNewIssue();
+    this.nav.toNewIssue(this.selectedProject);
   }
 
 }

@@ -15,6 +15,9 @@ export class CommentCardComponent implements OnInit {
   @Output()
   editComment = new EventEmitter<Comment>();
 
+  @Output()
+  deleteComment = new EventEmitter<string>();
+
   editMode: boolean = false;
 
   comForm: FormGroup = new FormGroup({});
@@ -35,6 +38,10 @@ export class CommentCardComponent implements OnInit {
       }
     }
     this.editMode = !this.editMode;
+  }
+
+  delete() {
+    this.deleteComment.emit(this.comment.id);
   }
 
   initForm() {

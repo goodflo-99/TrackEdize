@@ -38,4 +38,12 @@ export class IssueService extends BaseService<Issue> {
       params: params
     });
   }
+
+  deleteComment(commentId: string, id: string) {
+    var params = new HttpParams().set("issueId", id).set("commentId", commentId);
+
+    return this.http.delete<Comment[]>(this.api+'/DeleteComment', {
+      params: params
+    });
+  }
 }

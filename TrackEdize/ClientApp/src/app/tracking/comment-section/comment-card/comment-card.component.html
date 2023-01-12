@@ -17,7 +17,7 @@
           <div class="col-3 align-self-center">
             <div>
                 <button class="btn btn-outline-primary mx-1" (click)="toggleMode()"><i [ngClass]="editMode ? ['pi','pi-check-circle'] : ['pi','pi-file-edit']"></i></button>
-                <button class="btn btn-outline-danger mx-1"><i class="pi pi-times"></i></button>
+                <button class="btn btn-outline-danger mx-1" (click)="delete()"><i class="pi pi-times"></i></button>
             </div>
           </div>
         </div>

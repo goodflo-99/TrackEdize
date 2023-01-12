@@ -8,11 +8,15 @@ import { ProjectService } from 'src/app/project/services/project.service';
 import { Project } from 'src/app/project/models/project';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../models/comment';
+import {Clipboard} from '@angular/cdk/clipboard';
+import { DialogHelperService } from 'src/app/shared/helpers/dialog-helper.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-bug-view',
   templateUrl: './bug-view.component.html',
-  styleUrls: ['./bug-view.component.scss']
+  styleUrls: ['./bug-view.component.scss'],
+  providers: [MessageService]
 })
 export class BugViewComponent implements OnInit {
 
@@ -31,19 +35,24 @@ export class BugViewComponent implements OnInit {
   @Input()
   id: string | undefined;
 
+  @Input()
+  projectId?: string;
+
   isNewIssue: boolean = true;
   newIssue: Issue = new Issue();
   projects: Project[] = [];
 
   issueForm: FormGroup = new FormGroup({});
 
-  constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, private projSvc: ProjectService, private fb: FormBuilder) { }
+  constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, 
+    private projSvc: ProjectService, private fb: FormBuilder, private clipboard: Clipboard, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.initForm();
     if (!this.id) {
-      this.route.params.subscribe(x => this.id = x['id'])
+      this.handleParams();
     }
+
     if (this.id) {
       this.isNewIssue = false;
       this.issueService.getById(this.id).subscribe(response => {
@@ -59,9 +68,9 @@ export class BugViewComponent implements OnInit {
 
 
     this.statuses = Statuses.getValues();
-    console.log(this.statuses);
 
-    this.projSvc.getAll().subscribe(x => this.projects = x);
+    this.getProjects();
+
   }
 
   initForm() {
@@ -125,6 +134,59 @@ export class BugViewComponent implements OnInit {
 
   private setDefaultIssueType() {
     this.newIssue.type = 'Bug';
+  }
+
+  handleParams() {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+
+    this.route.queryParams.subscribe(params => {
+      this.projectId = params['projectId']
+    })
+  }
+
+  getProjects() {
+    this.projSvc.getAll().subscribe(projects => {
+      this.projects = projects;
+
+      if(this.isNewIssue && this.projectId && this.projectId.length > 0) {
+        this.newIssue.project.id = this.projectId;
+      }
+    });
+  }
+
+  deleteComment(id: string) {
+    if (id && this.newIssue.id) {
+      this.issueService.deleteComment(id, this.newIssue.id).subscribe(x=> {
+        this.updateComments(x);
+      });
+    }
+  }
+
+  copyLink() {
+    this.clipboard.copy(window.location.href);
+  }
+
+  showDeleteIssueDialog() {
+    this.messageService.clear();
+    this.messageService.add({
+      key: 'issue',
+      sticky: true,
+      severity: 'warn',
+      summary: 'Confirmation',
+      detail: 'Are you sure that you want to delete this issue?',
+      closable: false,
+      data: this.newIssue.id,
+    });
+  }
+
+  delete(id?: string) {
+    if(id) {
+      this.issueService.delete(id).subscribe(x=> {
+        this.router.navigate(['/dashboard']);
+      })
+    }    
   }
 
 }

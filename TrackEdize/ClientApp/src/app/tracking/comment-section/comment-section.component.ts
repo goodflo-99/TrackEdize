@@ -16,6 +16,9 @@ export class CommentSectionComponent implements OnInit {
   @Output()
   commentEdited = new EventEmitter<Comment>()
 
+  @Output()
+  commentDeleted = new EventEmitter<string>()
+
   comment: Comment = new Comment();
 
   constructor() {  }
@@ -35,6 +38,10 @@ export class CommentSectionComponent implements OnInit {
 
   editComment(comment: Comment) {
     this.commentAdded.emit(comment);
+  }
+
+  delete(id: string) {
+    this.commentDeleted.emit(id);
   }
 
 }
