@@ -7,6 +7,7 @@ import { ChipModule } from 'primeng/chip';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import {ToastModule} from 'primeng/toast';
 import { ScrollerModule } from 'primeng/scroller';
+import { ChatService } from './services/chat.service';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ScrollerModule } from 'primeng/scroller';
   ],
   exports: [
     ChatComponent,
-  ]
+  ],
+  providers:[ChatService]
 })
 export class ChatModule { }
