@@ -31,6 +31,10 @@ export class ChatService {
     this.mapSendMessage();
   }
 
+  public loadHistory() {
+    return this.http.get<MessageDto[]>(this.api+"/history");
+  }
+
   public broadcastMessage(msgDto: any) {
     this.http.post(this.api+"/", msgDto).subscribe(data => console.log(data));
   }

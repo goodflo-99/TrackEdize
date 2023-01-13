@@ -70,8 +70,12 @@ import { MessageService } from 'primeng/api';
       { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard],  pathMatch: 'full', children: [
         
       ]},
-      { path: 'issues/bug-view', component: BugViewComponent},
-      { path: 'issues/bug-view/:id', component: BugViewComponent}
+      { path: 'issues/issue', component: BugViewComponent, children: [
+        { path: ':id', component: BugViewComponent},
+        { path: ':projectId', component: BugViewComponent}
+      ]},
+      // { path: 'issues/issue', component: BugViewComponent, children: [
+      // ]},
     ]),
   ]
 })

@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Services;
 using Common.Entities.SignalR;
 using Database.Entities.Identity;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ using TrackEdize.SignalR.Interfaces;
 namespace TrackEdize.Controllers.SignalR
 {
     [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
     public class ChatController : ControllerBase
@@ -28,6 +30,23 @@ namespace TrackEdize.Controllers.SignalR
             _hub = hub;
             _userManager = userManager;
             _chatService = chatService;
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> Get()
+        {
+            var chat = await _chatService.GetAllChat();
+
+            return Ok(chat);
+        }
+
+
+        [HttpGet("History")]
+        public async Task<IActionResult> GetHistory()
+        {
+            var chat = await _chatService.GetAllChat();
+
+            return Ok(chat.Messages);
         }
 
         [HttpPost, HttpPut]

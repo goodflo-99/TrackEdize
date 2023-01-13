@@ -15,11 +15,11 @@ export class NavigationHelperService {
     }
 
     public navigateToIssue(id: string) {
-        this.router.navigate([`/issues/bug-view/${id}`]);        
+        this.router.navigate([`/issues/issue/`, {id: id}]);        
     }
 
     public toNewIssue(projectId?: string) {
-        this.router.navigate([`/issues/bug-view`], {queryParams: {projectId: projectId}});        
+        this.router.navigate([`/issues/issue`, {projectId: projectId}]);        
     }
 
     public toDashboard() {

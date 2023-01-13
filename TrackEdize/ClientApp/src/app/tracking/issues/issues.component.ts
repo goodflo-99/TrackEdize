@@ -19,7 +19,7 @@ export class IssuesComponent implements OnInit {
   }
 
   edit(issue:Issue){
-    this.router.navigate(['/issues/bug-view', issue.id]);
+    this.router.navigate(['/issues/issue', issue.id]);
   }
 
   delete(id:any) {

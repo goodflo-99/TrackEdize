@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageDto } from '../models/message-dto';
 import { ChatService } from '../services/chat.service';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'general-chat',
@@ -11,12 +11,18 @@ import {MessageService} from 'primeng/api';
 })
 export class ChatComponent implements OnInit {
 
-  @ViewChild('scrollContainer', {static: false}) scrollContainer?: ElementRef;
+  @ViewChild('scrollContainer', { static: false }) scrollContainer?: ElementRef;
 
   constructor(private chatSvc: ChatService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.chatSvc.retrieveMappedObject().subscribe( (receivedObj: MessageDto) => { this.addToInbox(receivedObj); this.upd()});                                                     
+    this.chatSvc.retrieveMappedObject().subscribe((receivedObj: MessageDto) => { this.addToInbox(receivedObj); this.upd() });
+    this.chatSvc.loadHistory().subscribe(messages => {
+      this.msgInboxArray = messages;
+      messages.filter(x=> {
+        x.user == "First Last"
+      });
+    });
   }
 
   msgDto: MessageDto = new MessageDto();
@@ -24,9 +30,9 @@ export class ChatComponent implements OnInit {
   update = true;
 
   send(): void {
-    if(this.msgDto) {
-      if(this.msgDto.msgText.length == 0){
-        this.messageService.add({key: 'emptyInput', severity:'error', summary:'Text is required'});
+    if (this.msgDto) {
+      if (this.msgDto.msgText.length == 0) {
+        this.messageService.add({ key: 'emptyInput', severity: 'error', summary: 'Text is required' });
         return;
       } else {
         this.chatSvc.broadcastMessage(this.msgDto);

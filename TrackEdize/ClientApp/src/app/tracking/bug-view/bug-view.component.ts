@@ -11,6 +11,7 @@ import { Comment } from '../models/comment';
 import {Clipboard} from '@angular/cdk/clipboard';
 import { DialogHelperService } from 'src/app/shared/helpers/dialog-helper.service';
 import { MessageService } from 'primeng/api';
+import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
 
 @Component({
   selector: 'app-bug-view',
@@ -28,24 +29,23 @@ export class BugViewComponent implements OnInit {
   statuses: any[] = [];
   aDev: any[] = [];
   aQA: any[] = [];
-
-  @Input()
-  issue: Issue | undefined;
-
-  @Input()
-  id: string | undefined;
-
-  @Input()
-  projectId?: string;
-
   isNewIssue: boolean = true;
   newIssue: Issue = new Issue();
   projects: Project[] = [];
-
   issueForm: FormGroup = new FormGroup({});
+  viewMode = false;
 
-  constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, 
-    private projSvc: ProjectService, private fb: FormBuilder, private clipboard: Clipboard, private messageService: MessageService) { }
+  //@Input() issue?: Issue;
+  @Input() id?: string;
+  @Input() projectId?: string;
+
+  constructor(private issueService: IssueService,
+    private nav: NavigationHelperService, 
+    private route: ActivatedRoute, 
+    private projSvc: ProjectService, 
+    private fb: FormBuilder, 
+    private clipboard: Clipboard, 
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -55,22 +55,21 @@ export class BugViewComponent implements OnInit {
 
     if (this.id) {
       this.isNewIssue = false;
-      this.issueService.getById(this.id).subscribe(response => {
-        this.newIssue = response;
-      });
-    }
-    if (this.issue) {
-      this.isNewIssue = false;
-      this.newIssue = this.issue;
+      this.getIssue(this.id);
+      this.disableForm();
     } else {
       this.setDefaultIssueType();
     }
-
-
+    
     this.statuses = Statuses.getValues();
 
     this.getProjects();
 
+  }
+  getIssue(id: string) {
+    this.issueService.getById(id).subscribe(response => {
+      this.newIssue = response;
+    });
   }
 
   initForm() {
@@ -92,7 +91,7 @@ export class BugViewComponent implements OnInit {
     });
   }
 
-  click() {
+  save() {
     if (this.id || this.newIssue.id) {
       this.issueService.update(this.newIssue).subscribe(x => {
         this.newIssue = x
@@ -103,6 +102,8 @@ export class BugViewComponent implements OnInit {
         this.newIssue = x;
       });
     }
+
+    this.disableForm();
   }
 
   reset() {
@@ -139,11 +140,12 @@ export class BugViewComponent implements OnInit {
   handleParams() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
+      this.projectId = params['projectId']
     });
 
-    this.route.queryParams.subscribe(params => {
-      this.projectId = params['projectId']
-    })
+    // this.route.queryParams.subscribe(params => {
+    //   this.projectId = params['projectId']
+    // })
   }
 
   getProjects() {
@@ -184,9 +186,19 @@ export class BugViewComponent implements OnInit {
   delete(id?: string) {
     if(id) {
       this.issueService.delete(id).subscribe(x=> {
-        this.router.navigate(['/dashboard']);
+        this.nav.toDashboard();
       })
     }    
+  }
+
+  enableForm() {
+    this.viewMode = false;
+    //this.issueForm.enable();
+  }
+
+  disableForm() {
+    this.viewMode = true;
+    //this.issueForm.disable();
   }
 
 }
