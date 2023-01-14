@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Statuses } from 'src/app/shared/constants/statuses';
+import { Statuses } from 'src/app/common/constants/statuses';
 import { Issue } from 'src/app/tracking/models/issue';
 import { IssueService } from 'src/app/tracking/services/issue.service';
 

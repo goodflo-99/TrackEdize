@@ -6,8 +6,7 @@ import { AccountService } from '../../services/account.service';
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss'],
-  providers: [AccountService]
+  styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
 
@@ -34,7 +33,7 @@ export class SignInComponent implements OnInit {
 
     this.signinSvc.login(creds).subscribe((res: any)=> {
       localStorage.setItem("jwt", res.token);
-      this.signinSvc.getUserInfo();
+      this.signinSvc.getAccountInfo();
       this.nav.toDashboard();
     }, err=> {
 

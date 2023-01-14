@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as signalR from "@microsoft/signalr"
 import { Observable, Subject } from 'rxjs';
+import { AccountInfo } from 'src/app/common/models/AccountInfo';
+import { AccountService } from 'src/app/services/account.service';
 import { environment } from '../../../environments/environment';
 import { MessageDto } from '../models/message-dto';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Injectable()
 export class ChatService {
 
   private hubConnection?: signalR.HubConnection;
@@ -41,10 +44,7 @@ export class ChatService {
 
   private mapSendMessage = () => {
     if(!this.hubConnection) return;
-    this.hubConnection.on('Send', (user: string, message: string) => {
-      let dto = new MessageDto();
-      dto.user = user;
-      dto.msgText = message;
+    this.hubConnection.on('Send', (dto: MessageDto) => {
       this.sharedObj.next(dto);
     })
   }

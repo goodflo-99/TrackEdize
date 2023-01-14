@@ -6,8 +6,7 @@ import { AccountService } from '../../services/account.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
-  providers: [AccountService]
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
   formCtr!: FormGroup;

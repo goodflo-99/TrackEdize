@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Statuses } from 'src/app/shared/constants/statuses';
+import { Statuses } from 'src/app/common/constants/statuses';
 import { Issue } from 'src/app/tracking/models/issue';
 
 @Component({

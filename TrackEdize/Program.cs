@@ -16,6 +16,7 @@ using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using TrackEdize.SignalR.HubConfig;
 using Microsoft.Extensions.Primitives;
+using BusinessLogic.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,6 +122,8 @@ builder.Services.AddCors(x =>
         b.AllowCredentials();
     });
 });
+
+builder.Services.AddAutoMapper(typeof(TrackerMappingProfile));
 
 
 ConfigureHelper.ConfigureDatabase(builder);

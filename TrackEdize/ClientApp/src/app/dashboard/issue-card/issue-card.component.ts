@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColorHelperService } from 'src/app/shared/helpers/color-helper.service';
-import { Statuses } from 'src/app/shared/constants/statuses';
+import { Statuses } from 'src/app/common/constants/statuses';
 import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
 import { Issue } from 'src/app/tracking/models/issue';
 

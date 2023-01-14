@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageDto } from '../models/message-dto';
 import { ChatService } from '../services/chat.service';
 import { MessageService } from 'primeng/api';
+import { AccountInfo } from 'src/app/common/models/AccountInfo';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'general-chat',
@@ -12,8 +14,12 @@ import { MessageService } from 'primeng/api';
 export class ChatComponent implements OnInit {
 
   @ViewChild('scrollContainer', { static: false }) scrollContainer?: ElementRef;
+  accInfo: AccountInfo;
 
-  constructor(private chatSvc: ChatService, private messageService: MessageService) { }
+  constructor(private chatSvc: ChatService, private messageService: MessageService, accountSvc: AccountService) {
+    this.accInfo = accountSvc.accountInfo;
+    console.log(this.accInfo)
+  }
 
   ngOnInit(): void {
     this.chatSvc.retrieveMappedObject().subscribe((receivedObj: MessageDto) => { this.addToInbox(receivedObj); this.upd() });
@@ -42,10 +48,10 @@ export class ChatComponent implements OnInit {
   }
 
   addToInbox(obj: MessageDto) {
-    let newObj = new MessageDto();
-    newObj.user = obj.user;
-    newObj.msgText = obj.msgText;
-    this.msgInboxArray.push(newObj);
+    
+
+    let new1 = {...obj};
+    this.msgInboxArray.push(new1);
   }
 
   upd() {

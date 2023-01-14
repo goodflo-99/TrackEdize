@@ -56,9 +56,10 @@ namespace TrackEdize.Controllers.SignalR
             var user = await _userManager.GetUserAsync(User);
             
             msg.User = user.FullName;
+            msg.Id = user.Id;
             chat.Messages.Add(msg);
             await _chatService.UpdateAsync(chat);
-            _hub.Clients.All.Send(user.FullName, msg.MsgText);
+            _hub.Clients.All.Send(msg);
             return Ok(msg);
         }
 

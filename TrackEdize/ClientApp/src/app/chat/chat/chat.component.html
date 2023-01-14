@@ -6,16 +6,9 @@
 <div>
   <div class="message-container" #scrollContainer [scrollTop]="scrollContainer.scrollHeight">
     <div *ngFor="let mObj of msgInboxArray" >
-      <div class="d-flex justify-content-start">
+      <div class="d-flex" [ngClass]="mObj.id == accInfo.id ? 'justify-content-end' : 'justify-content-start'">
         <div class="div-left msg">
           <p-chip label="{{mObj.user}}" icon="pi pi-check" class="chip-left"></p-chip>
-          <br>
-          {{mObj.msgText}}
-        </div>
-      </div>
-      <div class="d-flex justify-content-end">
-        <div class="div-right msg">
-          <p-chip label="{{mObj.user}}" icon="pi pi-check" class="chip-right"></p-chip>
           <br>
           {{mObj.msgText}}
         </div>

@@ -51,6 +51,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ChatModule } from './chat/chat.module';
 import { LogoComponent } from './components/nav-menu/logo/logo.component';
 import { MessageFloatComponent } from './components/message-float/message-float.component';
+import { AccountService } from './services/account.service';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -108,7 +109,7 @@ export function tokenGetter() {
     ChatModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,        
+        tokenGetter: tokenGetter,
         allowedDomains: ["localhost:7294"],
         headerName: "Authrorization"
       }
@@ -116,7 +117,8 @@ export function tokenGetter() {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    AccountService
   ],
   bootstrap: [AppComponent]
 })

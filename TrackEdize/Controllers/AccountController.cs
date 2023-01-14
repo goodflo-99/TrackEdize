@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Common.Entities;
 
 namespace TrackEdize.Controllers
 {
@@ -21,11 +23,14 @@ namespace TrackEdize.Controllers
 
         private JwtTokenService _tokenService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, ILogger<AccountController> logger)
+        private IMapper _mapper;
+
+        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, ILogger<AccountController> logger, IMapper mapper)
         {
             _userManager = userManager;
             _logger = logger;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         [HttpPost("User")]
@@ -79,9 +84,20 @@ namespace TrackEdize.Controllers
         public async Task<IActionResult> GetAccountInfo()
         {
             var user = await _userManager.GetUserAsync(User);
+            var mappedUser = _mapper.Map<AccountInfo>(user);
 
+            return Ok(mappedUser);
+        }
 
-            return Ok(user);
+        [HttpPut("AccountInfo")]
+        [Authorize]
+        public async Task<IActionResult> UpdateAccountInfo(AccountInfo accountInfo)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            _mapper.Map(accountInfo, user);
+            await _userManager.UpdateAsync(user);
+
+            return Ok(accountInfo);
         }
 
 
