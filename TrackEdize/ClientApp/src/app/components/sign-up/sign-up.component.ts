@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
   register() {
     const creds = JSON.stringify(this.formCtr.value);
 
-    this.signinSvc.register(creds).subscribe();
+    this.signinSvc.register(creds).subscribe(x=> this.nav.toSignIn());
   }
 
 }

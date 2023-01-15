@@ -29,6 +29,8 @@ namespace Database.Entities
         public List<Comment>? Comments { get; set; }
         public string? Acceptance { get; set; }
         public string? CreatedBy { get; set; }
+        public string? Dev { get; set; }
+        public string? Qa { get; set; }
 
 
     }

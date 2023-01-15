@@ -146,21 +146,21 @@
           <div class="input-group">
             <span class="input-group-text" id="status">Status</span>
             <p-dropdown [className]="['right-side-menu']" [options]="statuses" [(ngModel)]="newIssue.status"
-              name="status" [ngModelOptions]="{standalone: true}" placeholder="Status"></p-dropdown>
+              name="status" [ngModelOptions]="{standalone: true}" placeholder="Status" (onChange)="save()"></p-dropdown>
           </div>
         </div>
         <div class="d-flex mt-4">
           <div class="input-group">
             <span class="input-group-text" id="aDev">Assignee (Dev)</span>
-            <p-dropdown [className]="['right-side-menu']" [options]="aDev" [(ngModel)]="newIssue.status" name="aDev"
-              [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="name" placeholder="Assignee (Dev)"></p-dropdown>
+            <p-dropdown [className]="['right-side-menu']" [options]="aDev" [(ngModel)]="newIssue.dev" name="aDev"
+              [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="name" placeholder="Assignee (Dev)" (onChange)="save()"></p-dropdown>
           </div>
         </div>
         <div class="d-flex mt-4">
           <div class="input-group">
             <span class="input-group-text" id="users">Assignee (QA)</span>
-            <p-dropdown [className]="['right-side-menu']" [options]="aQA" [(ngModel)]="newIssue.status" name="aQA"
-              [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="name" placeholder="Assignee (QA)"></p-dropdown>
+            <p-dropdown [className]="['right-side-menu']" [options]="aQA" [(ngModel)]="newIssue.qa" name="aQA"
+              [ngModelOptions]="{standalone: true}" optionValue="id" optionLabel="name" placeholder="Assignee (QA)" (onChange)="save()"></p-dropdown>
           </div>
         </div>
         <div class="d-flex mt-4">

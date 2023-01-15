@@ -39,4 +39,8 @@ export class NavigationHelperService {
     public back() {
         this.router.navigate([this.previousUrl]);
     }
+
+    public toSignIn() {
+        this.router.navigate([`/sign-in`]);
+    }
 }

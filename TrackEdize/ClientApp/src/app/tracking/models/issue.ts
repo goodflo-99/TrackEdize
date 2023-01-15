@@ -22,7 +22,8 @@ export class Issue {
     createdDate?: Date;
     updatedDate?: Date;
     createdBy?: string
-
+    dev?: string;
+    qa?:string;
     comments: Comment[] = [];
 
     constructor() {
