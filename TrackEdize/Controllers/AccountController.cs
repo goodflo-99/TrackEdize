@@ -20,17 +20,20 @@ namespace TrackEdize.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         private JwtTokenService _tokenService;
 
         private IMapper _mapper;
 
-        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, ILogger<AccountController> logger, IMapper mapper)
+        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, 
+            ILogger<AccountController> logger, IMapper mapper, RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
             _logger = logger;
             _tokenService = tokenService;
             _mapper = mapper;
+            _roleManager = roleManager;
         }
 
         [HttpPost("User")]
@@ -105,7 +108,20 @@ namespace TrackEdize.Controllers
         [Authorize("Admin")]
         public async Task<IActionResult> AddRole(string name)
         {
-            return Ok();
+            var result = await _roleManager.CreateAsync(new ApplicationRole { Name = name });
+            if(!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok(result.Succeeded);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetByRoles()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Qa");
+            return Ok(users.Select(_mapper.Map<AccountInfo>));
         }
     }
 }

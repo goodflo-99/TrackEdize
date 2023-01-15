@@ -14,11 +14,15 @@ import { AccountService } from 'src/app/services/account.service';
 export class ChatComponent implements OnInit {
 
   @ViewChild('scrollContainer', { static: false }) scrollContainer?: ElementRef;
-  accInfo: AccountInfo;
+  //accInfo?: AccountInfo;
 
-  constructor(private chatSvc: ChatService, private messageService: MessageService, accountSvc: AccountService) {
-    this.accInfo = accountSvc.accountInfo;
-    console.log(this.accInfo)
+  public get accInfo() : AccountInfo {
+    return this.accountSvc.accountInfo;
+  }
+
+  constructor(private chatSvc: ChatService, private messageService: MessageService, private accountSvc: AccountService) {
+    //this.accInfo = accountSvc.accountInfo;
+    //console.log(this.accInfo)
   }
 
   ngOnInit(): void {
@@ -58,5 +62,7 @@ export class ChatComponent implements OnInit {
     setTimeout(() => this.update = false);
     setTimeout(() => this.update = true);
   }
+
+  
 
 }

@@ -117,7 +117,6 @@ export function tokenGetter() {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     AccountService
   ],
   bootstrap: [AppComponent]

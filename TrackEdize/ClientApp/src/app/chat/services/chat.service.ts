@@ -20,6 +20,7 @@ export class ChatService {
 
   constructor(private http: HttpClient, private jwtHelper : JwtHelperService) {
     this.startConnection();
+    this.hubConnection?.onclose(this.reconect);
    }
 
   public startConnection = () => {
