@@ -124,6 +124,7 @@ builder.Services.AddCors(x =>
 });
 
 builder.Services.AddAutoMapper(typeof(TrackerMappingProfile));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 ConfigureHelper.ConfigureDatabase(builder);
@@ -162,6 +163,8 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name: "default",

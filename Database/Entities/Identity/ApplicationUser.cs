@@ -1,4 +1,5 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Models;
+using Common.Entities.Identity;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDbGenericRepository.Attributes;
 
@@ -19,5 +20,17 @@ namespace Database.Entities.Identity
 
         [BsonIgnore]
         public string FullName => $"{FirstName} {LastName}";
+
+        public ApplicationUser() : base()
+        {
+        }
+
+        public ApplicationUser(User user) : base()
+        {
+            UserName = user.UserName;
+            Email = user.Email;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+        }
     }
 }

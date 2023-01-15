@@ -4,6 +4,10 @@ using Database.Repositories;
 using Database;
 using Identity.Security;
 using BusinessLogic.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Database.Entities.Identity;
+using AutoMapper;
 
 namespace TrackEdize
 {
@@ -34,6 +38,14 @@ namespace TrackEdize
             builder.Services.AddScoped<IssueService>();
             builder.Services.AddScoped<ChatService>();
             builder.Services.AddScoped<JwtTokenService>();
+            builder.Services.AddTransient<AccountService>(factory => {
+                var httpContext = factory.GetService<IHttpContextAccessor>();
+                var userManager = factory.GetRequiredService<UserManager<ApplicationUser>>();
+                var mapper = factory.GetRequiredService<IMapper>();
+                var logger = factory.GetRequiredService<ILogger<AccountService>>();
+                if (httpContext != null) return new AccountService(userManager, mapper, logger, httpContext.HttpContext.User);
+                else return new AccountService(userManager, mapper, logger);
+            });
         }
     }
 }

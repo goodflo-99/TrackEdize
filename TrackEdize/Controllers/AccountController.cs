@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Common.Entities;
+using BusinessLogic.Services;
 
 namespace TrackEdize.Controllers
 {
@@ -21,19 +22,17 @@ namespace TrackEdize.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-
+        private readonly AccountService _accountService;
         private JwtTokenService _tokenService;
 
-        private IMapper _mapper;
-
         public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService tokenService, 
-            ILogger<AccountController> logger, IMapper mapper, RoleManager<ApplicationRole> roleManager)
+            ILogger<AccountController> logger, RoleManager<ApplicationRole> roleManager, AccountService accountService)
         {
             _userManager = userManager;
             _logger = logger;
             _tokenService = tokenService;
-            _mapper = mapper;
             _roleManager = roleManager;
+            _accountService = accountService;
         }
 
         [HttpPost("User")]
@@ -43,23 +42,12 @@ namespace TrackEdize.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            ApplicationUser appUser = new ApplicationUser()
+            try
             {
-                UserName = user.UserName,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
-
-            var res = await _userManager.CreateAsync(appUser, user.Password);
-
-            if (res.Succeeded)
+                await _accountService.CreateNewUser(user);
+            }
+            catch
             {
-                _logger.LogInformation("User was created", user);
-            } 
-            else
-            {
-                _logger.LogError("User creation fail", user, res.Errors);
                 return BadRequest("User creation fail");
             }
 
@@ -86,26 +74,19 @@ namespace TrackEdize.Controllers
         [Authorize]
         public async Task<IActionResult> GetAccountInfo()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var mappedUser = _mapper.Map<AccountInfo>(user);
-
-            return Ok(mappedUser);
+            return Ok(await _accountService.GetAccountInfo());
         }
 
         [HttpPut("AccountInfo")]
         [Authorize]
         public async Task<IActionResult> UpdateAccountInfo(AccountInfo accountInfo)
         {
-            var user = await _userManager.GetUserAsync(User);
-            _mapper.Map(accountInfo, user);
-            await _userManager.UpdateAsync(user);
-
-            return Ok(accountInfo);
+            return Ok(await _accountService.UpdateAccountInfo(accountInfo));
         }
 
 
         [HttpPost("Role")]
-        [Authorize("Admin")]
+        //[Authorize("Admin")]
         public async Task<IActionResult> AddRole(string name)
         {
             var result = await _roleManager.CreateAsync(new ApplicationRole { Name = name });
@@ -121,7 +102,8 @@ namespace TrackEdize.Controllers
         public async Task<IActionResult> GetByRoles()
         {
             var users = await _userManager.GetUsersInRoleAsync("Qa");
-            return Ok(users.Select(_mapper.Map<AccountInfo>));
+            //return Ok(users.Select(_mapper.Map<AccountInfo>));
+            return Ok();
         }
     }
 }
