@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColorHelperService } from 'src/app/shared/helpers/color-helper.service';
+import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
 
@@ -12,14 +13,14 @@ import { IssueService } from '../services/issue.service';
 export class IssuesComponent implements OnInit {
 
   issues: Issue[] = [];
-  constructor(private service: IssueService, private router: Router, public colorHelper: ColorHelperService) { }
+  constructor(private service: IssueService, private nav: NavigationHelperService, public colorHelper: ColorHelperService) { }
 
   ngOnInit(): void {
     this.service.getAll().subscribe(x=> this.issues = x);
   }
 
   edit(issue:Issue){
-    this.router.navigate(['/issues/issue', issue.id]);
+    this.nav.navigateToIssue(issue.id);
   }
 
   delete(id:any) {

@@ -17,6 +17,8 @@ public class AccountInfo
 
     public string? Gender { get; set; }
 
+    public string? FullName { get => $"{FirstName} {LastName}"; } 
+
     public AccountInfo()
     {
 

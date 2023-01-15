@@ -72,8 +72,10 @@ import { MessageService } from 'primeng/api';
       ]},
       { path: 'issues/issue', component: BugViewComponent, children: [
         { path: ':id', component: BugViewComponent},
-        { path: ':projectId', component: BugViewComponent}
+        // { path: ':projectId', component: BugViewComponent}
       ]},
+
+      { path: 'issues/create-issue', component: BugViewComponent }
       // { path: 'issues/issue', component: BugViewComponent, children: [
       // ]},
     ]),

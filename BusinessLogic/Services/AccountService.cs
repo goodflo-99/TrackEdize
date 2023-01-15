@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Database.Entities.Base;
 
 namespace BusinessLogic.Services
 {
@@ -61,8 +62,8 @@ namespace BusinessLogic.Services
             }
             if (accountInfo.Role != null && user.Role != accountInfo.Role)
             {
-                user.Roles.Remove(user.Role);
-                user.Roles.Add(accountInfo.Role);
+                await _userManager.RemoveFromRoleAsync(user, user.Role);
+                await _userManager.AddToRoleAsync(user, accountInfo.Role);
             }
             _mapper.Map(accountInfo, user);
             await _userManager.UpdateAsync(user);
@@ -86,6 +87,13 @@ namespace BusinessLogic.Services
             }
 
             return user;
+        }
+
+        public async Task<IEnumerable<Dropdown>> UsersByRole(string role)
+        {
+            var users = await _userManager.GetUsersInRoleAsync(role);
+            if (users == null) return new List<Dropdown>();
+            return users.Select(_mapper.Map<Dropdown>);
         }
 
 

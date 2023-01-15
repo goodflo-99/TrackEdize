@@ -16,10 +16,12 @@ namespace BusinessLogic.Services
     {
         private readonly ProjectService _projectService;
         private readonly IssueRepository _issueRepository;
-        public IssueService(IssueRepository repository, ProjectService projectService) : base(repository, nameof(Issue))
+        private readonly AccountService _accountService;
+        public IssueService(IssueRepository repository, ProjectService projectService, AccountService accountService) : base(repository, nameof(Issue))
         {
             _issueRepository = repository;
             _projectService = projectService;
+            _accountService = accountService;
         }
 
         public override async Task<Issue?> GetAsync(string id)
@@ -41,6 +43,8 @@ namespace BusinessLogic.Services
             var project_abbv = await _projectService.GetAbbv(newEntity.Project.Id);
             newEntity.Key = $"{project_abbv}-{newEntity.OrderNumber}";
             newEntity.Status = "Open";
+            var userInfo = await _accountService.GetAccountInfo();
+            newEntity.CreatedBy = userInfo.FullName;
 
             var project = await _projectService.GetAsync(newEntity.Project.Id);
             newEntity.Project.Name = project.Name;

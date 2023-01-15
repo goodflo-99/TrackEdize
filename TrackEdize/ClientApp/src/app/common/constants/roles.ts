@@ -3,7 +3,7 @@ import { Dropdown } from "src/app/shared/model/dropdown";
 export namespace Roles {
     export enum Role {
         Dev = 'Dev',
-        QA = 'QA',
+        QA = 'Qa',
         Manager = 'Manager'
     }
     

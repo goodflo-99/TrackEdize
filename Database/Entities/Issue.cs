@@ -28,6 +28,8 @@ namespace Database.Entities
         public string? Type { get; set; }
         public List<Comment>? Comments { get; set; }
         public string? Acceptance { get; set; }
+        public string? CreatedBy { get; set; }
+
 
     }
 }

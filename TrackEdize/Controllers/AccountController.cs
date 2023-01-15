@@ -86,7 +86,7 @@ namespace TrackEdize.Controllers
 
 
         [HttpPost("Role")]
-        //[Authorize("Admin")]
+        [Authorize("Admin")]
         public async Task<IActionResult> AddRole(string name)
         {
             var result = await _roleManager.CreateAsync(new ApplicationRole { Name = name });
@@ -97,13 +97,11 @@ namespace TrackEdize.Controllers
             return Ok(result.Succeeded);
         }
 
-        [HttpGet]
+        [HttpGet("GetByRole")]
         [Authorize]
-        public async Task<IActionResult> GetByRoles()
+        public async Task<IActionResult> GetByRole(string role)
         {
-            var users = await _userManager.GetUsersInRoleAsync("Qa");
-            //return Ok(users.Select(_mapper.Map<AccountInfo>));
-            return Ok();
+            return Ok(await _accountService.UsersByRole(role));
         }
     }
 }

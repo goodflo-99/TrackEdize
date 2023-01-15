@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { AccountInfo } from '../common/models/AccountInfo';
+import { Dropdown } from '../shared/model/dropdown';
+import { Roles } from '../common/constants/roles';
 
 @Injectable()
 export class AccountService {
@@ -57,5 +59,9 @@ export class AccountService {
     this.http.put<AccountInfo>(this.api + '/accountinfo', accountInfo).subscribe(x => {
       this.accountInfo = x;
     });
+  }
+
+  getUsersByRole(role: Roles.Role){
+    return this.http.get<Dropdown[]>(this.api+'/GetByRole', {params: {role: role}})
   }
 }

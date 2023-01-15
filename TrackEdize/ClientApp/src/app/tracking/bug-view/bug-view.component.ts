@@ -12,6 +12,9 @@ import {Clipboard} from '@angular/cdk/clipboard';
 import { DialogHelperService } from 'src/app/shared/helpers/dialog-helper.service';
 import { MessageService } from 'primeng/api';
 import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
+import { Dropdown } from 'src/app/shared/model/dropdown';
+import { AccountService } from 'src/app/services/account.service';
+import { Roles } from 'src/app/common/constants/roles';
 
 @Component({
   selector: 'app-bug-view',
@@ -27,8 +30,8 @@ export class BugViewComponent implements OnInit {
   devices = Constants.devices;
   opsystems = Constants.opsystems;
   statuses: any[] = [];
-  aDev: any[] = [];
-  aQA: any[] = [];
+  aDev: Dropdown[] = [];
+  aQA: Dropdown[] = [];
   isNewIssue: boolean = true;
   newIssue: Issue = new Issue();
   projects: Project[] = [];
@@ -45,7 +48,8 @@ export class BugViewComponent implements OnInit {
     private projSvc: ProjectService, 
     private fb: FormBuilder, 
     private clipboard: Clipboard, 
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private accountSvc: AccountService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -64,7 +68,7 @@ export class BugViewComponent implements OnInit {
     this.statuses = Statuses.getValues();
 
     this.getProjects();
-
+    this.getAssignee();
   }
   getIssue(id: string) {
     this.issueService.getById(id).subscribe(response => {
@@ -138,14 +142,15 @@ export class BugViewComponent implements OnInit {
   }
 
   handleParams() {
-    this.route.params.subscribe(params => {
+    // this.route.params.subscribe(params => {
+    //   this.id = params['id'];
+    //   this.projectId = params['projectId']
+    // });
+
+    this.route.queryParams.subscribe(params => {
       this.id = params['id'];
       this.projectId = params['projectId']
-    });
-
-    // this.route.queryParams.subscribe(params => {
-    //   this.projectId = params['projectId']
-    // })
+    })
   }
 
   getProjects() {
@@ -186,7 +191,7 @@ export class BugViewComponent implements OnInit {
   delete(id?: string) {
     if(id) {
       this.issueService.delete(id).subscribe(x=> {
-        this.nav.toDashboard();
+        this.nav.back();
       })
     }    
   }
@@ -199,6 +204,16 @@ export class BugViewComponent implements OnInit {
   disableForm() {
     this.viewMode = true;
     //this.issueForm.disable();
+  }
+
+  getAssignee() {
+    this.accountSvc.getUsersByRole(Roles.Role.Dev).subscribe(x=> {
+      this.aDev = x;
+    });
+
+    this.accountSvc.getUsersByRole(Roles.Role.QA).subscribe(x=> {
+      this.aQA = x;
+    });
   }
 
 }

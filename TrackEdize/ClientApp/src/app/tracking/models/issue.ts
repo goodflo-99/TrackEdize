@@ -2,7 +2,7 @@ import { Dropdown } from "src/app/shared/model/dropdown";
 import {Comment} from './comment';
 
 export class Issue {
-    id: string | null = null;
+    id?: string;
     subject: string | null = null;
     userName: string | null = null;
     password: string | null = null;
