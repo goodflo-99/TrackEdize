@@ -31,7 +31,10 @@ namespace Database.Entities
         public string? CreatedBy { get; set; }
         public string? Dev { get; set; }
         public string? Qa { get; set; }
-
-
+        public DateTime? StartDate { get;set; }
+        public DateTime? EndDate { get;set; }
+        public string? SprintId { get; set; }
+        public string? ParentIssueId { get; set; }
+        public List<string>? SubtaskIds { get; set; }
     }
 }

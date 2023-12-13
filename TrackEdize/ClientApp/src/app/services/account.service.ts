@@ -18,12 +18,12 @@ export class AccountService {
   }
   private set accountInfo(value: AccountInfo) {
     this._accountInfo = value;
-    sessionStorage.setItem("AccountInfo", JSON.stringify(value));
+    localStorage.setItem("AccountInfo", JSON.stringify(value));
   }
 
   constructor(private router: Router, private http: HttpClient, private jwtHelper: JwtHelperService) {
     if(jwtHelper.tokenGetter() && !jwtHelper.isTokenExpired()) {
-      var infoStr = sessionStorage.getItem('AccountInfo');
+      var infoStr = localStorage.getItem('AccountInfo');
       if(infoStr) {
         this.accountInfo = JSON.parse(infoStr);
       } else {
@@ -46,7 +46,6 @@ export class AccountService {
 
   logout() {
     localStorage.clear();
-    sessionStorage.clear();
   }
 
   async getAccountInfo() {

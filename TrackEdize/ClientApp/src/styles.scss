@@ -196,3 +196,18 @@ account-page {
 .p-sidebar {
   background: #FAFBFC !important;
 }
+
+.p-calendar {
+  max-width: 15em;
+  min-width: 15em;
+  height: 2.2em;
+  margin: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background-color: #FAFBFC !important;
+  border-color: #BDBDBD;
+}
+
+.ql-disabled .ql-editor {
+  background-color: #e9ecef !important;
+}

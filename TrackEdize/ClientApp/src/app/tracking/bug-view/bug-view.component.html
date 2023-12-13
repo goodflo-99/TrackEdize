@@ -23,6 +23,11 @@
             </div>
           </div>
           <div class="input-group mb-3">
+            <span class="input-group-text" id="type">Sprint</span>
+            <p-dropdown [options]="iTypes" [disabled]="viewMode" [(ngModel)]="newIssue.sprint" formControlName="sprint"
+              placeholder="Issue type"></p-dropdown>
+          </div>
+          <div class="input-group mb-3">
             <span class="input-group-text" id="type">Issue type</span>
             <p-dropdown [options]="iTypes" [disabled]="viewMode" [(ngModel)]="newIssue.type" formControlName="type"
               placeholder="Issue type"></p-dropdown>
@@ -52,17 +57,15 @@
           </div>
 
           <mdb-form-control class="mb-3">
-            <textarea [(ngModel)]="newIssue.steps" [readonly]="viewMode" formControlName="steps" mdbInput
-              class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea>
-            <label mdbLabel class="form-label" for="textAreaExample">{{isBug(newIssue) ? 'Steps to reproduce' :
-              'Description'}}</label>
+            <!-- <textarea [(ngModel)]="newIssue.steps" [readonly]="viewMode" formControlName="steps" mdbInput
+              class="form-control" id="steps" autocomplete="off" appTextareaAutoresize [minHeight]="160"></textarea> -->
+            <label mdbLabel class="form-label" for="textAreaExample">{{isBug(newIssue) ? 'Steps to reproduce' : 'Description'}}</label>
+            <p-editor mdbInput [readonly]="viewMode" formControlName="steps" [style]="{'height':'320px'}" [(ngModel)]="newIssue.steps" id="steps"></p-editor>            
           </mdb-form-control>
 
           <mdb-form-control *ngIf="isStory(newIssue)" class="mb-3">
-            <textarea [(ngModel)]="newIssue.acceptance" [readonly]="viewMode" formControlName="acceptance" mdbInput
-              class="form-control" id="acceptance" autocomplete="off" appTextareaAutoresize
-              [minHeight]="160"></textarea>
             <label mdbLabel class="form-label" for="textAreaExample">Acceptance criteria</label>
+            <p-editor mdbInput [readonly]="viewMode" formControlName="acceptance" [style]="{'height':'320px'}" [(ngModel)]="newIssue.acceptance" id="acceptance"></p-editor>            
           </mdb-form-control>
 
           <div *ngIf="isBug(newIssue)">
@@ -190,6 +193,22 @@
               <input mdbInput class="form-control" [ngModel]="newIssue.updatedDate | date:'LL/dd/yyyy'" id="updated"
                 type="text" [readonly]="true">
               <!-- <label mdbLabel class="form-label" for="updated">Updated at</label> -->
+            </mdb-form-control>
+          </div>
+        </div>
+        <div class="d-flex mt-4">
+          <div class="input-group">
+            <span class="input-group-text" id="startDate">Start Date</span>
+            <mdb-form-control>
+              <p-calendar [(ngModel)]="newIssue.startDate" [showButtonBar]="true" [placeholder]="'Select start date'"></p-calendar>
+            </mdb-form-control>
+          </div>
+        </div>
+        <div class="d-flex mt-4">
+          <div class="input-group">
+            <span class="input-group-text" id="endDate">Due Date</span>
+            <mdb-form-control>
+              <p-calendar [(ngModel)]="newIssue.endDate" [showButtonBar]="true" [placeholder]="'Select due date'"></p-calendar>
             </mdb-form-control>
           </div>
         </div>

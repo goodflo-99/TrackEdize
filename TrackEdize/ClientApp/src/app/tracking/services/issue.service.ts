@@ -4,6 +4,7 @@ import { BaseService } from 'src/app/common/base-service';
 import { environment } from 'src/environments/environment';
 import { Comment } from '../models/comment';
 import { Issue } from '../models/issue';
+import { Filter } from '../models/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class IssueService extends BaseService<Issue> {
     return this.http.delete<Comment[]>(this.api+'/DeleteComment', {
       params: params
     });
+  }
+
+  filterIssues(filter: Filter) {
+    return this.http.post<Issue[]>(this.api+'/FilterIssues', filter);
   }
 }

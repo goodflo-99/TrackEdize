@@ -1,5 +1,6 @@
 import { Dropdown } from "src/app/shared/model/dropdown";
 import {Comment} from './comment';
+import { Sprint } from "./sprint";
 
 export class Issue {
     id?: string;
@@ -25,6 +26,9 @@ export class Issue {
     dev?: string;
     qa?:string;
     comments: Comment[] = [];
+    startDate: Date | null = null;
+    endDate: Date | null = null;
+    sprint: Sprint | null = null;
 
     constructor() {
         

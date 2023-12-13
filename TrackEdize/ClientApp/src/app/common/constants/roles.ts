@@ -4,7 +4,8 @@ export namespace Roles {
     export enum Role {
         Dev = 'Dev',
         QA = 'Qa',
-        Manager = 'Manager'
+        Manager = 'Manager',
+        User = 'User'
     }
     
     export function getKeys() {

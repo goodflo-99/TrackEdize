@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="row">
+    <div class="d-flex col-8">
+      <div class="container">
+        <form [formGroup]="sprintForm">
+          <div class="d-flex justify-content-around">
+            <div class="input-group">
+              <span class="input-group-text" id="project">Project</span>
+              <p-dropdown
+                [disabled]="!isNewIssue"
+                [options]="projects"
+                [(ngModel)]="newSprint.projectId"
+                formControlName="projectId"
+                placeholder="Project"
+                optionLabel="name"
+                optionValue="id"
+                (onChange)="updateTitle()"
+              ></p-dropdown>
+            </div>
+          </div>
+
+          <hr class="hr hr-blurry" />
+
+          <mdb-form-control class="mb-3">
+            <textarea
+              [(ngModel)]="newSprint.title"
+              [readonly]="viewMode"
+              mdbInput
+              formControlName="title"
+              class="form-control"
+              id="title"
+              autocomplete="off"
+              rows="1"
+              appTextareaAutoresize
+              [minHeight]="38"
+            ></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample"
+              >Title</label
+            >
+          </mdb-form-control>
+
+          <mdb-form-control class="mb-3">
+            <label mdbLabel class="form-label" for="textAreaExample">{{
+              "Description"
+            }}</label>
+            <p-editor
+              mdbInput
+              [readonly]="viewMode"
+              formControlName="desciption"
+              [style]="{ height: '320px' }"
+              [(ngModel)]="newSprint.description"
+              id="desciption"
+            ></p-editor>
+          </mdb-form-control>
+        </form>
+      </div>
+      <div class="vr vr-blurry" style="min-height: 100%"></div>
+    </div>
+
+    <div class="col-4">
+      <div class="d-flex justify-content-around">
+        <button
+          (click)="enableForm()"
+          *ngIf="!isNewIssue && viewMode"
+          pButton
+          type="button"
+          label="Edit"
+          class="p-button-text p-button-info"
+        >
+          <i class="pi pi-file-edit"></i>
+        </button>
+        <button
+          (click)="save()"
+          *ngIf="isNewIssue || !viewMode"
+          pButton
+          type="button"
+          [label]="isNewIssue ? 'Create' : 'Save'"
+          class="p-button-text p-button-info"
+        >
+          <i class="pi pi-file-edit"></i>
+        </button>
+        <button
+          (click)="reset()"
+          pButton
+          *ngIf="isNewIssue"
+          type="button"
+          label=" Clear"
+          class="p-button-text p-button-danger"
+        >
+          <i class="pi pi-times"></i>
+        </button>
+        <button
+          (click)="showDeleteIssueDialog()"
+          pButton
+          *ngIf="!isNewIssue"
+          type="button"
+          label="Delete"
+          class="p-button-text p-button-danger"
+        >
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+      <div class="d-flex mt-4">
+        <div class="input-group">
+          <span class="input-group-text" id="status">Status</span>
+          <p-dropdown
+            [className]="['right-side-menu']"
+            [options]="statuses"
+            [(ngModel)]="newSprint.status"
+            name="status"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Status"
+            (onChange)="saveDates()"
+          ></p-dropdown>
+        </div>
+      </div>
+
+      <div class="d-flex mt-4">
+        <div class="input-group">
+          <span class="input-group-text" id="startDate">Start Date</span>
+          <p-calendar
+            [(ngModel)]="startDate"
+            [showButtonBar]="true"
+            [placeholder]="'Select start date'"
+            (onSelect)="saveDates()"
+            
+          ></p-calendar>
+        </div>
+      </div>
+      <div class="d-flex mt-4">
+        <div class="input-group">
+          <span class="input-group-text" id="endDate">Due Date</span>
+          <p-calendar
+            [(ngModel)]="endDate"
+            [showButtonBar]="true"
+            [placeholder]="'Select due date'"
+            (onSelect)="saveDates()"
+          ></p-calendar>
+        </div>
+      </div>
+
+      <div *ngIf="!isNewIssue">
+        <div class="d-flex mt-4">
+          <div class="input-group">
+            <span class="input-group-text" id="created">Created at</span>
+            <mdb-form-control>
+              <input
+                mdbInput
+                class="form-control"
+                [ngModel]="newSprint.createdDate | date : 'LL/dd/yyyy'"
+                id="created"
+                type="text"
+                [readonly]="true"
+              />
+            </mdb-form-control>
+          </div>
+        </div>
+        <div class="d-flex mt-4">
+          <div class="input-group">
+            <span class="input-group-text" id="updated">Updated at</span>
+            <mdb-form-control>
+              <input
+                mdbInput
+                class="form-control"
+                [ngModel]="newSprint.updatedDate | date : 'LL/dd/yyyy'"
+                id="updated"
+                type="text"
+                [readonly]="true"
+              />
+            </mdb-form-control>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<delete-confirm-dialog [okMessage]="'Sprint deleted'" [rejectMessage]="'Rejected'" (confirmation)="delete($event)"
+  [key]="'sprint'"></delete-confirm-dialog>

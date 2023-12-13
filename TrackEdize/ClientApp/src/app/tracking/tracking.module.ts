@@ -32,6 +32,11 @@ import { CommentCardComponent } from './comment-section/comment-card/comment-car
 import { CardModule } from 'primeng/card';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { MessageService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
+import { EditorModule } from 'primeng/editor';
+import { SprintComponent } from './sprint/sprint.component';
+import { SprintFormComponent } from './sprint-form/sprint-form.component';
+
 
 @NgModule({
   providers: [IssueService, MessageService],
@@ -39,7 +44,9 @@ import { MessageService } from 'primeng/api';
     BugViewComponent,
     IssuesComponent,
     CommentSectionComponent,
-    CommentCardComponent
+    CommentCardComponent,
+    SprintComponent,
+    SprintFormComponent
   ],
   imports: [
     CommonModule,
@@ -66,18 +73,21 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     DropdownModule,
     CardModule,
+    CalendarModule,
+    EditorModule,
     RouterModule.forRoot([
-      { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard],  pathMatch: 'full', children: [
-        
+      { path: 'issues', component: IssuesComponent, canActivate: [AuthGuard],  pathMatch: 'full', children: [        
       ]},
       { path: 'issues/issue', component: BugViewComponent, children: [
         { path: ':id', component: BugViewComponent},
-        // { path: ':projectId', component: BugViewComponent}
       ]},
+      { path: 'issues/create-issue', component: BugViewComponent },
 
-      { path: 'issues/create-issue', component: BugViewComponent }
-      // { path: 'issues/issue', component: BugViewComponent, children: [
-      // ]},
+      { path: 'sprints', component: SprintComponent},
+      { path: 'sprints/sprint', component: SprintFormComponent, children: [
+        { path: ':id', component: SprintFormComponent},
+      ]},
+      { path: 'sprints/create-sprint', component: SprintFormComponent },
     ]),
   ]
 })

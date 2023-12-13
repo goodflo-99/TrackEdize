@@ -19,6 +19,9 @@
             <a class="nav-link text-white" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
+            <a class="nav-link text-white" [routerLink]="['sprints']">Sprints</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">
             <a class="nav-link text-white" [routerLink]="['/projects']">Projects</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="authorized()">

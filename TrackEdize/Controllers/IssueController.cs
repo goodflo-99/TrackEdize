@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Services;
+using Common;
 using Database.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,19 @@ namespace TrackEdize.Controllers
         public async Task<IActionResult> DeleteComment(string issueId, string commentId)
         {
             return Ok(await _service.DeleteCommentAsync(issueId, commentId));
+        }
+
+        [HttpGet("GetBySprint")]
+        [ActionName("GetBySprint")]
+        public async Task<IActionResult> GetBySprint(string id)
+        {
+            return Ok(await _service.GetBySprint(id));
+        }
+
+        [HttpPost("FilterIssues")]
+        public async Task<IActionResult> FilterIssues([FromBody]Filter filter)
+        {
+            return Ok(await _service.FilterIssues(filter));
         }
     }
 }

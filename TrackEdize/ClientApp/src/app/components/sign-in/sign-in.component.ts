@@ -12,28 +12,28 @@ export class SignInComponent implements OnInit {
 
   formCtr!: FormGroup;
 
-  constructor(private fb: FormBuilder, private signinSvc: AccountService, private nav: NavigationHelperService) {
+  constructor(private fb: FormBuilder, private accountSvc: AccountService, private nav: NavigationHelperService) {
 
   }
 
   ngOnInit(): void {
-    this.signinSvc.logout();
+    this.accountSvc.logout();
     this.initForm();
   }
 
   initForm() {
     this.formCtr = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      userName: ['admin', [Validators.required]],
+      password: ['admin', [Validators.required]]
     })
   }
 
   login() {
     const creds = JSON.stringify(this.formCtr.value);
 
-    this.signinSvc.login(creds).subscribe((res: any)=> {
+    this.accountSvc.login(creds).subscribe((res: any)=> {
       localStorage.setItem("jwt", res.token);
-      this.signinSvc.getAccountInfo();
+      this.accountSvc.getAccountInfo();
       this.nav.toDashboard();
     }, err=> {
 

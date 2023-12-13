@@ -1,0 +1,25 @@
+<!-- <div class="d-flex align-items-center justify-content-between"> -->
+<filter (filterChange)="filter($event)" [isIssue]="false"></filter>
+
+    <!-- <button type="button" class="btn btn-primary">Add new issue</button> -->
+<!-- </div> -->
+<table class="table align-middle mb-0 table-hover table-striped">
+    <thead class="table-light">
+        <tr class="table-primary">
+            <th class="col-3">Title</th>
+            <th class="col-4">Description</th>
+            <th class="col-2">Start Date</th>
+            <th class="col-2">Due Date</th>
+            <th class="col-1">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let is of sprints" (click)="edit(is)">
+            <th>{{is.title}}</th>
+            <th>{{is.description}}</th>
+            <th>{{is.startDate | date : 'LL/dd/yyyy'}}</th>
+            <th>{{is.endDate | date : 'LL/dd/yyyy'}}</th>
+            <th>{{is.status}}</th>
+        </tr>
+    </tbody>
+</table>

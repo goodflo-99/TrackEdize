@@ -1,18 +1,55 @@
 <div class="d-flex justify-content-between mb-3">
-    <div class="input-group">
-        <span class="p-input-icon-left p-input-icon-right">
-            <i class="pi pi-search"></i>
-                <i class="pi pi-times" (click)="clearSearch()"></i>
-            <input type="text" pInputText placeholder="Search" (change)="searchFilterChange()" [(ngModel)]="search">
-        </span>
-    </div>
-    <div class="input-group">
-        <!-- <p-multiSelect [options]="projects" [(ngModel)]="selectedProjects" optionLabel="name" optionValue="id" display="chip" (onChange)="projectsFilterChange($event)"></p-multiSelect> -->
-        <span class="input-group-text" id="projects">Filter by project</span>
-        <p-dropdown [className]="['right-side-menu']" [options]="projects" [(ngModel)]="selectedProject" [showClear]="true" optionLabel="name" optionValue="id" placeholder="Select a Project" (onChange)="projectFilterChange($event)"></p-dropdown>
-    </div>
-    <div>
-        <button type="button" (click)="addNewIssue()" class="btn btn-primary">Add new issue</button>
-    </div>
+  <div class="input-group">
+    <span class="p-input-icon-left p-input-icon-right">
+      <i class="pi pi-search"></i>
+      <i class="pi pi-times" (click)="clearSearch()"></i>
+      <input
+        type="text"
+        pInputText
+        placeholder="Search"
+        (change)="searchFilterChange()"
+        [(ngModel)]="filter.searchString"
+      />
+    </span>
+  </div>
+  <div class="input-group">
+    <!-- <span class="input-group-text" id="projects">Filter by project</span> -->
+    <p-dropdown
+      [className]="['right-side-menu']"
+      [options]="projects"
+      [(ngModel)]="filter.projectId"
+      [showClear]="true"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Select a Project"
+      (onChange)="projectFilterChange($event)"
+      [filter]="true"
+      filterBy="name"
+    ></p-dropdown>
+  </div>
+  <div class="input-group">
+    <!-- <span class="input-group-text" id="sprints">Filter by sprint</span> -->
+    <p-dropdown
+      [className]="['right-side-menu']"
+      [options]="sprints"
+      [(ngModel)]="filter.sprintId"
+      [showClear]="true"
+      optionLabel="title"
+      optionValue="id"
+      placeholder="Select a Sprint"
+      (onChange)="sprintFilterChange($event)"
+      [disabled]="!filter.projectId"
+      [filter]="true"
+      filterBy="title"
+    ></p-dropdown>
+  </div>
+  <div>
+    <button
+      type="button"
+      (click)="isIssue ? addNewIssue() : addNewSprint()"
+      class="btn btn-primary"
+    >
+      Add new {{ isIssue ? "Issue" : "Sprint" }}
+    </button>
+  </div>
 </div>
-

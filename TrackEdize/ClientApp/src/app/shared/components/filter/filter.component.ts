@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Project } from 'src/app/project/models/project';
 import { ProjectService } from 'src/app/project/services/project.service';
 import { NavigationHelperService } from '../../helpers/navigation-helper.service';
+import { Filter } from 'src/app/tracking/models/filter';
+import { Sprint } from 'src/app/tracking/models/sprint';
+import { SprintService } from 'src/app/tracking/services/sprint.service';
 
 @Component({
   selector: 'filter',
@@ -11,45 +14,40 @@ import { NavigationHelperService } from '../../helpers/navigation-helper.service
 export class FilterComponent implements OnInit {
 
   projects: Project[] = [];
-  selectedProjects: string[] = [];
   selectedProject: string | undefined;
 
-  projectTimeout: any;
+  dropdownTimeout: any;
   searchTimeout: any;
 
   search: string = "";
 
-  @Output()
-  projectChange = new EventEmitter<string[]>();
+  sprints: Sprint[] = []
+
+  filter: Filter = new Filter();
 
   @Output()
-  searchChange = new EventEmitter<string>();
+  filterChange = new EventEmitter<Filter>();
 
-  constructor(private projectSvc: ProjectService, private nav: NavigationHelperService) { }
+  @Input() isIssue = true;
+
+  constructor(private projectSvc: ProjectService, private sprintSvc: SprintService, private nav: NavigationHelperService) { }
 
   ngOnInit(): void {
     this.projectSvc.getAll().subscribe(x => this.projects = x);
   }
 
-  projectsFilterChange(e: any) {
-    if(this.projectTimeout) {
-      clearTimeout(this.projectTimeout);
-    }
-
-    this.projectTimeout = setTimeout(() => this.emmitProjects(e.value), 2000);
-  }
-
   projectFilterChange(e: any) {
-    if(this.projectTimeout) {
-      clearTimeout(this.projectTimeout);
+    if(this.dropdownTimeout) {
+      clearTimeout(this.dropdownTimeout);
     }
 
-    this.projectTimeout = setTimeout(() => this.projectChange.emit(e.value), 500);
-  }
+    if(this.filter.projectId) {
+      this.sprintSvc.getByProjectId(this.filter.projectId).subscribe(x=> {
+        this.sprints = x;
+        this.dropdownTimeout = setTimeout(() => this.filterChange.emit(this.filter), 500);
+      })
+    }
 
-  emmitProjects(values: string[]) {
-    console.log("emmited: ", values)
-    this.projectChange.emit(values);
   }
 
   searchFilterChange() {
@@ -61,17 +59,28 @@ export class FilterComponent implements OnInit {
 
     console.log("emmited: ", this.search)
 
-    this.searchTimeout = setTimeout(() => this.searchChange.emit(this.search), 500);
+    this.searchTimeout = setTimeout(() => this.filterChange.emit(this.filter), 500);
   }
 
   clearSearch() {
-    console.log("clear")
-    this.search = "";
+    this.filter.searchString = "";
     this.searchFilterChange();
   }
 
   addNewIssue() {
     this.nav.toNewIssue(this.selectedProject);
+  }
+
+  addNewSprint() {
+    this.nav.toNewSprint(this.selectedProject);
+  }
+
+  sprintFilterChange(e: any) {
+    if(this.dropdownTimeout) {
+      clearTimeout(this.dropdownTimeout);
+    }
+
+    this.dropdownTimeout = setTimeout(() => this.filterChange.emit(this.filter), 500);
   }
 
 }

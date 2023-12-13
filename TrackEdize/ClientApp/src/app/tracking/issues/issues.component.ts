@@ -4,6 +4,7 @@ import { ColorHelperService } from 'src/app/shared/helpers/color-helper.service'
 import { NavigationHelperService } from 'src/app/shared/helpers/navigation-helper.service';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
+import { Filter } from '../models/filter';
 
 @Component({
   selector: 'app-issues',
@@ -31,22 +32,10 @@ export class IssuesComponent implements OnInit {
     this.service.getAll().subscribe(x=> this.issues = x);
   }
 
-  filterIssues(id: any) {
-    if(!id) {
+  filterIssues(filter: Filter) {
+    if(!filter.isDirty()) {
       return this.getAll();
     }
-    console.log("triggered from issues.component", id)
-    this.service.getByProjectId(id).subscribe(x=>this.issues = x);
-  }
-
-  search(str: string) {
-    console.log("searched ", str)
-    if(str.length == 0) {
-      this.getAll();
-    } else if(this.issues.length == 0) {
-      this.service.getAll().subscribe(x=> this.issues = x.filter(y=>y.subject?.toUpperCase().includes(str.toUpperCase())));
-    } else {
-      this.issues = this.issues.filter(x=> x.subject?.toUpperCase().includes(str.toUpperCase()));
-    }
+    this.service.filterIssues(filter).subscribe(x=>this.issues = x);
   }
 }

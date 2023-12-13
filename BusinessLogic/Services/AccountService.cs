@@ -41,6 +41,13 @@ namespace BusinessLogic.Services
             return await GetAccountInfo(_currentUser);
         }
 
+        public async Task<AccountInfo> GetAccountInfo(string UserId)
+        {
+            var dbUser = await _userManager.FindByIdAsync(UserId);
+            var mappedUser = _mapper.Map<AccountInfo>(dbUser);
+            return mappedUser;
+        }
+
         public async Task<AccountInfo> GetAccountInfo(ClaimsPrincipal claims)
         {
             var dbUser = await _userManager.GetUserAsync(claims);
@@ -75,6 +82,7 @@ namespace BusinessLogic.Services
         {
             ApplicationUser appUser = new ApplicationUser(user);
             var res = await _userManager.CreateAsync(appUser, user.Password);
+            await _userManager.AddToRoleAsync(appUser, "User");
 
             if (res.Succeeded)
             {

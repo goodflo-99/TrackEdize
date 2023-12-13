@@ -43,4 +43,13 @@ export class NavigationHelperService {
     public toSignIn() {
         this.router.navigate([`/sign-in`]);
     }
+
+    public navigateToSprint(id?: string) {
+        if(!id) return;
+        this.router.navigate([`/sprints/sprint/`], {queryParams: {id: id}});        
+    }
+
+    public toNewSprint(projectId?: string) {
+        this.router.navigate([`/sprints/create-sprint`], {queryParams: {projectId: projectId}});        
+    }
 }

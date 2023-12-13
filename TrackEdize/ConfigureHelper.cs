@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Database.Entities.Identity;
 using AutoMapper;
+using BusinessLogic;
 
 namespace TrackEdize
 {
@@ -25,9 +26,11 @@ namespace TrackEdize
             builder.Services.AddScoped<IBaseRepository<Project>, BaseRepository<Project>>();
             builder.Services.AddScoped<IBaseRepository<Issue>, BaseRepository<Issue>>();
             builder.Services.AddScoped<IBaseRepository<Chat>, BaseRepository<Chat>>();
+            builder.Services.AddScoped<IBaseRepository<Sprint>, BaseRepository<Sprint>>();
 
             builder.Services.AddScoped<IssueRepository>();
             builder.Services.AddScoped<ChatRepository>();
+            builder.Services.AddScoped<SprintRepository>();
             builder.Services.AddTransient<AccountRepository>();
 
         }
@@ -37,6 +40,7 @@ namespace TrackEdize
             builder.Services.AddScoped<ProjectService>();
             builder.Services.AddScoped<IssueService>();
             builder.Services.AddScoped<ChatService>();
+            builder.Services.AddScoped<SprintService>();
             builder.Services.AddScoped<JwtTokenService>();
             builder.Services.AddTransient<AccountService>(factory => {
                 var httpContext = factory.GetService<IHttpContextAccessor>();

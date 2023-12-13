@@ -52,6 +52,7 @@ import { ChatModule } from './chat/chat.module';
 import { LogoComponent } from './components/nav-menu/logo/logo.component';
 import { MessageFloatComponent } from './components/message-float/message-float.component';
 import { AccountService } from './services/account.service';
+import { ReportingModule } from './reporting/reporting.module';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -114,6 +115,7 @@ export function tokenGetter() {
         headerName: "Authrorization"
       }
     }),
+    ReportingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace BusinessLogic.Services
 {
@@ -102,6 +103,17 @@ namespace BusinessLogic.Services
             await UpdateAsync(issueId, issue);
 
             return await GetCommentsAsync(issueId);
+        }
+
+
+        public async Task<IEnumerable<Issue>> GetBySprint(string sprintId)
+        {
+            return await _issueRepository.GetByProjectId(sprintId);
+        }
+
+        public async Task<IEnumerable<Issue>> FilterIssues(Filter filter) 
+        {
+            return await _issueRepository.FilterIssues(filter);
         }
     }
 }
